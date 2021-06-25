@@ -1,0 +1,24 @@
+{
+  "name": "@hakibase/cli",
+  "version": "1.0.0",
+  "description": "Awesome CLI",
+  "main": "lib/main.js",
+  "bin": {
+    "cli": "bin/cli.js"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "test": "node lib/main.spec.js"
+  },
+  "keywords": [],
+  "author": "Hakongo",
+  "license": "MIT",
+  "dependencies": {
+    "@hakibase/core": "^1.0.0",
+    "@types/node": "^14.11.8",
+    "yarg": "^1.0.8"
+  },
+  "devDependencies": {
+    "typescript": "4.3.3"
+  }
+}
