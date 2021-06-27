@@ -1,5 +1,9 @@
 export {
   Exist,
   StorageDriver,
-  Sanitize
+  Sanitize,
 } from './types';
+
+export {
+  Datastore
+} from './datastore';

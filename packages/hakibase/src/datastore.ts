@@ -43,7 +43,7 @@ export interface IDatastore {
  * ~~~
  * Creates a new Datastore using a specified storageDriver
  */
-export default class Datastore implements IDatastore {
+export class Datastore implements IDatastore {
 
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;

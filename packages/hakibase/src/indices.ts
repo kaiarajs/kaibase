@@ -1,6 +1,6 @@
 import { ASNDBS, SNDBSA, AVLTree } from '@hakibase/binary-tree';
 import { ArrayDuplicate, GetObjectValue, CompareArray } from '@hakibase/core';
-import Datastore from './datastore';
+import { Datastore } from './datastore';
 import { IndexOptions, Range } from './types';
 
 /**
@@ -14,7 +14,7 @@ import { IndexOptions, Range } from './types';
  * SNDBSA = Array<{}|any[]|string|number|Date|boolean|null>;
  * ~~~
  */
- export interface IIndex {
+export interface IIndex {
     insert(doc: any): Promise<any>;
     insertMany(key: ASNDBS, indices: any[]): Promise<null>;
     updateKey(key: ASNDBS, newKey: ASNDBS): Promise<any>;
@@ -42,7 +42,7 @@ export default class Index implements IIndex {
      * @param options - Options for Index, `{fieldName: string}`
      */
     constructor(datastore: Datastore, options: IndexOptions) {
-        this.avl = options.unique ? new AVLTree({unique: true}) : new AVLTree({});
+        this.avl = options.unique ? new AVLTree({ unique: true }) : new AVLTree({});
 
         if (options.compareKeys) {
             this.avl.compareKeys = options.compareKeys;

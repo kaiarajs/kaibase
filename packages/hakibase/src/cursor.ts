@@ -1,5 +1,5 @@
 import { ArrayDuplicate, FlattenArray, GetSortType, IsEmpty, MergeSort } from "@hakibase/core";
-import Datastore from "./datastore";
+import { Datastore } from "./datastore";
 
 export interface ICursor {
     sort(sort: any): this;
@@ -95,7 +95,7 @@ export class Cursor implements ICursor {
                     }
                 } else {
                     const searchValues = Object.values(this.query);
-                    const newQuery: I$and = {$and: []};
+                    const newQuery: I$and = { $and: [] };
                     searchKeys.forEach((v: any, i: number) => {
                         const obj: any = {};
                         obj[v] = searchValues[i];
@@ -108,7 +108,7 @@ export class Cursor implements ICursor {
             const joined: any = Promise.all(promisesGetIds); // confusing type issues*
 
             joined
-                .then((idsArr: string[][]): number | Promise<any[]>  => {
+                .then((idsArr: string[][]): number | Promise<any[]> => {
                     idsArr = FlattenArray(idsArr);
                     const ids = ArrayDuplicate(idsArr);
                     if (this.count) {
