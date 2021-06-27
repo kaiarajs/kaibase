@@ -1,3 +1,5 @@
-export function awesomeFn() {
-  return "Hello";
-}
+export {
+  Exist,
+  StorageDriver,
+  Sanitize
+} from './types';

@@ -121,7 +121,7 @@ export interface Range {
  * You can create plugins for TeDB to provide different mediums of storage. Below you'll find methods that TeDB will
  * expect in your plugin. Storage plugins implement a simple key-value store.
  */
- export interface IStorageDriver {
+ export interface StorageDriver {
     /**
      * Get item by key
      * @param key
@@ -178,7 +178,7 @@ export interface Range {
      * @param {string} fieldName
      * @returns {Promise<Iexist>}
      */
-    exists(obj: Isanitize, index: any, fieldName: string): Promise<Iexist>;
+    exists(obj: Sanitize, index: any, fieldName: string): Promise<Exist>;
 
     /**
      * Should send all keys for this collection of the index.
@@ -200,7 +200,7 @@ export interface Range {
  * Used to insert object into exists -> Key needs to be the search term and value needs t be the values of that
  * search term
  */
-export interface Isanitize {
+export interface Sanitize {
     key: any; // -> search term
     value: any; // actual key
 }
@@ -208,7 +208,7 @@ export interface Isanitize {
 /**
  * Return object interface for the exists method of the storage driver.
  */
-export interface Iexist {
+export interface Exist {
     key: any;
     value: string;
     doesExist: boolean;

@@ -1,5 +1,5 @@
 import Index from "./indices";
-import { IndexOptions, IStorageDriver, Range, UpdateOptions, Isanitize, Iexist } from "./types";
+import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
 import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
 import { AVLNode, SNDBSA } from '@hakibase/binary-tree';
 import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@hakibase/core";
@@ -48,14 +48,14 @@ export default class Datastore implements IDatastore {
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;
     /** StorageDriver that is used for this Datastore */
-    private storage: IStorageDriver;
+    private storage: StorageDriver;
     /** whether or not to generate IDs automatically */
     private generateId: boolean;
 
     /**
      * @param config - config object `{storage: IStorageDriver}`
      */
-    constructor(config: {storage: IStorageDriver}) {
+    constructor(config: {storage: StorageDriver}) {
         this.storage = config.storage;
         this.generateId = true;
 
@@ -294,7 +294,7 @@ export default class Datastore implements IDatastore {
             return this.getIndices()
                 .then((indices) => indices.get(fieldName))
                 .then((INDEX) => {
-                    const values: Isanitize[] = [];
+                    const values: Sanitize[] = [];
                     // Upgrade here if you ever get an error from a user
                     // about there being a crash or slow down when they have an
                     // extremely large index. millions. thousands of levels
@@ -309,7 +309,7 @@ export default class Datastore implements IDatastore {
                     return values;
                 })
                 .then((values) => {
-                    return Promise.all(values.map((obj: Isanitize) => {
+                    return Promise.all(values.map((obj: Sanitize) => {
                         return this.storage.exists(obj, index, fieldName);
                     }));
                 })

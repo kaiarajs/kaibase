@@ -48,6 +48,7 @@ export default class Index implements IIndex {
             this.avl.compareKeys = options.compareKeys;
         }
         if (options.checkKeyEquality) {
+            //@ts-ignore
             this.avl.checkKeyEquality = options.checkKeyEquality;
         }
 
@@ -58,6 +59,7 @@ export default class Index implements IIndex {
     }
 
     public traverse(fn: any): Promise<any> {
+        //@ts-ignore
         return this.avl.tree.executeOnEveryNode(fn);
     }
 
@@ -199,6 +201,7 @@ export default class Index implements IIndex {
      * @returns {Promise<string>}
      */
     public toJSON(): Promise<string> {
+        //@ts-ignore
         return this.avl.tree.toJSON();
     }
 
