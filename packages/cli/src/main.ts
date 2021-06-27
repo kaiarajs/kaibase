@@ -1,7 +1,6 @@
-import { awesomeFn } from "@hakibase/core";
 
 export async function main() {
   // dependencies across child packages
-  const out = await awesomeFn();
+  const out = "lol";
   return out;
 }
