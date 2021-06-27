@@ -1,4 +1,4 @@
 {
   "files": [],
-  "references": [{ "path": "packages/core" }, { "path": "packages/cli" }, { "path": "packages/hakibase" }, { "path": "packages/binary-tree" }]
+  "references": [{ "path": "packages/core" }, { "path": "packages/cli" }, { "path": "packages/hakibase" }, { "path": "packages/binary-tree" }, { "path": "packages/disk-storage" }]
 }
