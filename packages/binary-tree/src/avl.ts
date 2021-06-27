@@ -1,4 +1,4 @@
-import { ArrayDuplicate, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction } from "core/lib/utils";
+import { ArrayDuplicate, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction } from "@hakibase/core";
 import { ASNDBS, INodeConstructor, SNDBSA, Node } from "./node";
 
 
