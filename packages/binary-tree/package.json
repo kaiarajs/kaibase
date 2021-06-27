@@ -1,0 +1,20 @@
+{
+  "name": "@hakibase/binary-tree",
+  "version": "1.0.0",
+  "description": "Awesome functions",
+  "main": "lib/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "test": "echo \"T.B.D.\""
+  },
+  "types": "lib/index.d.ts",
+  "keywords": [],
+  "author": "Hakongo",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.11.8"
+  },
+  "devDependencies": {
+    "typescript": "4.3.3"
+  }
+}
