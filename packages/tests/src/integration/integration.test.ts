@@ -1,13 +1,14 @@
 import { expect } from 'chai';
 import { DiskStorageDriver } from '@hakibase/disk-storage';
-import { Datastore } from '@hakibase/hakibase';
+import { Hakibase } from '@hakibase/hakibase';
 import fs from 'fs';
 import path from 'path';
 
 
 describe('Options tests', () => {
-    const DbStorage = new DiskStorageDriver("test");
-    const Db = new Datastore({ storage: DbStorage });
+    const DbStorage = new DiskStorageDriver({});
+    const Db = new Hakibase({ storage: DbStorage });
+    Db.collection('user');
 
     before('setupApplication', async () => {
         const pathi = path.join(__dirname + '/../../db/test');

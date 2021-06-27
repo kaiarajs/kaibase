@@ -5,16 +5,8 @@ import { AVLNode, SNDBSA } from '@hakibase/binary-tree';
 import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@hakibase/core";
 import {Cursor, Options} from "./cursor";
 
-/**
- * ~~~
- * Array String Number, Date, Boolean, -> symbol was redacted. : Used for keys
- * BTT.ASNDBS = Array<any[]|string|number|Date|boolean|null>|string|number|Date|boolean|null
- * -> redacted symbol, Number, Date, Boolean, String, Array : Used for values
- * BTT.SNDBSA = Array<{}|any[]|string|number|Date|boolean|null>;
- * ~~~
- */
-
 export interface IDatastore {
+    collection(name: string): Hakibase;
     insert(doc: any): Promise<any>;
     find(query: any): Cursor;
     count(query: any): Cursor;
@@ -34,20 +26,20 @@ export interface IDatastore {
 }
 
 /**
- * Datastore class
+ * Hakibase class
  *
  * Example:
  * ~~~
  * const UserStorage = new yourStorageClass("users");
- * const Users = new Datastore({storage: UserStorage});
+ * const Users = new Hakibase({storage: UserStorage});
  * ~~~
- * Creates a new Datastore using a specified storageDriver
+ * Creates a new Hakibase using a specified storageDriver
  */
-export class Datastore implements IDatastore {
+export class Hakibase implements IDatastore {
 
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;
-    /** StorageDriver that is used for this Datastore */
+    /** StorageDriver that is used for this Hakibase */
     private storage: StorageDriver;
     /** whether or not to generate IDs automatically */
     private generateId: boolean;
@@ -60,6 +52,18 @@ export class Datastore implements IDatastore {
         this.generateId = true;
 
         this.indices = new Map();
+    }
+
+    /**
+     * Set the collection name to the storage handler
+     * 
+     * db.collection("users");
+     * 
+     * @param name of the collection
+     */
+    collection(name: string): Hakibase {
+        this.storage.setCollection(name);
+        return this;
     }
 
     /**

@@ -1,15 +1,7 @@
 import { ASNDBS } from "@hakibase/binary-tree";
 import { DefaultCheckKeyEquality, DefaultCompareKeysFunction } from "@hakibase/core";
-/**
- * Boundaries for lookup
- *
- * ~~~
- * Array String Number, Date, Boolean, -> symbol was redacted. : Used for keys
- * BTT.ASNDBS = Array<any[]|string|number|Date|boolean|null>|string|number|Date|boolean|null
- * -> redacted symbol, Number, Date, Boolean, String, Array : Used for values
- * BTT.SNDBSA = Array<{}|any[]|string|number|Date|boolean|null>;
- * ~~~
- */
+
+
 export interface Range {
     /**
      * Greater Than
@@ -122,6 +114,11 @@ export interface Range {
  * expect in your plugin. Storage plugins implement a simple key-value store.
  */
  export interface StorageDriver {
+     /**
+     * Set collection name
+     * @param key
+     */
+    setCollection(name: string): void;
     /**
      * Get item by key
      * @param key

@@ -5,5 +5,5 @@ export {
 } from './types';
 
 export {
-  Datastore
-} from './datastore';
+  Hakibase
+} from './hakibase';

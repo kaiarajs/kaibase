@@ -1,18 +1,29 @@
-import { StorageDriver, Sanitize, Exist} from "@hakibase/hakibase"
+import { StorageDriver, Sanitize, Exist } from "@hakibase/hakibase"
 import fs from "fs";
 import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
     public allKeys: string[];
-    private filePath: string;
+    public folderPath: string = `${process.cwd()}/db/`;
+    public collection: string = 'data';
 
-    constructor(filePath: string) {
-        this.filePath = filePath;
+    constructor(config: { folderPath?: string }) {
+        if (config.folderPath) {
+            this.folderPath = config.folderPath;
+        }
         this.allKeys = [];
-        const cwd = process.cwd();
-        if (!fs.existsSync(`${cwd}/db/${this.filePath}`)) {
+        const cwd = this.folderPath
+        if (!fs.existsSync(cwd)) {
             console.log('not exist, create')
-            fs.mkdirSync(`${cwd}/db/${this.filePath}`);
+            fs.mkdirSync(cwd);
+        }
+    }
+
+    public setCollection(collection: string): void {
+        this.collection = collection;
+        const cwd = `${this.folderPath}/${this.collection}`
+        if (!fs.existsSync(cwd)) {
+            fs.mkdirSync(cwd);
         }
     }
 
@@ -23,12 +34,12 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public getItem(key: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = process.cwd();
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}/${key}.db`)) {
-                reject(`No doc with key: ${key} found in ${cwd}/db/${this.filePath}`);
+            const cwd = `${this.folderPath}/${this.collection}`
+            if (!fs.existsSync(cwd)) {
+                reject(`No doc with key: ${key} found in ${cwd}`);
             } else {
                 //@ts-ignore
-                fs.readFile(`${cwd}/db/${this.filePath}/${key}.db`, "utf8", (err: ErrnoException, data: string) => {
+                fs.readFile(`${cwd}/${key}.db`, "utf8", (err: ErrnoException, data: string) => {
                     if (err) {
                         reject(err);
                     }
@@ -50,16 +61,16 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public setItem(key: string, value: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = process.cwd();
+            const cwd = `${this.folderPath}/${this.collection}`
             let data;
             try {
                 data = JSON.stringify(value);
             } catch (e) {
                 reject(e);
             }
-                //@ts-ignore
+            //@ts-ignore
 
-            fs.writeFile(`${cwd}/db/${this.filePath}/${key}.db`, data, (err: ErrnoException) => {
+            fs.writeFile(`${cwd}/${key}.db`, data, (err: ErrnoException) => {
                 if (err) {
                     reject(err);
                 }
@@ -78,15 +89,15 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public removeItem(key: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = process.cwd();
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}/${key}.db`)) {
-                                //@ts-ignore
+            const cwd = `${this.folderPath}/${this.collection}`
+            if (!fs.existsSync(`${cwd}/${key}.db`)) {
+                //@ts-ignore
 
                 resolve(true);
             } else {
-                                //@ts-ignore
+                //@ts-ignore
 
-                fs.unlink(`${cwd}/db/${this.filePath}/${key}.db`, (err: ErrnoException) => {
+                fs.unlink(`${cwd}/${key}.db`, (err: ErrnoException) => {
                     if (err) {
                         reject(err);
                     }
@@ -112,13 +123,13 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public storeIndex(key: string, index: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = process.cwd();
-            const fileName = `${this.filePath}/index_${key}.db`;
+            const cwd = `${this.folderPath}/${this.collection}`
+            const fileName = `${cwd}/index_${key}.db`;
             if (index === '[{"key":null,"value":[null]}]' || index === '[{"key":null, "value":[]}]') {
-                if (fs.existsSync(`${cwd}/db/${fileName}`)) {
-                                    //@ts-ignore
+                if (fs.existsSync(`${cwd}/${fileName}`)) {
+                    //@ts-ignore
 
-                    fs.unlink(`${cwd}/db/${fileName}`, (err: ErrnoException) => {
+                    fs.unlink(`${cwd}/${fileName}`, (err: ErrnoException) => {
                         if (err) {
                             reject(err);
                         }
@@ -132,9 +143,9 @@ export class DiskStorageDriver implements StorageDriver {
                 }
 
             } else {
-                                //@ts-ignore
+                //@ts-ignore
 
-                fs.writeFile(`${cwd}/db/${fileName}`, index, (err: ErrnoException) => {
+                fs.writeFile(`${cwd}/${fileName}`, index, (err: ErrnoException) => {
                     if (err) {
                         reject(err);
                     }
@@ -151,14 +162,14 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public fetchIndex(key: string): Promise<any[]> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = process.cwd();
-            const fileName = `${this.filePath}/index_${key}.db`;
+            const cwd = `${this.folderPath}/${this.collection}`
+            const fileName = `${cwd}/index_${key}.db`;
             let index: any;
-            if (!fs.existsSync(`${cwd}/db/${fileName}`)) {
+            if (!fs.existsSync(`${cwd}/${fileName}`)) {
                 resolve([]);
             } else {
                 //@ts-ignore
-                fs.readFile(`${cwd}/db/${fileName}`, "utf8", (err: ErrnoException, data) => {
+                fs.readFile(`${cwd}/${fileName}`, "utf8", (err: ErrnoException, data) => {
                     if (err) {
                         reject(err);
                     }
@@ -189,13 +200,13 @@ export class DiskStorageDriver implements StorageDriver {
     }
     public removeIndex(key: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = process.cwd();
+            const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `index_${key}.db`;
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}/${fileName}`)) {
+            if (!fs.existsSync(`${cwd}/${fileName}`)) {
                 resolve(true);
             } else {
-                                //@ts-ignore
-                fs.unlink(`${cwd}/db/${this.filePath}/${fileName}`, (err: ErrnoException) => {
+                //@ts-ignore
+                fs.unlink(`${cwd}/${fileName}`, (err: ErrnoException) => {
                     if (err) {
                         return reject(err);
                     }
@@ -210,19 +221,19 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number) => any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = process.cwd();
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}`)) {
-                reject(`No directory at ${this.filePath}`);
+            const cwd = `${this.folderPath}/${this.collection}`
+            if (!fs.existsSync(cwd)) {
+                reject(`No directory at ${cwd}`);
             } else {
-                                //@ts-ignore
-                fs.readdir(`${cwd}/db/${this.filePath}`, (err: ErrnoException, files) => {
+                //@ts-ignore
+                fs.readdir(cwd, (err: ErrnoException, files) => {
                     if (err) {
                         reject(err);
                     }
                     if (files.length > 0) {
                         files.forEach((v) => {
                             try {
-                                const fileName = `${cwd}/db/${this.filePath}/${v}`;
+                                const fileName = `${cwd}/${v}`;
                                 const data = fs.readFileSync(fileName).toString();
                                 if (data) {
                                     const doc = JSON.parse(data);
@@ -246,9 +257,9 @@ export class DiskStorageDriver implements StorageDriver {
     public keys(): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             if (this.allKeys.length === 0) {
-                const cwd = process.cwd();
-                                //@ts-ignore
-                fs.readdir(`${cwd}/db/${this.filePath}`, (err: ErrnoException, files) => {
+                const cwd = `${this.folderPath}/${this.collection}`
+                //@ts-ignore
+                fs.readdir(cwd, (err: ErrnoException, files) => {
                     if (err) {
                         return reject(err);
                     }
@@ -256,7 +267,7 @@ export class DiskStorageDriver implements StorageDriver {
                         const ids: string[] = [];
                         files.forEach((v) => {
                             try {
-                                const fileName = `${cwd}/db/${this.filePath}/${v}`;
+                                const fileName = `${cwd}/${v}`;
                                 const data = fs.readFileSync(fileName).toString();
                                 if (data) {
                                     const doc = JSON.parse(data);
@@ -289,12 +300,12 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public exists(obj: Sanitize, index: any, fieldName: string): Promise<Exist> {
         return new Promise((resolve, reject) => {
-            const cwd = process.cwd();
+            const cwd = `${this.folderPath}/${this.collection}`
             try {
-                if (fs.existsSync(`${cwd}/db/${this.filePath}/${obj.value}.db`)) {
-                    resolve({key: obj.key, value: obj.value, doesExist: true, index, fieldName});
+                if (fs.existsSync(`${cwd}/${obj.value}.db`)) {
+                    resolve({ key: obj.key, value: obj.value, doesExist: true, index, fieldName });
                 } else {
-                    resolve({key: obj.key, value: obj.value, doesExist: false, index, fieldName});
+                    resolve({ key: obj.key, value: obj.value, doesExist: false, index, fieldName });
                 }
             } catch (e) {
                 return reject(e);
@@ -311,12 +322,12 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public collectionSanitize(keys: string[]): Promise<any> {
         return new Promise((resolve, reject) => {
-            const cwd = process.cwd();
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}`)) {
+            const cwd = `${this.folderPath}/${this.collection}`
+            if (!fs.existsSync(cwd)) {
                 resolve(true);
             } else {
                 //@ts-ignore
-                fs.readdir(`${cwd}/db/${this.filePath}`, (err: ErrnoException, files) => {
+                fs.readdir(cwd, (err: ErrnoException, files) => {
                     if (err) {
                         return reject(err);
                     }
@@ -331,9 +342,9 @@ export class DiskStorageDriver implements StorageDriver {
                     }, []);
                     filteredKeys.forEach((key) => {
                         if (keys.indexOf(key) === -1) {
-                            if (fs.existsSync(`${cwd}/db/${this.filePath}/${key}.db`)) {
+                            if (fs.existsSync(`${cwd}/${key}.db`)) {
                                 this.allKeys = this.allKeys.filter((cur) => cur !== key);
-                                fs.unlinkSync(`${cwd}/db/${this.filePath}/${key}.db`);
+                                fs.unlinkSync(`${cwd}/${key}.db`);
                             }
                         }
                     });
@@ -348,18 +359,18 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public clear(): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = process.cwd();
-            if (!fs.existsSync(`${cwd}/db/${this.filePath}`)) {
+            const cwd = `${this.folderPath}/${this.collection}`
+            if (!fs.existsSync(cwd)) {
                 resolve(null);
             } else {
                 //@ts-ignore
-                fs.readdir(`${cwd}/db/${this.filePath}`, (err: ErrnoException, files) => {
+                fs.readdir(cwd, (err: ErrnoException, files) => {
                     if (err) {
                         reject(err);
                     }
                     if (files.length > 0) {
                         files.forEach((v) => {
-                            const fileName = `${cwd}/db/${this.filePath}/${v}`;
+                            const fileName = `${cwd}/${v}`;
                             try {
                                 fs.unlinkSync(fileName);
                             } catch (e) {
@@ -368,7 +379,7 @@ export class DiskStorageDriver implements StorageDriver {
                         });
                     }
                     //@ts-ignore
-                    fs.rmdir(`${cwd}/db/${this.filePath}`, (error: ErrnoException) => {
+                    fs.rmdir(cwd, (error: ErrnoException) => {
                         if (error) {
                             reject(error);
                         }

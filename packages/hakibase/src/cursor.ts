@@ -1,5 +1,5 @@
 import { ArrayDuplicate, FlattenArray, GetSortType, IsEmpty, MergeSort } from "@hakibase/core";
-import { Datastore } from "./datastore";
+import { Hakibase } from "./hakibase";
 
 export interface ICursor {
     sort(sort: any): this;
@@ -25,9 +25,9 @@ export interface Options {
  * Database Cursor
  */
 export class Cursor implements ICursor {
-    /** Reference to Datastore object */
-    private datastore: Datastore;
-    /** Query passed from `Datastore.find` or `count` */
+    /** Reference to Hakibase object */
+    private datastore: Hakibase;
+    /** Query passed from `Hakibase.find` or `count` */
     private query: any;
     /** Options for `exec` */
     private options: Options;
@@ -37,11 +37,11 @@ export class Cursor implements ICursor {
 
     /**
      * Constructor
-     * @param datastore - Datastore reference
+     * @param datastore - Hakibase reference
      * @param query - query for search
      * @param count - is this a count operation? Default: false
      */
-    constructor(datastore: Datastore, query: any = {}, count?: boolean) {
+    constructor(datastore: Hakibase, query: any = {}, count?: boolean) {
         this.datastore = datastore;
         this.query = query;
         this.count = count || false;

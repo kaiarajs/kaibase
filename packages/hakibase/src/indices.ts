@@ -1,6 +1,6 @@
 import { ASNDBS, SNDBSA, AVLTree } from '@hakibase/binary-tree';
 import { ArrayDuplicate, GetObjectValue, CompareArray } from '@hakibase/core';
-import { Datastore } from './datastore';
+import { Hakibase } from './hakibase';
 import { IndexOptions, Range } from './types';
 
 /**
@@ -31,17 +31,17 @@ export default class Index implements IIndex {
     protected fieldName: string;
     /** ALV Tree for indexing */
     private avl: AVLTree;
-    /** Reference to Datastore */
-    private datastore: Datastore;
+    /** Reference to Hakibase */
+    private datastore: Hakibase;
     /** Is the index holding an array */
     private isArray: boolean;
 
     /**
      * Constructor
-     * @param datastore - reference to Datastore
+     * @param datastore - reference to Hakibase
      * @param options - Options for Index, `{fieldName: string}`
      */
-    constructor(datastore: Datastore, options: IndexOptions) {
+    constructor(datastore: Hakibase, options: IndexOptions) {
         this.avl = options.unique ? new AVLTree({ unique: true }) : new AVLTree({});
 
         if (options.compareKeys) {
