@@ -1,5 +1,6 @@
 import fp from 'fastify-plugin'
 import { MongoClient } from "mongodb";
+import { CONFIG } from '../app';
 
 export interface SupportPluginOptions {
   // Specify Support plugin options here
@@ -11,9 +12,10 @@ export interface SupportPluginOptions {
 // to export the decorators to the outer scope
 export default fp<SupportPluginOptions>(async (fastify, opts) => {
   try {
-    const uri = "mongodb://localhost:27017/hakibase";
+    const uri = CONFIG.dbUrl;
     const client = new MongoClient(uri);
     await client.connect();
+    client.db(CONFIG.databaseName).collection('users').createIndex({ email: 1 });
     fastify.decorate('mongo', client);
     fastify.addHook('onClose', () => client.close());
   } catch (error) {
