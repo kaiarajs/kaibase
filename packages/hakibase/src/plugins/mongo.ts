@@ -15,6 +15,7 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
     const client = new MongoClient(uri);
     await client.connect();
     fastify.decorate('mongo', client);
+    fastify.addHook('onClose', () => client.close());
   } catch (error) {
     console.log(error);
     process.exit(1);
