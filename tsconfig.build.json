@@ -1,4 +1,4 @@
 {
   "files": [],
-  "references": [{ "path": "packages/cli" }, { "path": "packages/hakibase" }]
+  "references": [{ "path": "packages/cli" }, { "path": "packages/hakibase" }, { "path": "packages/client-js" }]
 }
