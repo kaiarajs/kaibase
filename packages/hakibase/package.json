@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv-json-complex": "^1.0.4",
     "fastify": "^3.0.0",
     "fastify-plugin": "^3.0.0",
     "fastify-autoload": "^3.3.1",

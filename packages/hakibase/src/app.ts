@@ -2,6 +2,12 @@ import { join } from 'path';
 import AutoLoad, {AutoloadPluginOptions} from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
 
+const environment = process.env.NODE_ENV || 'local'
+require("dotenv-json-complex")({ environment });
+console.log(environment);
+const envLoad = process.env?.[environment];
+export const CONFIG = JSON.parse( envLoad || 'local');
+
 export type AppOptions = {
   // Place your custom options for app below here.
 } & Partial<AutoloadPluginOptions>;
