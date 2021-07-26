@@ -67,5 +67,3 @@ typings/
 lib/
 
 *.tsbuildinfo
-.DS_Store
-packages/tests/db/

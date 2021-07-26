@@ -11,14 +11,13 @@
     "test": "node lib/main.spec.js"
   },
   "keywords": [],
-  "author": "Hakongo",
+  "author": "hakibase",
   "license": "MIT",
   "dependencies": {
-    "@hakibase/core": "^1.0.0",
     "@types/node": "^14.11.8",
-    "yarg": "^1.0.8"
+    "minimist": "^1.2.5"
   },
   "devDependencies": {
-    "typescript": "4.3.3"
+    "typescript": "4.3.5"
   }
 }
