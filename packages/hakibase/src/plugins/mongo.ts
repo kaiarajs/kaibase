@@ -2,15 +2,9 @@ import fp from 'fastify-plugin'
 import { MongoClient } from "mongodb";
 import { CONFIG } from '../app';
 
-export interface SupportPluginOptions {
-  // Specify Support plugin options here
-}
-
-
-
 // The use of fastify-plugin is required to be able
 // to export the decorators to the outer scope
-export default fp<SupportPluginOptions>(async (fastify, opts) => {
+export default fp(async (fastify, opts) => {
   try {
     const uri = CONFIG.dbUrl;
     const client = new MongoClient(uri);
@@ -22,7 +16,7 @@ export default fp<SupportPluginOptions>(async (fastify, opts) => {
     console.log(error);
     process.exit(1);
   }
-})
+}, { name: 'mongo'})
 
 // When using .decorate you have to specify added properties for Typescript
 declare module 'fastify' {
