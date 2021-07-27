@@ -6,6 +6,7 @@ import { CONFIG } from '../app';
 // to export the decorators to the outer scope
 export default fp(async (fastify, opts) => {
   try {
+    if(fastify.hasDecorator('mongo')) return;
     const uri = CONFIG.dbUrl;
     const client = new MongoClient(uri);
     await client.connect();
@@ -16,7 +17,7 @@ export default fp(async (fastify, opts) => {
     console.log(error);
     process.exit(1);
   }
-}, { name: 'mongo'})
+}, {name: "mongo"})
 
 // When using .decorate you have to specify added properties for Typescript
 declare module 'fastify' {
