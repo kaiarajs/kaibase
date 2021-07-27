@@ -17,14 +17,13 @@ const DbOpts = (fastify: FastifyInstance) => {
         required: ['collection']
       },
     },
-    preValidation: [fastify.authenticate]
+    preValidation: [fastify.authenticate, fastify.secureRoles]
   }
 }
 
 
 const hakibase: FastifyPluginAsync =async (fastify, opts): Promise<void> => {
   fastify.get<{Headers: HeadersDb, Querystring: QuerystringDb}>('/', DbOpts(fastify), async function (request, reply) {
-    console.log(request);
     const { filter } = request.query
     const collection = request.headers['collection']
     const db = await fastify.mongo.db(CONFIG.databaseName).collection(collection).find(filter || {}).toArray();
