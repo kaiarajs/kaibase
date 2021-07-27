@@ -27,11 +27,13 @@
     "fastify-jwt": "^3.0.0",
     "fastify-sensible": "^3.1.0",
     "fastify-cli": "^2.13.0",
+    "nodemailer": "^6.6.3",
     "mongodb": "^4.0.1",
     "grant": "^5.4.16"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/nodemailer": "^6.4.4",
     "@types/node": "^15.0.0",
     "@types/tap": "^15.0.0",
     "ts-node": "^10.0.0",
