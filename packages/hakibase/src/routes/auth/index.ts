@@ -53,7 +53,7 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     if (!findUser) return reply.status(403).send({ sucess: false, error: "user not exist" })
     if (findUser && findUser.provider !== "EMAIL") return reply.status(403).send({ sucess: false, error: `user register with other provider: ${findUser.provider}` })
     if (findUser && !findUser.password) return reply.status(403).send({ sucess: false, error: "user not have password" })
-    const payload = { email: findUser.email, id: findUser._id }
+    const payload = { email: findUser.email, id: findUser._id, roles: findUser.roles }
     const token = fastify.jwt.sign({ payload })
     return reply.status(403).send({ sucess: true, token })
   })
