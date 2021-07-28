@@ -30,6 +30,21 @@ export class Db {
         }
     }
 
+    async update(filter: Filter<Document>, doc: Document): Promise<DbResponse> {
+        const req = await this._axios.put('/db', doc, { headers: { collection: this._collection}, params: filter});
+        if(req.status === 200) {
+            return {
+                success: true,
+                data: req.data
+            }
+        } else {
+            return {
+                success: false,
+                data: req.data || null
+            }
+        }
+    }
+
     async add(doc: Document): Promise<DbResponse> {
         const req = await this._axios.post('/db', doc, { headers: { collection: this._collection}});
         if(req.status === 201) {
