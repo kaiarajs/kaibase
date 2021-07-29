@@ -1,8 +1,14 @@
 {
-    "extends": "fastify-tsconfig",
-    "compilerOptions": {
-        "outDir": "dist",
-        "esModuleInterop": true
-    },
-    "include": ["src/**/*.ts"]
+  "extends": "fastify-tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noEmit": false, // <- remove this or set to false
+    "incremental": false, // <- r
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

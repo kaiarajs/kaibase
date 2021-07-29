@@ -1,20 +1,22 @@
 import { join } from 'path';
-import AutoLoad, {AutoloadPluginOptions} from 'fastify-autoload';
+import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
+import fastifyNextJs from '@applicazza/fastify-nextjs';
 
 const environment = process.env.NODE_ENV || 'local'
 require("dotenv-json-complex")({ environment });
 console.log(environment);
 const envLoad = process.env?.[environment];
-export const CONFIG = JSON.parse( envLoad || 'local');
+export const CONFIG = JSON.parse(envLoad || 'local');
+const dev = process.env.NODE_ENV !== 'production';
 
 export type AppOptions = {
   // Place your custom options for app below here.
 } & Partial<AutoloadPluginOptions>;
 
 const app: FastifyPluginAsync<AppOptions> = async (
-    fastify,
-    opts
+  fastify,
+  opts
 ): Promise<void> => {
   // Place here your custom code!
 
@@ -35,18 +37,34 @@ const app: FastifyPluginAsync<AppOptions> = async (
     options: opts
   })
 
+  fastify.register(fastifyNextJs, {
+    dev,
+  });
+
+
+  await fastify.after();
+
+  fastify.passNextJsDataRequests();
+  fastify.passNextJsImageRequests();
+  if (dev) {
+      fastify.passNextJsDevRequests();
+  } else {
+      fastify.passNextJsStaticRequests();
+  }
+  fastify.passNextJsPageRequests();
+
   fastify.addHook('onReady', async function () {
     console.log('initializing.....')
     await fastify.mongo.db(CONFIG.databaseName).collection('users').createIndex({ email: 1 }, { unique: true });
-    const existConfigDbRoles = await fastify.mongo.db(CONFIG.databaseName).collection('_config').findOne({name: "security-roles"});
-    if(!existConfigDbRoles) {
+    const existConfigDbRoles = await fastify.mongo.db(CONFIG.databaseName).collection('_config').findOne({ name: "security-roles" });
+    if (!existConfigDbRoles) {
       await fastify.mongo.db(CONFIG.databaseName).collection('_config').insertOne({
         name: "security-roles",
         buckets: [
-          { name: "test-bucket", secure: true, allowRead: ['admin', 'user'],allowWrite: ['admin'],allowUpdate: ['admin', 'user'],allowDelete: ['admin']}
+          { name: "test-bucket", secure: true, allowRead: ['admin', 'user'], allowWrite: ['admin'], allowUpdate: ['admin', 'user'], allowDelete: ['admin'] }
         ],
         collections: [
-          { name: "test-roles", secure: true, allowRead: ['admin', 'user'],allowWrite: ['admin'],allowUpdate: ['admin', 'user'],allowDelete: ['admin'] }
+          { name: "test-roles", secure: true, allowRead: ['admin', 'user'], allowWrite: ['admin'], allowUpdate: ['admin', 'user'], allowDelete: ['admin'] }
         ]
       })
     }
