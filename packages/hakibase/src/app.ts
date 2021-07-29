@@ -35,6 +35,23 @@ const app: FastifyPluginAsync<AppOptions> = async (
     options: opts
   })
 
+  fastify.addHook('onReady', async function () {
+    console.log('initializing.....')
+    await fastify.mongo.db(CONFIG.databaseName).collection('users').createIndex({ email: 1 }, { unique: true });
+    const existConfigDbRoles = await fastify.mongo.db(CONFIG.databaseName).collection('_config').findOne({name: "security-roles"});
+    if(!existConfigDbRoles) {
+      await fastify.mongo.db(CONFIG.databaseName).collection('_config').insertOne({
+        name: "security-roles",
+        buckets: [
+          { name: "test-bucket", secure: true, allowRead: ['admin', 'user'],allowWrite: ['admin'],allowUpdate: ['admin', 'user'],allowDelete: ['admin']}
+        ],
+        collections: [
+          { name: "test-roles", secure: true, allowRead: ['admin', 'user'],allowWrite: ['admin'],allowUpdate: ['admin', 'user'],allowDelete: ['admin'] }
+        ]
+      })
+    }
+    console.log('Config ready')
+  })
 };
 
 export default app;
