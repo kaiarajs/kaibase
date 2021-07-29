@@ -16,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@slynova/flydrive": "^1.0.3",
+    "@slynova/flydrive-s3": "^1.0.3",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "dotenv-json-complex": "^1.0.4",
