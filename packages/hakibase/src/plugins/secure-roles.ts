@@ -6,39 +6,54 @@ import { CONFIG } from '../app';
 export default fp(async (fastify, opts) => {
   fastify.decorate("secureRoles", async function(request: FastifyRequest, reply: FastifyReply) {
     try {
+      let findConfig: any;
+      let secureReq: string | null = null;
       let allowed = false;
-      const db = await fastify.mongo.db(CONFIG.databaseName).collection("config").findOne({ name: "security-roles" });
+      //@ts-ignore
+      const userRole = request.user.payload?.roles || null;
+      const url = request.url.split('/')[1];
+      const db = await fastify.mongo.db(CONFIG.databaseName).collection("_config").findOne({ name: "security-roles" });
       if (!db) allowed = true;
       else {
-        if (db && db.collections) {
-          const collectionReq = request.headers['collection'] || null;
-          //@ts-ignore
-          const userRole = request.user.payload?.roles || null;
-          console.log(userRole);
-          if(!userRole) reply.status(401).send({success: false, error: "cannot get the role of the user"})
-          const findCollectionConfig = db.collections.find((o: any) => o.name === collectionReq);
-          if (!findCollectionConfig) return allowed = true;
-          if (findCollectionConfig && findCollectionConfig.secure === false) return allowed = true;
-          console.log(findCollectionConfig.allowRead);
-
-          const evenHaveRole = (element: any) => element.includes(userRole);
-          switch (request.raw.method) {
-            case "GET":
-              allowed = findCollectionConfig.allowRead.some(evenHaveRole)
-              break;
-            case "POST":
-              allowed = findCollectionConfig.allowWrite.some(evenHaveRole)
-              break;
-              case "PATCH":
-                allowed = findCollectionConfig.allowUpdate.some(evenHaveRole)
-                break;
-            case "GET":
-              allowed = findCollectionConfig.allowDelete.some(evenHaveRole)
-              break;
-            default:
-              allowed = false;
-              break;
+        console.log('url', url)
+        if (db && db.collections && url === 'db') {
+          secureReq = request.headers['collection'] as string || null;
+          findConfig = db.collections.find((o: any) => o.name === secureReq);
+                 
+        } else if(db && db.collections && url === 'storage') {
+          secureReq = request.headers['location'] as string  || null;
+          if(secureReq) {
+            secureReq = secureReq.split('/')[0]
+            findConfig = db.buckets.find((o: any) => o.name === secureReq);
           }
+        }
+
+        console.log(secureReq);
+        if(!secureReq) reply.status(403).send({success: false, error: "cannot get the resource on the headers request"})
+
+        console.log(userRole);
+        if (findConfig && findConfig.secure === false) return allowed = true;   
+        if(!userRole) reply.status(401).send({success: false, error: "cannot get the role of the user"})
+        if (!findConfig) return reply.status(403).send({success: false, error: "cannot get the resource permissions"})
+
+        const evenHaveRole = (element: any) => element.includes(userRole);
+
+        switch (request.raw.method) {
+          case "GET":
+            allowed = findConfig.allowRead.some(evenHaveRole)
+            break;
+          case "POST":
+            allowed = findConfig.allowWrite.some(evenHaveRole)
+            break;
+            case "PATCH":
+              allowed = findConfig.allowUpdate.some(evenHaveRole)
+              break;
+          case "GET":
+            allowed = findConfig.allowDelete.some(evenHaveRole)
+            break;
+          default:
+            allowed = false;
+            break;
         }
       }
   
