@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Db } from "./db";
+import { Storage } from "./storage";
 import { HakibaseConfig } from "./types";
 
 export class Hakibase {
@@ -18,6 +19,10 @@ export class Hakibase {
 
     db() {
         return new Db(this.axiosInstance);
+    }
+
+    storage() {
+        return new Storage(this.axiosInstance);
     }
 
 }
