@@ -22,6 +22,7 @@
     "@slynova/flydrive": "^1.0.3",
     "@slynova/flydrive-s3": "^1.0.3",
     "axios": "^0.21.1",
+    "ejs": "^3.1.6",
     "bcrypt": "^5.0.1",
     "dotenv-json-complex": "^1.0.4",
     "fastify": "^3.0.0",
@@ -38,6 +39,7 @@
     "fastify-multipart": "^4.0.7",
     "fastify-rate-limit": "^5.6.0",
     "fastify-static": "^4.2.2",
+    "point-of-view": "^4.15.1",
     "nodemailer": "^6.6.3",
     "mongodb": "^4.0.1",
     "grant": "^5.4.16"
