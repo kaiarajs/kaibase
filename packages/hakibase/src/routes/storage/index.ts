@@ -64,7 +64,7 @@ const storage: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     const upload = await fastify.storage.disk(CONFIG.storage.driver).getStat(location);
     reply.send(upload);
   }),
-  fastify.delete<{ Headers: HeadersStorage }>('/signedUrl', StorageOpts(fastify), async function (request, reply) {
+  fastify.delete<{ Headers: HeadersStorage }>('/', StorageOpts(fastify), async function (request, reply) {
     const location = request.headers['location'];
     const upload = await fastify.storage.disk(CONFIG.storage.driver).delete(location);
     reply.status(201).send(upload);

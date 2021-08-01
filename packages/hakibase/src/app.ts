@@ -41,7 +41,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
     dev,
   });
 
-
   await fastify.after();
 
   fastify.passNextJsDataRequests();
