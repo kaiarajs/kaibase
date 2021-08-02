@@ -11,15 +11,17 @@ import PeopleIcon from '@material-ui/icons/People';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
+import { useRouter } from "next/router";
 
 const categories = [
   {
     id: 'main',
     children: [
-      { id: 'Authentication', icon: <PeopleIcon />, active: true },
+      { id: 'Dashboard', icon: <PeopleIcon />, active: true, page: 'dashboard' },
+      { id: 'Users', icon: <PeopleIcon />, active: false, page: 'users' },
       { id: 'Database', icon: <DnsRoundedIcon /> },
       { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Functions', icon: <SettingsEthernetIcon /> },
+      { id: 'Functions', icon: <SettingsEthernetIcon /> , page: 'functions'},
     ],
   },
 ];
@@ -70,6 +72,22 @@ export interface NavigatorProps extends Omit<DrawerProps, 'classes'>, WithStyles
 
 function Navigator(props: NavigatorProps) {
   const { classes, ...other } = props;
+  const router = useRouter();
+
+  function setActiveTab(page: string) {
+    categories[0].children.forEach(element => {
+      if(element.page === page) {
+        element.active = true;
+      } else {
+        element.active =false;
+      }
+    });
+  }
+
+  function navigateTo(page: string) {
+    router.push(page)
+    setActiveTab(page);
+  }
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -79,11 +97,12 @@ function Navigator(props: NavigatorProps) {
         </ListItem>
         {categories.map(({ id, children }) => (
           <React.Fragment key={id}>
-            {children.map(({ id: childId, icon, active }) => (
+            {children.map(({ id: childId, icon, active, page }) => (
               <ListItem
                 key={childId}
                 button
                 className={clsx(classes.item, active && classes.itemActiveItem)}
+                onClick={() => navigateTo(page)}
               >
                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
                 <ListItemText

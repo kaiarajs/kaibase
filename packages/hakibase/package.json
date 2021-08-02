@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@monaco-editor/react": "4.2.1",
     "@applicazza/fastify-nextjs": "^0.1.1",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",

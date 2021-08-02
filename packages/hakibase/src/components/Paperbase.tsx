@@ -166,7 +166,9 @@ const styles = createStyles({
   },
 });
 
-export interface PaperbaseProps extends WithStyles<typeof styles> {}
+export interface PaperbaseProps extends WithStyles<typeof styles> {
+  children: React.ReactNode
+}
 
 function Paperbase(props: PaperbaseProps) {
   const { classes } = props;
@@ -196,7 +198,7 @@ function Paperbase(props: PaperbaseProps) {
         <div className={classes.app}>
           <Header onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
-            <Content />
+            {props.children}
           </main>
           <footer className={classes.footer}>
             <Copyright />
