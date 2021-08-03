@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify"
 import { Document } from "mongodb";
 import { CONFIG } from "../../app";
-import { HeadersDb, QuerystringDb } from "../../types";
+import { HeadersDb, QuerystringDb, QuerystringDbGet } from "../../types";
 
 const DbOpts = (fastify: FastifyInstance) => {
    return {
@@ -23,10 +23,10 @@ const DbOpts = (fastify: FastifyInstance) => {
 
 
 const hakibase: FastifyPluginAsync =async (fastify, opts): Promise<void> => {
-  fastify.get<{Headers: HeadersDb, Querystring: QuerystringDb}>('/', DbOpts(fastify), async function (request, reply) {
-    const { filter } = request.query
+  fastify.get<{Headers: HeadersDb, Querystring: QuerystringDbGet}>('/', DbOpts(fastify), async function (request, reply) {
+    const { filter, sort, limit } = request.query
     const collection = request.headers['collection']
-    const db = await fastify.mongo.db(CONFIG.databaseName).collection(collection).find(filter || {}).toArray();
+    const db = await fastify.mongo.db(CONFIG.databaseName).collection(collection).find(filter || {}).sort(sort || {}).limit(limit || 1000).toArray();
     return reply.status(200).send(db)
   }),
   fastify.post<{Headers: HeadersDb}>('/', DbOpts(fastify),  async function (request, reply) {

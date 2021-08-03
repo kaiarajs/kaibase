@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { Filter, Document, DbResponse } from "./types";
+import { Filter, Document, DbResponse, Sort } from "./types";
 
 export class Db {
 
@@ -15,8 +15,8 @@ export class Db {
         return this;
     }
 
-    async get(filter?: Filter<Document>): Promise<DbResponse> {
-        const req = await this._axios.get('/db',{ headers: { collection: this._collection}, params: filter});
+    async get(filter?: Filter<Document>, sort?: Sort, limit?: number): Promise<DbResponse> {
+        const req = await this._axios.get('/db',{ headers: { collection: this._collection}, params: { filter, sort, limit } });
         if(req.status === 200) {
             return {
                 success: true,

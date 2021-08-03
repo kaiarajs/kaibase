@@ -6,6 +6,18 @@ export declare interface HakibaseConfig {
     serverUrl: string;
 }
 
+/** @public */
+export declare type Sort = string | Exclude<SortDirection, {
+    $meta: string;
+}> | string[] | {
+    [key: string]: SortDirection;
+} | Map<string, SortDirection> | [string, SortDirection][] | [string, SortDirection];
+
+/** @public */
+export declare type SortDirection = 1 | -1 | 'asc' | 'desc' | 'ascending' | 'descending' | {
+    $meta: string;
+};
+
 export declare type AlternativeType<T> = T extends ReadonlyArray<infer U> ? T | RegExpOrString<U> : RegExpOrString<T>;
 
 /** @public */
