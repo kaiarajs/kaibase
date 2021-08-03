@@ -2,13 +2,12 @@ import { join } from 'path';
 import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
 import fastifyNextJs from '@applicazza/fastify-nextjs';
-
-const environment = process.env.NODE_ENV || 'local'
-require("dotenv-json-complex")({ environment });
-console.log(environment);
-const envLoad = process.env?.[environment];
-export const CONFIG = JSON.parse(envLoad || 'local');
+import { readFileSync } from 'fs';
+import path from 'path';
 const dev = process.env.NODE_ENV !== 'production';
+console.log('ENV= ', process.env.NODE_ENV)
+console.log('dir', __dirname)
+export const CONFIG = JSON.parse(readFileSync(path.join(`${__dirname}/`, '..',`/.env.${process.env.NODE_ENV}.json`), 'utf8'));;
 
 export type AppOptions = {
   // Place your custom options for app below here.
