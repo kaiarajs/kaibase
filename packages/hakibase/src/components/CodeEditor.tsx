@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
 
 function CodeEditor() {
-  const editorRef = useRef(null);
+  const editorRef = useRef<any>(null);
 
-  function handleEditorDidMount(editor, monaco) {
+  function handleEditorDidMount(editor: any, monaco: any) {
     editorRef.current = editor; 
   }
   
   function showValue() {
-    alert(editorRef.current.getValue());
+  //  alert(editorRef.current.getValue());
   }
 
   return (

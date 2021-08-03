@@ -102,7 +102,7 @@ function Navigator(props: NavigatorProps) {
                 key={childId}
                 button
                 className={clsx(classes.item, active && classes.itemActiveItem)}
-                onClick={() => navigateTo(page)}
+                onClick={() => navigateTo(page || '')}
               >
                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
                 <ListItemText
