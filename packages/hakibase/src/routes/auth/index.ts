@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { CONFIG } from "../../app";
 import axios from 'axios';
 import Mail from "nodemailer/lib/mailer";
+import { TokenModel } from "../../models/tokens";
 
 interface BodyEmailAndPassword {
   email: string,
@@ -59,6 +60,12 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     const createdUser = await fastify.mongo.db(CONFIG.databaseName).collection('users').insertOne(newUser);
     const payload = { email: body.email, id: createdUser.insertedId, roles: ['user'] }
     const token = fastify.jwt.sign({ payload })
+    const newToken: TokenModel = {
+      token,
+      userId: createdUser.insertedId,
+      allowedRefresh: true
+    }
+    fastify.mongo.db(CONFIG.databaseName).collection('tokens').insertOne(newToken);
     return reply.status(201).send({ sucess: true, token })
   })
 
@@ -70,8 +77,35 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     if (findUser && !findUser.password) return reply.status(403).send({ sucess: false, error: "user not have password" })
     const payload = { email: findUser.email, id: findUser._id, roles: findUser.roles }
     const token = fastify.jwt.sign({ payload })
+    const newToken: TokenModel = {
+      token,
+      userId: findUser.insertedId,
+      allowedRefresh: true
+    }
+    fastify.mongo.db(CONFIG.databaseName).collection('tokens').insertOne(newToken);
     return reply.status(201).send({ sucess: true, token })
   }),
+
+  fastify.get('/refresh-token',{preValidation:[fastify.authenticate]}, async function (request, reply) {
+    console.log('token', request.headers.authorization?.slice(7))
+    console.log('user', request.user)
+    const findToken = await fastify.mongo.db(CONFIG.databaseName).collection('tokens').findOne({ token: request.headers.authorization?.slice(7) });
+    if (!findToken) return reply.status(403).send({ sucess: false, error: "token not exist" })
+    if (!findToken.allowedRefresh) return reply.status(401).send({ sucess: false, error: "token cannot refresh" })
+    //@ts-ignore
+    const findUser = await fastify.mongo.db(CONFIG.databaseName).collection('users').findOne({ email: request.user.payload.email });
+    if (!findUser) return reply.status(403).send({ sucess: false, error: "user not exist" })
+    const payload = { email: findUser.email, id: findUser._id, roles: findUser.roles }
+    const token = fastify.jwt.sign({ payload })
+    const newToken: TokenModel = {
+      token,
+      userId: findUser.insertedId,
+      allowedRefresh: true
+    }
+    await fastify.mongo.db(CONFIG.databaseName).collection('tokens').deleteOne(findToken);
+    await fastify.mongo.db(CONFIG.databaseName).collection('tokens').insertOne(newToken);
+    return reply.status(201).send({ sucess: true, token })
+  })
 
     fastify.post<{ Body: MailVerifyUser }>('/verify-user-mail', MailVerifyUserOpts, async function (request, reply) {
       const body = request.body;
