@@ -1,18 +1,15 @@
 import { join } from 'path';
 import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
-import fastifyNextJs from '@applicazza/fastify-nextjs';
 import { readFileSync } from 'fs';
 import path from 'path';
-const dev = process.env.NODE_ENV !== 'production';
 console.log('ENV= ', process.env.NODE_ENV)
 console.log('dir', __dirname)
-export const CONFIG = JSON.parse(readFileSync(path.join(`${__dirname}/`, '..',`/.env.${process.env.NODE_ENV}.json`), 'utf8'));;
+export const CONFIG = JSON.parse(readFileSync(path.join(`${__dirname}/`, '..',`/.env.${process.env.NODE_ENV || 'development'}.json`), 'utf8'));
 
 export type AppOptions = {
   // Place your custom options for app below here.
 } & Partial<AutoloadPluginOptions>;
-
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
   opts
@@ -36,21 +33,6 @@ const app: FastifyPluginAsync<AppOptions> = async (
     options: opts
   })
 
-  fastify.register(fastifyNextJs, {
-    dev,
-  });
-
-  await fastify.after();
-
-  fastify.passNextJsDataRequests();
-  fastify.passNextJsImageRequests();
-  if (dev) {
-      fastify.passNextJsDevRequests();
-  } else {
-      fastify.passNextJsStaticRequests();
-  }
-  fastify.passNextJsPageRequests();
-
   fastify.addHook('onReady', async function () {
     console.log('initializing.....')
     await fastify.mongo.db(CONFIG.databaseName).collection('users').createIndex({ email: 1 }, { unique: true });
@@ -67,8 +49,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
       })
     }
     console.log('Config ready')
+    console.log(fastify.printRoutes())
   })
 };
-
 export default app;
 export { app }
