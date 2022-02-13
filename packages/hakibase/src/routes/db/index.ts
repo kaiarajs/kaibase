@@ -23,6 +23,10 @@ const DbOpts = (fastify: FastifyInstance) => {
 
 
 const hakibase: FastifyPluginAsync =async (fastify, opts): Promise<void> => {
+  fastify.get<{Headers: HeadersDb}>('/all-collections', DbOpts(fastify), async function (request, reply) {
+    const db = await fastify.mongo.db(CONFIG.databaseName).collections();
+    return reply.status(200).send(db)
+  }),
   fastify.get<{Headers: HeadersDb, Querystring: QuerystringDbGet}>('/', DbOpts(fastify), async function (request, reply) {
     const { filter, sort, limit } = request.query
     const collection = request.headers['collection']
