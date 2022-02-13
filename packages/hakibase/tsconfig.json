@@ -8,8 +8,7 @@
     "allowJs": true,
     "noEmit": false, // <- remove this or set to false
     "incremental": false, // <- r
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "isolatedModules": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
