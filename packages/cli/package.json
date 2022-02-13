@@ -4,7 +4,7 @@
   "description": "Awesome CLI",
   "main": "lib/main.js",
   "bin": {
-    "cli": "bin/cli.js"
+    "hk": "bin/hk.js"
   },
   "scripts": {
     "compile": "tsc",
@@ -15,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^14.11.8",
+    "commander": "^8.3.0",
     "minimist": "^1.2.5"
   },
   "devDependencies": {
