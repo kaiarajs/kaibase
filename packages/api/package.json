@@ -1,0 +1,29 @@
+{
+    "name": "@hakibase/api",
+    "version": "1.0.0",
+    "description": "Awesome functions",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "test": "echo \"T.B.D.\""
+    },
+    "keywords": [],
+    "author": "Hakongo",
+    "license": "MIT",
+    "dependencies": {
+        "@hakibase/disk-storage": "1.0.0",
+        "@hakibase/hakibase": "1.0.0",
+        "@kaiarajs/http": "^0.0.12",
+        "@kaiarajs/kainox": "^0.0.15",
+        "@kaiarajs/router": "^0.0.15",
+        "@types/node": "^14.11.8"
+    },
+    "devDependencies": {
+        "@hakibase/disk-storage": "workspace:*",
+        "@hakibase/hakibase": "workspace:*",
+        "tsconfig": "workspace:*",
+        "typescript": "4.3.3"
+    }
+}
