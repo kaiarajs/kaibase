@@ -4,11 +4,11 @@ import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
     public allKeys: string[];
-    public folderPath: string = `${process.cwd()}/db/`;
+    public folderPath: string = `${process.cwd()}/db`;
     public collection: string = 'data';
 
-    constructor(config: { folderPath?: string }) {
-        if (config.folderPath) {
+    constructor(config?: { folderPath?: string }) {
+        if (config?.folderPath) {
             this.folderPath = config.folderPath;
         }
         this.allKeys = [];
@@ -68,8 +68,8 @@ export class DiskStorageDriver implements StorageDriver {
             } catch (e) {
                 reject(e);
             }
+            console.log(`${cwd}/${key}.db`)
             //@ts-ignore
-
             fs.writeFile(`${cwd}/${key}.db`, data, (err: ErrnoException) => {
                 if (err) {
                     reject(err);
