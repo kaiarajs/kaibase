@@ -346,7 +346,7 @@ export class Hakibase implements IDatastore {
                     values.push(...ind.value.filter((i) => {
                         if (i !== undefined && i !== null && i !== false) {
                             return i;
-                        }
+                        } else return
                     }));
                 });
                 return values;

@@ -21,7 +21,7 @@
         let i;
         let b10;
         let imax: number = s ? s.length : 0;
-        const x = [];
+        const x: string[] = [];
 
         s = String(s);
 
@@ -69,7 +69,7 @@
     public encode(s: string): string {
         let i;
         let b10;
-        const x = [];
+        const x: string[] = [];
         const imax: number = s ? s.length - s.length % 3 : 0;
 
         if (s.length === 0) {

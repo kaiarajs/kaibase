@@ -430,7 +430,7 @@ function NumberToByteArray(long: number): Uint8Array {
  * @returns {Uint8Array}
  */
 function randomByteArray(): Uint8Array {
-    const byteArray = [];
+    const byteArray: number[] = [];
     // hex 100 = 256, math random from 0 to 255;
     byteArray.push(Math.floor(Math.random() * (0x100)));
     byteArray.push(Math.floor(Math.random() * (0x100)));
@@ -714,7 +714,7 @@ export const ExpandObject = (obj: any): any => {
 };
 
 const merge = (left: any[], right: any[], sortField: string, sort: number, type: string) => {
-    const result = [];
+    const result: any[] = [];
     const leftLength: number = left.length;
     const rightLength: number = right.length;
     let l: number = 0;
