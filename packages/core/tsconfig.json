@@ -1,8 +1,7 @@
 {
-    "extends": "tsconfig.json",
-    "compilerOptions": {
-      "rootDir": "src",
-      "outDir": "lib"
-    }
+  "extends": "tsconfig.json/base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib"
   }
-  
+}
