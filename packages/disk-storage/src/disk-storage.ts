@@ -14,7 +14,6 @@ export class DiskStorageDriver implements StorageDriver {
         this.allKeys = [];
         const cwd = this.folderPath
         if (!fs.existsSync(cwd)) {
-            console.log('not exist, create')
             fs.mkdirSync(cwd);
         }
     }
@@ -68,7 +67,6 @@ export class DiskStorageDriver implements StorageDriver {
             } catch (e) {
                 reject(e);
             }
-            console.log(`${cwd}/${key}.db`)
             //@ts-ignore
             fs.writeFile(`${cwd}/${key}.db`, data, (err: ErrnoException) => {
                 if (err) {
@@ -125,11 +123,13 @@ export class DiskStorageDriver implements StorageDriver {
         return new Promise<null>((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `${cwd}/index_${key}.db`;
+            const pte = fileName;
+
             if (index === '[{"key":null,"value":[null]}]' || index === '[{"key":null, "value":[]}]') {
-                if (fs.existsSync(`${cwd}/${fileName}`)) {
+                if (fs.existsSync(pte)) {
                     //@ts-ignore
 
-                    fs.unlink(`${cwd}/${fileName}`, (err: ErrnoException) => {
+                    fs.unlink(pte, (err: ErrnoException) => {
                         if (err) {
                             reject(err);
                         }
@@ -143,9 +143,8 @@ export class DiskStorageDriver implements StorageDriver {
                 }
 
             } else {
-                //@ts-ignore
-
-                fs.writeFile(`${cwd}/${fileName}`, index, (err: ErrnoException) => {
+                                //@ts-ignore
+                fs.writeFile(pte, index, (err: ErrnoException) => {
                     if (err) {
                         reject(err);
                     }
@@ -165,11 +164,11 @@ export class DiskStorageDriver implements StorageDriver {
             const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `${cwd}/index_${key}.db`;
             let index: any;
-            if (!fs.existsSync(`${cwd}/${fileName}`)) {
+            if (!fs.existsSync(fileName)) {
                 resolve([]);
             } else {
                 //@ts-ignore
-                fs.readFile(`${cwd}/${fileName}`, "utf8", (err: ErrnoException, data) => {
+                fs.readFile(fileName, "utf8", (err: ErrnoException, data) => {
                     if (err) {
                         reject(err);
                     }
