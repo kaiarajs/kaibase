@@ -1,5 +1,5 @@
 import { StorageDriver, Sanitize, Exist } from "@hakibase/hakibase"
-import fs from "fs";
+import fs, { readdirSync } from "fs";
 import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
@@ -24,6 +24,12 @@ export class DiskStorageDriver implements StorageDriver {
         if (!fs.existsSync(cwd)) {
             fs.mkdirSync(cwd);
         }
+    }
+
+    public getCollections(): string[] {
+        return readdirSync(this.folderPath, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name)
     }
 
     /**

@@ -119,6 +119,10 @@ export interface Range {
      * @param key
      */
     setCollection(name: string): void;
+     /**
+     * Get all collections
+     */
+    getCollections(): string[];
     /**
      * Get item by key
      * @param key
