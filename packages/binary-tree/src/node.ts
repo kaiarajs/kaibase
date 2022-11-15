@@ -581,30 +581,30 @@ export abstract class Node<T> implements INode<T> {
      * Requires that key and value can be turned into JSON
      * @returns {any}
      */
-    public async toJSON<T>(): Promise<string | Error> {
-        try {
+     public toJSON<T>(): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
             const allArray: any[] = this.getTreeAsArrayOfArrays<T>();
             let indexArray: any[];
-            const rdi = await CreateRandomSortedIndex(allArray);
-            indexArray = rdi;
-            let finalJSON: any = [];
-            for (let index = 0; index < allArray.length; index++) {
-                const element = allArray[index];
-                for (let index2 = 0; index2 < element.length; index2++) {
-                    const el2 = element[index];
-                    if (el2 !== undefined) {
-                        finalJSON.push(el2[indexArray[index][index2]]);
-                    }
-                }
-            }
-            finalJSON = finalJSON.filter((val: any) => {
-                return (Object.prototype.toString.call(val) === "[object Object]");
-            });
-            return JSON.stringify(finalJSON);
-
-        } catch (error) {
-            return error;
-        }
+            // const indexArray: any[] = bTreeUtils.createRandomSortedIndex(allArray);
+            CreateRandomSortedIndex(allArray)
+                .then((res) => {
+                    indexArray = res;
+                    let finalJSON: any = [];
+                    allArray.forEach((value: any, x: number) => {
+                        indexArray[x].forEach((v: any, y: number) => {
+                            if (indexArray[x][y] !== undefined) {
+                                finalJSON.push(allArray[x][indexArray[x][y]]);
+                            }
+                        });
+                    });
+                    finalJSON = finalJSON.filter((val: any) => {
+                        return (Object.prototype.toString.call(val) === "[object Object]");
+                    });
+                    return JSON.stringify(finalJSON);
+                })
+                .then(resolve)
+                .catch(reject);
+        });
     }
 
     /**
