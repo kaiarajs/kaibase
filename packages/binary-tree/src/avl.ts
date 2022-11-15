@@ -151,7 +151,6 @@ export class AVLNode extends Node<AVLNode> implements IAVLNode {
              this.height = 1;
              return this;
          }
-
         // Insert new leaf at the right place
         while (true) {
             // Same key: no change in the tree structure

@@ -7,6 +7,7 @@ import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
     collection(name: string): Hakibase;
+    getCollections(): string[];
     insert(doc: any): Promise<any>;
     find(query: any): Cursor;
     count(query: any): Cursor;
@@ -65,6 +66,16 @@ export class Hakibase implements IDatastore {
         this.storage.setCollection(name);
         return this;
     }
+
+     /**
+     * Get all the collections from storage
+     * 
+     * db.getCollections();
+     */
+    getCollections(): string[] {
+        return this.storage.getCollections();
+    }
+
 
     /**
      * Insert a single document and insert any indices of document into
