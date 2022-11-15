@@ -1,0 +1,20 @@
+{
+    "name": "@hakibase/example",
+    "version": "1.0.0",
+    "description": "Awesome functions",
+    "main": "dist/index.js",
+    "scripts": {
+      "build": "tsc",
+      "test": "echo \"T.B.D.\""
+    },
+    "keywords": [],
+    "author": "Hakongo",
+    "license": "MIT",
+    "dependencies": {
+      "@hakibase/hakibase": "workspace:*"
+    },
+    "devDependencies": {
+      "typescript": "4.3.3"
+    }
+  }
+  
