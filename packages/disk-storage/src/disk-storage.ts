@@ -4,12 +4,20 @@ import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
     public allKeys: string[];
-    public folderPath: string = `${process.cwd()}/db`;
+    public folderPath: string;
     public collection: string = 'data';
+    public fileExtension: string = 'json';
 
-    constructor(config?: { folderPath?: string }) {
+    constructor(config?: { folderPath?: string, fileExtension?: string }) {
+        
         if (config?.folderPath) {
             this.folderPath = config.folderPath;
+        } else {
+            this.folderPath = `${process.cwd()}/${this.fileExtension}`
+        }
+
+        if (config?.fileExtension) {
+            this.fileExtension = config.fileExtension;
         }
         this.allKeys = [];
         const cwd = this.folderPath
@@ -44,7 +52,7 @@ export class DiskStorageDriver implements StorageDriver {
                 reject(`No doc with key: ${key} found in ${cwd}`);
             } else {
                 //@ts-ignore
-                fs.readFile(`${cwd}/${key}.db`, "utf8", (err: ErrnoException, data: string) => {
+                fs.readFile(`${cwd}/${key}.${this.fileExtension}`, "utf8", (err: ErrnoException, data: string) => {
                     if (err) {
                         reject(err);
                     }
@@ -74,7 +82,7 @@ export class DiskStorageDriver implements StorageDriver {
                 reject(e);
             }
             //@ts-ignore
-            fs.writeFile(`${cwd}/${key}.db`, data, (err: ErrnoException) => {
+            fs.writeFile(`${cwd}/${key}.${this.fileExtension}`, data, (err: ErrnoException) => {
                 if (err) {
                     reject(err);
                 }
@@ -94,14 +102,14 @@ export class DiskStorageDriver implements StorageDriver {
     public removeItem(key: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
-            if (!fs.existsSync(`${cwd}/${key}.db`)) {
+            if (!fs.existsSync(`${cwd}/${key}.${this.fileExtension}`)) {
                 //@ts-ignore
 
                 resolve(true);
             } else {
                 //@ts-ignore
 
-                fs.unlink(`${cwd}/${key}.db`, (err: ErrnoException) => {
+                fs.unlink(`${cwd}/${key}.${this.fileExtension}`, (err: ErrnoException) => {
                     if (err) {
                         reject(err);
                     }
@@ -121,14 +129,14 @@ export class DiskStorageDriver implements StorageDriver {
      * name that represents a reference to the associated database file,
      * a reference to the associated object element.
      * example Obj: { "name": "fred", "internal": { "age": 33 } }
-     * example filename: BTTindex_users_internal-age.db
+     * example filename: BTTindex_users_internal-age.${this.fileExtension}
      * where the file path of the associated index is "users" and the key
      * given in the method is the path to the element indexed "internal.age".
      */
     public storeIndex(key: string, index: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
-            const fileName = `${cwd}/index_${key}.db`;
+            const fileName = `${cwd}/index_${key}.${this.fileExtension}`;
             const pte = fileName;
 
             if (index === '[{"key":null,"value":[null]}]' || index === '[{"key":null, "value":[]}]') {
@@ -168,7 +176,7 @@ export class DiskStorageDriver implements StorageDriver {
     public fetchIndex(key: string): Promise<any[]> {
         return new Promise<any>((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
-            const fileName = `${cwd}/index_${key}.db`;
+            const fileName = `${cwd}/index_${key}.${this.fileExtension}`;
             let index: any;
             if (!fs.existsSync(fileName)) {
                 resolve([]);
@@ -206,7 +214,7 @@ export class DiskStorageDriver implements StorageDriver {
     public removeIndex(key: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
-            const fileName = `index_${key}.db`;
+            const fileName = `index_${key}.${this.fileExtension}`;
             if (!fs.existsSync(`${cwd}/${fileName}`)) {
                 resolve(true);
             } else {
@@ -307,7 +315,7 @@ export class DiskStorageDriver implements StorageDriver {
         return new Promise((resolve, reject) => {
             const cwd = `${this.folderPath}/${this.collection}`
             try {
-                if (fs.existsSync(`${cwd}/${obj.value}.db`)) {
+                if (fs.existsSync(`${cwd}/${obj.value}.${this.fileExtension}`)) {
                     resolve({ key: obj.key, value: obj.value, doesExist: true, index, fieldName });
                 } else {
                     resolve({ key: obj.key, value: obj.value, doesExist: false, index, fieldName });
@@ -320,7 +328,7 @@ export class DiskStorageDriver implements StorageDriver {
 
     /**
      * An extra sanitizer for the storage side as an extra check.
-     * NOT used in tedb but is available if need be. It is recommended to
+     * NOT used in te${this.fileExtension} but is available if need be. It is recommended to
      * have one available for testing and for assurance.
      * @param {string[]} keys
      * @returns {Promise<any>}
@@ -347,9 +355,9 @@ export class DiskStorageDriver implements StorageDriver {
                     }, []);
                     filteredKeys.forEach((key) => {
                         if (keys.indexOf(key) === -1) {
-                            if (fs.existsSync(`${cwd}/${key}.db`)) {
+                            if (fs.existsSync(`${cwd}/${key}.${this.fileExtension}`)) {
                                 this.allKeys = this.allKeys.filter((cur) => cur !== key);
-                                fs.unlinkSync(`${cwd}/${key}.db`);
+                                fs.unlinkSync(`${cwd}/${key}.${this.fileExtension}`);
                             }
                         }
                     });
