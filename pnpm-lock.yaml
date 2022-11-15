@@ -14,7 +14,7 @@ importers:
 
   packages/binary-tree:
     specifiers:
-      '@hakibase/core': 1.0.0
+      '@hakibase/core': ^1.0.0
       '@types/node': ^14.11.8
       tsconfig: workspace:*
       typescript: 4.3.3
@@ -36,6 +36,17 @@ importers:
     devDependencies:
       typescript: 4.3.3
 
+  packages/disk-storage:
+    specifiers:
+      '@hakibase/hakibase': ^1.0.0
+      '@types/node': ^14.11.8
+      typescript: 4.3.3
+    dependencies:
+      '@hakibase/hakibase': link:../hakibase
+      '@types/node': 14.18.33
+    devDependencies:
+      typescript: 4.3.3
+
   packages/eslint-config-custom:
     specifiers:
       eslint: ^7.23.0
@@ -52,6 +63,19 @@ importers:
       eslint-plugin-react: 7.31.8_eslint@7.32.0
     devDependencies:
       typescript: 4.8.4
+
+  packages/example:
+    specifiers:
+      '@hakibase/disk-storage': workspace:*
+      '@hakibase/hakibase': workspace:*
+      '@types/node': ^14.11.8
+      typescript: 4.3.3
+    dependencies:
+      '@hakibase/disk-storage': link:../disk-storage
+      '@hakibase/hakibase': link:../hakibase
+    devDependencies:
+      '@types/node': 14.18.33
+      typescript: 4.3.3
 
   packages/hakibase:
     specifiers:
@@ -177,7 +201,6 @@ packages:
 
   /@types/node/14.18.33:
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
-    dev: false
 
   /@typescript-eslint/parser/5.43.0_3rubbgt5ekhqrcgx4uwls3neim:
     resolution: {integrity: sha512-2iHUK2Lh7PwNUlhFxxLI2haSDNyXvebBO9izhjhMoDC+S3XI9qt2DGFUsiJ89m2k7gGYch2aEpYqV5F/+nwZug==}
