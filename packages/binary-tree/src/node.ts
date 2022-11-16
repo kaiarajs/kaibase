@@ -1,4 +1,4 @@
-import { GetRowsArrayFromHeight, CreateRandomSortedIndex, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction, DefaultCompareValues, CreateRefArrayFromTreeHeight } from '@hakibase/core';
+import { GetRowsArrayFromHeight, CreateRandomSortedIndex, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction, DefaultCompareValues, CreateRefArrayFromTreeHeight } from '@kairajs/core';
 /** Type used for Node value. */
 export type SNDBSA = Array<{} | any[] | string | number | Date | boolean | null>;
 /** Type used for Node key. You cannot use objects as keys or symbols */

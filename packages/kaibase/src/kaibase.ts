@@ -1,12 +1,12 @@
 import Index from "./indices";
 import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
 import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
-import { AVLNode, SNDBSA } from '@hakibase/binary-tree';
-import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@hakibase/core";
+import { AVLNode, SNDBSA } from '@kairajs/binary-tree';
+import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kairajs/core";
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
-    collection(name: string): Hakibase;
+    collection(name: string): kaibase;
     getCollections(): string[];
     insert(doc: any): Promise<any>;
     find(query: any): Cursor;
@@ -27,20 +27,20 @@ export interface IDatastore {
 }
 
 /**
- * Hakibase class
+ * kairajs class
  *
  * Example:
  * ~~~
  * const UserStorage = new yourStorageClass("users");
- * const Users = new Hakibase({storage: UserStorage});
+ * const Users = new kairajs({storage: UserStorage});
  * ~~~
- * Creates a new Hakibase using a specified storageDriver
+ * Creates a new kairajs using a specified storageDriver
  */
-export class Hakibase implements IDatastore {
+export class kaibase implements IDatastore {
 
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;
-    /** StorageDriver that is used for this Hakibase */
+    /** StorageDriver that is used for this kairajs */
     private storage: StorageDriver;
     /** whether or not to generate IDs automatically */
     private generateId: boolean;
@@ -62,7 +62,7 @@ export class Hakibase implements IDatastore {
      * 
      * @param name of the collection
      */
-    collection(name: string): Hakibase {
+    collection(name: string): kaibase {
         this.storage.setCollection(name);
         return this;
     }

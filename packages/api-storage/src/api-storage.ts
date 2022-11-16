@@ -1,4 +1,4 @@
-import { Exist, Sanitize, StorageDriver } from "@hakibase/hakibase"
+import { Exist, Sanitize, StorageDriver } from "@kairajs/kairajs"
 import fetch from 'node-fetch-commonjs';
 
 export class ApiStorageDriver implements StorageDriver {

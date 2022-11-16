@@ -1,6 +1,6 @@
 {
-    "name": "@hakibase/api-storage",
-    "version": "1.0.0",
+    "name": "@kairajs/api-storage",
+    "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,17 +9,17 @@
         "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "Hakongo",
+    "author": "kairajs",
     "license": "MIT",
     "dependencies": {
         "@types/node": "^14.11.8",
         "node-fetch-commonjs": "^3.2.4"
     },
     "peerDependencies": {
-        "@hakibase/hakibase": "^1.0.0"
+        "@kairajs/kaibase": "^0.0.1"
     },
     "devDependencies": {
-        "@hakibase/hakibase": "workspace:*",
+        "@kairajs/kaibase": "workspace:*",
         "typescript": "4.3.3"
     }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "@hakibase/example",
+    "name": "@kairajs/database-example",
     "version": "1.0.0",
     "description": "Awesome functions",
     "main": "dist/index.js",
@@ -8,12 +8,12 @@
       "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "Hakongo",
+    "author": "kairajs",
     "license": "MIT",
     "dependencies": {
-      "@hakibase/hakibase": "workspace:*",
-      "@hakibase/disk-storage": "workspace:*",
-      "@hakibase/api-storage": "workspace:*"
+      "@kairajs/kaibase": "workspace:*",
+      "@kairajs/disk-storage": "workspace:*",
+      "@kairajs/api-storage": "workspace:*"
     },
     "devDependencies": {
       "@types/node": "^14.11.8",

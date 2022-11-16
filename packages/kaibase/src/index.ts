@@ -5,6 +5,6 @@ export {
   } from './types';
   
   export {
-    Hakibase
-  } from './hakibase';
+    kaibase
+  } from './kaibase';
   

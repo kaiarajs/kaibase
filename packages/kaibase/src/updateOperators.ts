@@ -1,4 +1,4 @@
-import { IsEmpty } from '@hakibase/core';
+import { IsEmpty } from '@kairajs/core';
 /**
  * Method used by all update operators except $rename
  * to updated nested object values by use of a string - `"nested.doc.key"`

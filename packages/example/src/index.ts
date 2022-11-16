@@ -1,12 +1,12 @@
-import { Hakibase } from "@hakibase/hakibase";
-import { DiskStorageDriver } from '@hakibase/disk-storage'
-import { ApiStorageDriver } from '@hakibase/api-storage'
+import { kairajs } from "@kairajs/kairajs";
+import { DiskStorageDriver } from '@kairajs/disk-storage'
+import { ApiStorageDriver } from '@kairajs/api-storage'
 
 async function main() {
     try {
 
         const dbStorage = new DiskStorageDriver();
-        const db = new Hakibase({ storage: dbStorage })
+        const db = new kairajs({ storage: dbStorage })
         // await Users.collection('pepe').insert({ name: "xyz", age: 30 })
         // await Users.collection('papa').insert({ name: "xyz", age: 30 })
 
@@ -42,7 +42,7 @@ async function main() {
 
 async function mainApi() {
     const dbStorage = new ApiStorageDriver();
-    const db = new Hakibase({ storage: dbStorage })
+    const db = new kairajs({ storage: dbStorage })
     const insert = await db.collection('pepe').insert({ name: "xyz"})
     console.log('insert', insert)
     const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()

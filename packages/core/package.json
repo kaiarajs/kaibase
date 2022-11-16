@@ -1,6 +1,6 @@
 {
-    "name": "@hakibase/core",
-    "version": "1.0.0",
+    "name": "@kairajs/kaibase-core",
+    "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
       "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "Hakongo",
+    "author": "kairajs",
     "license": "MIT",
     "dependencies": {
       "@types/node": "^14.11.8",

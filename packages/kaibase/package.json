@@ -1,6 +1,6 @@
 {
-    "name": "@hakibase/hakibase",
-    "version": "1.0.0",
+    "name": "@kairajs/kaibase",
+    "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,16 +9,16 @@
         "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "Hakongo",
+    "author": "kairajs",
     "license": "MIT",
     "dependencies": {
-        "@hakibase/binary-tree": "^1.0.0",
-        "@hakibase/core": "^1.0.0",
+        "@kairajs/binary-tree": "^0.0.1",
+        "@kairajs/kaibase-core": "^0.0.1",
         "@types/node": "^14.11.8"
     },
     "devDependencies": {
-        "@hakibase/binary-tree": "workspace:*",
-        "@hakibase/core": "workspace:*",
+        "@kairajs/binary-tree": "workspace:*",
+        "@kairajs/kaibase-core": "workspace:*",
         "tsconfig": "workspace:*",
         "typescript": "4.3.3"
     }
