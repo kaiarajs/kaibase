@@ -2,7 +2,7 @@ import Index from "./indices";
 import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
 import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
 import { AVLNode, SNDBSA } from '@kairajs/binary-tree';
-import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kairajs/core";
+import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kairajs/kaibase-core";
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {

@@ -1,5 +1,5 @@
 import { ASNDBS } from "@kairajs/binary-tree";
-import { DefaultCheckKeyEquality, DefaultCompareKeysFunction } from "@kairajs/core";
+import { DefaultCheckKeyEquality, DefaultCompareKeysFunction } from "@kairajs/kaibase-core";
 
 
 export interface Range {

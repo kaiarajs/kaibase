@@ -1,4 +1,4 @@
-import { StorageDriver, Sanitize, Exist } from "@kairajs/kairajs"
+import { StorageDriver, Sanitize, Exist } from "@kairajs/kaibase"
 import fs, { readdirSync } from "fs";
 import ErrnoException = NodeJS.ErrnoException;
 
