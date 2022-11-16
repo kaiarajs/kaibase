@@ -1,0 +1,25 @@
+{
+    "name": "@hakibase/api-storage",
+    "version": "1.0.0",
+    "description": "Awesome functions",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "echo \"T.B.D.\""
+    },
+    "keywords": [],
+    "author": "Hakongo",
+    "license": "MIT",
+    "dependencies": {
+        "@types/node": "^14.11.8",
+        "node-fetch-commonjs": "^3.2.4"
+    },
+    "peerDependencies": {
+        "@hakibase/hakibase": "^1.0.0"
+    },
+    "devDependencies": {
+        "@hakibase/hakibase": "workspace:*",
+        "typescript": "4.3.3"
+    }
+}
