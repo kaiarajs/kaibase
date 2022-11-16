@@ -1,6 +1,6 @@
 {
     "name": "@kaiarajs/kaibase",
-    "version": "0.0.1",
+    "version": "0.0.6",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -18,14 +18,13 @@
     "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-        "@kaiarajs/binary-tree": "^0.0.1",
-        "@kaiarajs/kaibase-core": "^0.0.1",
-        "@types/node": "^14.11.8"
+        "@kaiarajs/binary-tree": "^0.0.3",
+        "@kaiarajs/kaibase-core": "^0.0.2"
     },
     "devDependencies": {
+        "@types/node": "^14.11.8",
         "@kaiarajs/binary-tree": "workspace:*",
         "@kaiarajs/kaibase-core": "workspace:*",
-        "tsconfig": "workspace:*",
         "typescript": "4.3.3"
     }
 }

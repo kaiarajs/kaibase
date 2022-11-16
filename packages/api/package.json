@@ -16,9 +16,9 @@
     "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-        "@kaiarajs/disk-storage": "0.0.1",
+        "@kaiarajs/disk-storage": "0.0.2",
         "@kaiarajs/http": "^0.0.12",
-        "@kaiarajs/kaibase": "0.0.1",
+        "@kaiarajs/kaibase": "^0.0.5",
         "@kaiarajs/kainox": "^0.0.15",
         "@kaiarajs/router": "^0.0.15",
         "commander": "^9.4.1"
@@ -27,7 +27,6 @@
         "@types/node": "^14.11.8",
         "@kaiarajs/disk-storage": "workspace:*",
         "@kaiarajs/kaibase": "workspace:*",
-        "tsconfig": "workspace:*",
         "typescript": "4.3.3"
     }
 }

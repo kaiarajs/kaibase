@@ -1,6 +1,6 @@
 {
   "name": "@kaiarajs/binary-tree",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Awesome functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,12 +18,11 @@
   "author": "kaiarajs",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^14.11.8",
-    "@kaiarajs/kaibase-core": "^0.0.1"
+    "@kaiarajs/kaibase-core": "^0.0.2"
   },
   "devDependencies": {
+    "@types/node": "^14.11.8",
     "@kaiarajs/kaibase-core": "workspace:*",
-    "tsconfig": "workspace:*",
     "typescript": "4.3.3"
   }
 }

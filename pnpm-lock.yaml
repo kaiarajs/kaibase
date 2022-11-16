@@ -14,14 +14,13 @@ importers:
 
   packages/api:
     specifiers:
-      '@kaiarajs/disk-storage': 0.0.1
+      '@kaiarajs/disk-storage': 0.0.2
       '@kaiarajs/http': ^0.0.12
-      '@kaiarajs/kaibase': 0.0.1
+      '@kaiarajs/kaibase': ^0.0.5
       '@kaiarajs/kainox': ^0.0.15
       '@kaiarajs/router': ^0.0.15
       '@types/node': ^14.11.8
       commander: ^9.4.1
-      tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/disk-storage': link:../disk-storage
@@ -32,7 +31,6 @@ importers:
       commander: 9.4.1
     devDependencies:
       '@types/node': 14.18.33
-      tsconfig: link:../tsconfig
       typescript: 4.3.3
 
   packages/api-storage:
@@ -50,31 +48,27 @@ importers:
 
   packages/binary-tree:
     specifiers:
-      '@kaiarajs/kaibase-core': ^0.0.1
+      '@kaiarajs/kaibase-core': ^0.0.2
       '@types/node': ^14.11.8
-      tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/kaibase-core': link:../core
-      '@types/node': 14.18.33
     devDependencies:
-      tsconfig: link:../tsconfig
+      '@types/node': 14.18.33
       typescript: 4.3.3
 
   packages/core:
     specifiers:
       '@types/node': ^14.11.8
-      tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
       '@types/node': 14.18.33
-      tsconfig: link:../tsconfig
     devDependencies:
       typescript: 4.3.3
 
   packages/disk-storage:
     specifiers:
-      '@kaiarajs/kaibase': ^0.0.1
+      '@kaiarajs/kaibase': ^0.0.5
       '@types/node': ^14.11.8
       typescript: 4.3.3
     dependencies:
@@ -117,21 +111,16 @@ importers:
 
   packages/kaibase:
     specifiers:
-      '@kaiarajs/binary-tree': ^0.0.1
-      '@kaiarajs/kaibase-core': ^0.0.1
+      '@kaiarajs/binary-tree': ^0.0.3
+      '@kaiarajs/kaibase-core': ^0.0.2
       '@types/node': ^14.11.8
-      tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/binary-tree': link:../binary-tree
       '@kaiarajs/kaibase-core': link:../core
       '@types/node': 14.18.33
     devDependencies:
-      tsconfig: link:../tsconfig
       typescript: 4.3.3
-
-  packages/tsconfig:
-    specifiers: {}
 
 packages:
 
