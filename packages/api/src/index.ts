@@ -9,21 +9,25 @@ const router = new Router();
 
 app.use(Parser.json())
 
-router.post('/:collection/find', async (req, res) => {
+router.post('/:collection/getItem', async (req, res) => {
     const {collection} = req.params as { collection: string};
     const body = req.body
+    console.log(body)
     const insert = dbStorage.setCollection(collection).getItem(body)
     res.send(insert as any)
 });
 
-router.post('/:collection/insert', async (req, res) => {
+router.post('/:collection/setItem', async (req, res) => {
     const {collection} = req.params as { collection: string};
+    console.log('collection', collection)
+    console.log('req.body', req.body)
+
     const {key,value} = req.body;
     const insert = await dbStorage.setCollection(collection).setItem(key,value)
     res.send(insert)
 });
 
-router.post('/:collection/delete', async (req, res) => {
+router.post('/:collection/removeItem', async (req, res) => {
     const {collection} = req.params as { collection: string};
     const body = req.body;
     const del = await dbStorage.setCollection(collection).removeItem(body)

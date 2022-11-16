@@ -12,7 +12,8 @@
     "license": "MIT",
     "dependencies": {
       "@hakibase/hakibase": "workspace:*",
-      "@hakibase/disk-storage": "workspace:*"
+      "@hakibase/disk-storage": "workspace:*",
+      "@hakibase/api-storage": "workspace:*"
     },
     "devDependencies": {
       "@types/node": "^14.11.8",
