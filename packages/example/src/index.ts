@@ -43,6 +43,8 @@ async function main() {
 async function mainApi() {
     const dbStorage = new ApiStorageDriver();
     const db = new Hakibase({ storage: dbStorage })
+    const insert = await db.collection('pepe').insert({ name: "xyz"})
+    console.log('insert', insert)
     const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()
     console.log('pepe',pepe)
 }

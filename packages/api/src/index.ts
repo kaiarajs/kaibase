@@ -11,17 +11,13 @@ app.use(Parser.json())
 
 router.post('/:collection/getItem', async (req, res) => {
     const {collection} = req.params as { collection: string};
-    const body = req.body
-    console.log(body)
-    const insert = dbStorage.setCollection(collection).getItem(body)
+    const {key} = req.body
+    const insert = await dbStorage.setCollection(collection).getItem(key)
     res.send(insert as any)
 });
 
 router.post('/:collection/setItem', async (req, res) => {
     const {collection} = req.params as { collection: string};
-    console.log('collection', collection)
-    console.log('req.body', req.body)
-
     const {key,value} = req.body;
     const insert = await dbStorage.setCollection(collection).setItem(key,value)
     res.send(insert)
@@ -33,6 +29,16 @@ router.post('/:collection/removeItem', async (req, res) => {
     const del = await dbStorage.setCollection(collection).removeItem(body)
     res.send(del)
 });
+
+router.post('/:collection/iterate', async (req, res) => {
+    const {collection} = req.params as { collection: string};
+    let callback: any[] = [];
+    await dbStorage.setCollection(collection).iterate((k,v) => {
+        callback.push({k,v})
+    })
+    res.send(callback)
+});
+
 
 
 

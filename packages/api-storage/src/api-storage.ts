@@ -8,7 +8,7 @@ export class ApiStorageDriver implements StorageDriver {
     public fileExtension: string = 'json';
 
     constructor(config?: { apiUrl?: string, fileExtension?: string }) {
-        
+
         if (config?.apiUrl) {
             this.apiUrl = config.apiUrl;
         } else {
@@ -19,7 +19,7 @@ export class ApiStorageDriver implements StorageDriver {
             this.fileExtension = config.fileExtension;
         }
         this.allKeys = [];
-     
+
     }
 
 
@@ -39,9 +39,6 @@ export class ApiStorageDriver implements StorageDriver {
         throw new Error("Method not implemented.");
     }
     removeIndex(key: string): Promise<null> {
-        throw new Error("Method not implemented.");
-    }
-    iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number | undefined) => any): Promise<any> {
         throw new Error("Method not implemented.");
     }
     keys(): Promise<string[]> {
@@ -65,24 +62,32 @@ export class ApiStorageDriver implements StorageDriver {
     * else reject a new error message.
     */
     public async setItem(key: string, value: any): Promise<any> {
-        console.log({key,value})
-        console.log(JSON.stringify({key,value}) )
-        const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, { method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify({key,value}) });
+        const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key, value }) });
         const data = await response.json();
         return data;
     }
 
-     /**
-     * using the cwd use the file path to read the file contents
-     * parse the file and return the item with the given key
-     * else reject a new error message.
-     */
-      public async getItem(key: string): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/getItem`, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify({key}) });
+    /**
+    * using the cwd use the file path to read the file contents
+    * parse the file and return the item with the given key
+    * else reject a new error message.
+    */
+    public async getItem(key: string): Promise<any> {
+        const response = await fetch(`${this.apiUrl}/${this.collection}/getItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key }) });
         const data = await response.json();
         return data;
     }
 
+    /**
+    * using the cwd use the file path to read the file contents
+    * parse the file and return the item with the given key
+    * else reject a new error message.
+    */
+     public async iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number | undefined) => any): Promise<any> {
+        const response = await fetch(`${this.apiUrl}/${this.collection}/iterate`, { method: 'POST', headers: {'Content-Type': 'application/json'} });
+        const data: any = await response.json();
+        return data.forEach(element => {
+            return iteratorCallback(element.k,element.v)
+        });
+    }
 }
-
-

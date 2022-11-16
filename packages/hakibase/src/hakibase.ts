@@ -604,7 +604,6 @@ export class Hakibase implements IDatastore {
         return new Promise((resolve, reject) => {
             if (fieldName === "$or" && value instanceof Array) {
                 const promises: Array<Promise<any>> = [];
-
                 value.forEach((query): void => {
                     for (const field in query) {
                         if (typeof field === "string" && query.hasOwnProperty(field)) {
@@ -620,7 +619,6 @@ export class Hakibase implements IDatastore {
 
             } else if (fieldName === "$and" && value instanceof Array) {
                 const promises: Array<Promise<any>> = [];
-
                 value.forEach((query): void => {
                     for (const field in query) {
                         if (typeof field === "string" && query.hasOwnProperty(field)) {

@@ -106,7 +106,6 @@ export class Cursor implements ICursor {
             }
 
             const joined: any = Promise.all(promisesGetIds); // confusing type issues*
-
             joined
                 .then((idsArr: string[][]): number | Promise<any[]> => {
                     idsArr = FlattenArray(idsArr);
