@@ -1,6 +1,6 @@
 import { ASNDBS, SNDBSA, AVLTree } from '@kairajs/binary-tree';
 import { ArrayDuplicate, GetObjectValue, CompareArray } from '@kairajs/kaibase-core';
-import { kaibase } from './kaibase';
+import { Kaibase } from './kaibase';
 import { IndexOptions, Range } from './types';
 
 /**
@@ -32,7 +32,7 @@ export default class Index implements IIndex {
     /** ALV Tree for indexing */
     private avl: AVLTree;
     /** Reference to kairajs */
-    private datastore: kaibase;
+    private datastore: Kaibase;
     /** Is the index holding an array */
     private isArray: boolean;
 
@@ -41,7 +41,7 @@ export default class Index implements IIndex {
      * @param datastore - reference to kairajs
      * @param options - Options for Index, `{fieldName: string}`
      */
-    constructor(datastore: kaibase, options: IndexOptions) {
+    constructor(datastore: Kaibase, options: IndexOptions) {
         this.avl = options.unique ? new AVLTree({ unique: true }) : new AVLTree({});
 
         if (options.compareKeys) {

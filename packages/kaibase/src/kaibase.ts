@@ -6,7 +6,7 @@ import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue,
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
-    collection(name: string): kaibase;
+    collection(name: string): Kaibase;
     getCollections(): string[];
     insert(doc: any): Promise<any>;
     find(query: any): Cursor;
@@ -36,7 +36,7 @@ export interface IDatastore {
  * ~~~
  * Creates a new kairajs using a specified storageDriver
  */
-export class kaibase implements IDatastore {
+export class Kaibase implements IDatastore {
 
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;
@@ -62,7 +62,7 @@ export class kaibase implements IDatastore {
      * 
      * @param name of the collection
      */
-    collection(name: string): kaibase {
+    collection(name: string): Kaibase {
         this.storage.setCollection(name);
         return this;
     }

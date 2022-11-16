@@ -5,6 +5,6 @@ export {
   } from './types';
   
   export {
-    kaibase
+    Kaibase
   } from './kaibase';
   

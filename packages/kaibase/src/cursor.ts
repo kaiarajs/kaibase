@@ -1,5 +1,5 @@
 import { ArrayDuplicate, FlattenArray, GetSortType, IsEmpty, MergeSort } from "@kairajs/kaibase-core";
-import { kaibase } from "./kaibase";
+import { Kaibase } from "./kaibase";
 
 export interface ICursor {
     sort(sort: any): this;
@@ -25,8 +25,8 @@ export interface Options {
  * Database Cursor
  */
 export class Cursor implements ICursor {
-    /** Reference to kairajs object */
-    private datastore: kaibase;
+    /** Reference to Kaibase object */
+    private datastore: Kaibase;
     /** Query passed from `kairajs.find` or `count` */
     private query: any;
     /** Options for `exec` */
@@ -41,7 +41,7 @@ export class Cursor implements ICursor {
      * @param query - query for search
      * @param count - is this a count operation? Default: false
      */
-    constructor(datastore: kaibase, query: any = {}, count?: boolean) {
+    constructor(datastore: Kaibase, query: any = {}, count?: boolean) {
         this.datastore = datastore;
         this.query = query;
         this.count = count || false;
