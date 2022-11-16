@@ -26,12 +26,13 @@ export class DiskStorageDriver implements StorageDriver {
         }
     }
 
-    public setCollection(collection: string): void {
+    public setCollection(collection: string) {
         this.collection = collection;
         const cwd = `${this.folderPath}/${this.collection}`
         if (!fs.existsSync(cwd)) {
             fs.mkdirSync(cwd);
         }
+        return this
     }
 
     public getCollections(): string[] {
