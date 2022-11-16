@@ -20,6 +20,7 @@ importers:
       '@kaiarajs/kainox': ^0.0.15
       '@kaiarajs/router': ^0.0.15
       '@types/node': ^14.11.8
+      commander: ^9.4.1
       tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
@@ -28,8 +29,9 @@ importers:
       '@kaiarajs/kaibase': link:../kaibase
       '@kaiarajs/kainox': 0.0.15_iqwc3dyy5ypibs4v2apgkol5te
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
-      '@types/node': 14.18.33
+      commander: 9.4.1
     devDependencies:
+      '@types/node': 14.18.33
       tsconfig: link:../tsconfig
       typescript: 4.3.3
 
@@ -609,6 +611,11 @@ packages:
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    dev: false
+
+  /commander/9.4.1:
+    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
+    engines: {node: ^12.20.0 || >=14}
     dev: false
 
   /concat-map/0.0.1:
