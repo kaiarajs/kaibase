@@ -1,5 +1,5 @@
 {
-    "name": "@hakibase/hakibase",
+    "name": "@hakibase/api-storage",
     "version": "1.0.0",
     "description": "Awesome functions",
     "main": "dist/index.js",
@@ -12,14 +12,14 @@
     "author": "Hakongo",
     "license": "MIT",
     "dependencies": {
-        "@hakibase/binary-tree": "^1.0.0",
-        "@hakibase/core": "^1.0.0",
-        "@types/node": "^14.11.8"
+        "@types/node": "^14.11.8",
+        "node-fetch-commonjs": "^3.2.4"
+    },
+    "peerDependencies": {
+        "@hakibase/hakibase": "^1.0.0"
     },
     "devDependencies": {
-        "@hakibase/binary-tree": "workspace:*",
-        "@hakibase/core": "workspace:*",
-        "tsconfig": "workspace:*",
+        "@hakibase/hakibase": "workspace:*",
         "typescript": "4.3.3"
     }
 }
