@@ -1,5 +1,5 @@
 {
-    "name": "@kairajs/api-storage",
+    "name": "@kaiarajs/api-storage",
     "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
@@ -9,17 +9,17 @@
         "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "kairajs",
+    "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
         "@types/node": "^14.11.8",
         "node-fetch-commonjs": "^3.2.4"
     },
     "peerDependencies": {
-        "@kairajs/kaibase": "^0.0.1"
+        "@kaiarajs/kaibase": "^0.0.1"
     },
     "devDependencies": {
-        "@kairajs/kaibase": "workspace:*",
+        "@kaiarajs/kaibase": "workspace:*",
         "typescript": "4.3.3"
     }
 }

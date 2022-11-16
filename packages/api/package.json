@@ -1,5 +1,5 @@
 {
-    "name": "@kairajs/api",
+    "name": "@kaiarajs/api",
     "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
@@ -10,19 +10,19 @@
         "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "kairajs",
+    "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-        "@kairajs/disk-storage": "0.0.1",
-        "@kairajs/kaibase": "0.0.1",
+        "@kaiarajs/disk-storage": "0.0.1",
+        "@kaiarajs/kaibase": "0.0.1",
         "@kaiarajs/http": "^0.0.12",
         "@kaiarajs/kainox": "^0.0.15",
         "@kaiarajs/router": "^0.0.15",
         "@types/node": "^14.11.8"
     },
     "devDependencies": {
-        "@kairajs/disk-storage": "workspace:*",
-        "@kairajs/kaibase": "workspace:*",
+        "@kaiarajs/disk-storage": "workspace:*",
+        "@kaiarajs/kaibase": "workspace:*",
         "tsconfig": "workspace:*",
         "typescript": "4.3.3"
     }

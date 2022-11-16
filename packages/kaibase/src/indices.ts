@@ -1,5 +1,5 @@
-import { ASNDBS, SNDBSA, AVLTree } from '@kairajs/binary-tree';
-import { ArrayDuplicate, GetObjectValue, CompareArray } from '@kairajs/kaibase-core';
+import { ASNDBS, SNDBSA, AVLTree } from '@kaiarajs/binary-tree';
+import { ArrayDuplicate, GetObjectValue, CompareArray } from '@kaiarajs/kaibase-core';
 import { Kaibase } from './kaibase';
 import { IndexOptions, Range } from './types';
 
@@ -31,14 +31,14 @@ export default class Index implements IIndex {
     protected fieldName: string;
     /** ALV Tree for indexing */
     private avl: AVLTree;
-    /** Reference to kairajs */
+    /** Reference to kaiarajs */
     private datastore: Kaibase;
     /** Is the index holding an array */
     private isArray: boolean;
 
     /**
      * Constructor
-     * @param datastore - reference to kairajs
+     * @param datastore - reference to kaiarajs
      * @param options - Options for Index, `{fieldName: string}`
      */
     constructor(datastore: Kaibase, options: IndexOptions) {

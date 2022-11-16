@@ -1,4 +1,4 @@
-import { ArrayDuplicate, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction } from "@kairajs/kaibase-core";
+import { ArrayDuplicate, DefaultCheckKeyEquality, DefaultCheckValueEquality, DefaultCompareKeysFunction } from "@kaiarajs/kaibase-core";
 import { ASNDBS, INodeConstructor, SNDBSA, Node } from "./node";
 
 

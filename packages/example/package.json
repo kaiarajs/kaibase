@@ -1,5 +1,5 @@
 {
-    "name": "@kairajs/database-example",
+    "name": "@kaiarajs/database-example",
     "version": "1.0.0",
     "description": "Awesome functions",
     "main": "dist/index.js",
@@ -8,12 +8,12 @@
       "test": "echo \"T.B.D.\""
     },
     "keywords": [],
-    "author": "kairajs",
+    "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-      "@kairajs/kaibase": "workspace:*",
-      "@kairajs/disk-storage": "workspace:*",
-      "@kairajs/api-storage": "workspace:*"
+      "@kaiarajs/kaibase": "workspace:*",
+      "@kaiarajs/disk-storage": "workspace:*",
+      "@kaiarajs/api-storage": "workspace:*"
     },
     "devDependencies": {
       "@types/node": "^14.11.8",

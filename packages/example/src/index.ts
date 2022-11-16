@@ -1,6 +1,6 @@
-import { Kaibase } from "@kairajs/kaibase";
-import { DiskStorageDriver } from '@kairajs/disk-storage'
-import { ApiStorageDriver } from '@kairajs/api-storage'
+import { Kaibase } from "@kaiarajs/kaibase";
+import { DiskStorageDriver } from '@kaiarajs/disk-storage'
+import { ApiStorageDriver } from '@kaiarajs/api-storage'
 
 async function main() {
     try {

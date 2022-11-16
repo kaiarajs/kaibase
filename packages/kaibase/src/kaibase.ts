@@ -1,8 +1,8 @@
 import Index from "./indices";
 import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
 import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
-import { AVLNode, SNDBSA } from '@kairajs/binary-tree';
-import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kairajs/kaibase-core";
+import { AVLNode, SNDBSA } from '@kaiarajs/binary-tree';
+import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kaiarajs/kaibase-core";
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
@@ -27,20 +27,20 @@ export interface IDatastore {
 }
 
 /**
- * kairajs class
+ * kaiarajs class
  *
  * Example:
  * ~~~
  * const UserStorage = new yourStorageClass("users");
- * const Users = new kairajs({storage: UserStorage});
+ * const Users = new kaiarajs({storage: UserStorage});
  * ~~~
- * Creates a new kairajs using a specified storageDriver
+ * Creates a new kaiarajs using a specified storageDriver
  */
 export class Kaibase implements IDatastore {
 
     /** A HashMap of all the indices keyed by the fieldName. <fieldName, Index> */
     private indices: Map<string, Index>;
-    /** StorageDriver that is used for this kairajs */
+    /** StorageDriver that is used for this kaiarajs */
     private storage: StorageDriver;
     /** whether or not to generate IDs automatically */
     private generateId: boolean;

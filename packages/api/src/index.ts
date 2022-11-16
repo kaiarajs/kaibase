@@ -1,6 +1,6 @@
 import Kainox, { Parser } from "@kaiarajs/kainox";
 import Router from "@kaiarajs/router";
-import { DiskStorageDriver } from '@kairajs/disk-storage'
+import { DiskStorageDriver } from '@kaiarajs/disk-storage'
 export const dbStorage = new DiskStorageDriver();
 
 

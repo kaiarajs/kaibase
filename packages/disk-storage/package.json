@@ -1,24 +1,29 @@
 {
-    "name": "@kairajs/disk-storage",
-    "version": "0.0.1",
-    "description": "Awesome functions",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-      "build": "tsc",
-      "test": "echo \"T.B.D.\""
-    },
-    "keywords": [],
-    "author": "kairajs",
-    "license": "MIT",
-    "dependencies": {
-      "@types/node": "^14.11.8"
-    },
-    "peerDependencies": {
-      "@kairajs/kaibase": "^0.0.1"
-    },
-    "devDependencies": {
-      "typescript": "4.3.3"
-    }
+  "name": "@kaiarajs/disk-storage",
+  "version": "0.0.1",
+  "description": "Awesome functions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"T.B.D.\""
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "kaiarajs",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.11.8"
+  },
+  "peerDependencies": {
+    "@kaiarajs/kaibase": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "4.3.3"
   }
-  
+}

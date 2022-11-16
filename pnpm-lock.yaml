@@ -14,20 +14,20 @@ importers:
 
   packages/api:
     specifiers:
+      '@kaiarajs/disk-storage': 0.0.1
       '@kaiarajs/http': ^0.0.12
+      '@kaiarajs/kaibase': 0.0.1
       '@kaiarajs/kainox': ^0.0.15
       '@kaiarajs/router': ^0.0.15
-      '@kairajs/disk-storage': 0.0.1
-      '@kairajs/kaibase': 0.0.1
       '@types/node': ^14.11.8
       tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
+      '@kaiarajs/disk-storage': link:../disk-storage
       '@kaiarajs/http': 0.0.12_@types+node@14.18.33
+      '@kaiarajs/kaibase': link:../kaibase
       '@kaiarajs/kainox': 0.0.15_iqwc3dyy5ypibs4v2apgkol5te
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
-      '@kairajs/disk-storage': link:../disk-storage
-      '@kairajs/kaibase': link:../kaibase
       '@types/node': 14.18.33
     devDependencies:
       tsconfig: link:../tsconfig
@@ -35,7 +35,7 @@ importers:
 
   packages/api-storage:
     specifiers:
-      '@kairajs/kaibase': workspace:*
+      '@kaiarajs/kaibase': workspace:*
       '@types/node': ^14.11.8
       node-fetch-commonjs: ^3.2.4
       typescript: 4.3.3
@@ -43,17 +43,17 @@ importers:
       '@types/node': 14.18.33
       node-fetch-commonjs: 3.2.4
     devDependencies:
-      '@kairajs/kaibase': link:../kaibase
+      '@kaiarajs/kaibase': link:../kaibase
       typescript: 4.3.3
 
   packages/binary-tree:
     specifiers:
-      '@kairajs/kaibase-core': ^0.0.1
+      '@kaiarajs/kaibase-core': ^0.0.1
       '@types/node': ^14.11.8
       tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
-      '@kairajs/kaibase-core': link:../core
+      '@kaiarajs/kaibase-core': link:../core
       '@types/node': 14.18.33
     devDependencies:
       tsconfig: link:../tsconfig
@@ -72,11 +72,11 @@ importers:
 
   packages/disk-storage:
     specifiers:
-      '@kairajs/kaibase': ^0.0.1
+      '@kaiarajs/kaibase': ^0.0.1
       '@types/node': ^14.11.8
       typescript: 4.3.3
     dependencies:
-      '@kairajs/kaibase': link:../kaibase
+      '@kaiarajs/kaibase': link:../kaibase
       '@types/node': 14.18.33
     devDependencies:
       typescript: 4.3.3
@@ -100,29 +100,29 @@ importers:
 
   packages/example:
     specifiers:
-      '@kairajs/api-storage': workspace:*
-      '@kairajs/disk-storage': workspace:*
-      '@kairajs/kaibase': workspace:*
+      '@kaiarajs/api-storage': workspace:*
+      '@kaiarajs/disk-storage': workspace:*
+      '@kaiarajs/kaibase': workspace:*
       '@types/node': ^14.11.8
       typescript: 4.3.3
     dependencies:
-      '@kairajs/api-storage': link:../api-storage
-      '@kairajs/disk-storage': link:../disk-storage
-      '@kairajs/kaibase': link:../kaibase
+      '@kaiarajs/api-storage': link:../api-storage
+      '@kaiarajs/disk-storage': link:../disk-storage
+      '@kaiarajs/kaibase': link:../kaibase
     devDependencies:
       '@types/node': 14.18.33
       typescript: 4.3.3
 
   packages/kaibase:
     specifiers:
-      '@kairajs/binary-tree': ^0.0.1
-      '@kairajs/kaibase-core': ^0.0.1
+      '@kaiarajs/binary-tree': ^0.0.1
+      '@kaiarajs/kaibase-core': ^0.0.1
       '@types/node': ^14.11.8
       tsconfig: workspace:*
       typescript: 4.3.3
     dependencies:
-      '@kairajs/binary-tree': link:../binary-tree
-      '@kairajs/kaibase-core': link:../core
+      '@kaiarajs/binary-tree': link:../binary-tree
+      '@kaiarajs/kaibase-core': link:../core
       '@types/node': 14.18.33
     devDependencies:
       tsconfig: link:../tsconfig
