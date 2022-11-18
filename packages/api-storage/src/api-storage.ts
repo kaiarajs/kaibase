@@ -63,8 +63,12 @@ export class ApiStorageDriver implements StorageDriver {
     */
     public async setItem(key: string, value: any): Promise<any> {
         const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key, value }) });
-        const data = await response.json();
-        return data;
+        const data: any = await response.json();
+        if(response.ok) {
+            return data;
+        } else {
+            throw new Error(data.message);
+        }
     }
 
     /**
@@ -74,8 +78,12 @@ export class ApiStorageDriver implements StorageDriver {
     */
     public async getItem(key: string): Promise<any> {
         const response = await fetch(`${this.apiUrl}/${this.collection}/getItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key }) });
-        const data = await response.json();
-        return data;
+        const data: any = await response.json();
+        if(response.ok) {
+            return data;
+        } else {
+            throw new Error(data.message);
+        }
     }
 
     /**
@@ -83,11 +91,17 @@ export class ApiStorageDriver implements StorageDriver {
     * parse the file and return the item with the given key
     * else reject a new error message.
     */
-     public async iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number | undefined) => any): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/iterate`, { method: 'POST', headers: {'Content-Type': 'application/json'} });
+    public async iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number | undefined) => any): Promise<any> {
+        const response = await fetch(`${this.apiUrl}/${this.collection}/iterate`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
         const data: any = await response.json();
-        return data.forEach(element => {
-            return iteratorCallback(element.k,element.v)
-        });
+        if (response.ok) {
+            return data.forEach(element => {
+                return iteratorCallback(element.k, element.v)
+            });
+
+        } else {
+            throw new Error(data.message);
+
+        }
     }
 }

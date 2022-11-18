@@ -1,6 +1,7 @@
 import Kainox, { Parser } from "@kaiarajs/kainox";
 import Router from "@kaiarajs/router";
 import { DiskStorageDriver } from '@kaiarajs/disk-storage'
+import { apiKeyAuth } from "./middleware";
 export const dbStorage = new DiskStorageDriver();
 
 
@@ -14,7 +15,7 @@ export function main() {
         const {collection} = req.params as { collection: string};
         const {key} = req.body
         const insert = await dbStorage.setCollection(collection).getItem(key)
-        res.send(insert as any)
+        res.send(insert)
     });
     
     router.post('/:collection/setItem', async (req, res) => {
@@ -32,6 +33,7 @@ export function main() {
     });
     
     router.post('/:collection/iterate', async (req, res) => {
+        console.log(req.query);
         const {collection} = req.params as { collection: string};
         let callback: any[] = [];
         await dbStorage.setCollection(collection).iterate((k,v) => {

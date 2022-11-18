@@ -16,11 +16,13 @@ importers:
     specifiers:
       '@kaiarajs/disk-storage': 0.0.2
       '@kaiarajs/http': ^0.0.12
-      '@kaiarajs/kaibase': ^0.0.5
+      '@kaiarajs/kaibase': ^0.0.6
       '@kaiarajs/kainox': ^0.0.15
       '@kaiarajs/router': ^0.0.15
+      '@types/http-errors': ^2.0.1
       '@types/node': ^14.11.8
       commander: ^9.4.1
+      http-errors: ^2.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/disk-storage': link:../disk-storage
@@ -29,7 +31,9 @@ importers:
       '@kaiarajs/kainox': 0.0.15_iqwc3dyy5ypibs4v2apgkol5te
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
       commander: 9.4.1
+      http-errors: 2.0.0
     devDependencies:
+      '@types/http-errors': 2.0.1
       '@types/node': 14.18.33
       typescript: 4.3.3
 
@@ -68,7 +72,7 @@ importers:
 
   packages/disk-storage:
     specifiers:
-      '@kaiarajs/kaibase': ^0.0.5
+      '@kaiarajs/kaibase': ^0.0.6
       '@types/node': ^14.11.8
       typescript: 4.3.3
     dependencies:
@@ -118,8 +122,8 @@ importers:
     dependencies:
       '@kaiarajs/binary-tree': link:../binary-tree
       '@kaiarajs/kaibase-core': link:../core
-      '@types/node': 14.18.33
     devDependencies:
+      '@types/node': 14.18.33
       typescript: 4.3.3
 
 packages:
@@ -297,6 +301,10 @@ packages:
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: false
+
+  /@types/http-errors/2.0.1:
+    resolution: {integrity: sha512-/K3ds8TRAfBvi5vfjuz8y6+GiAYBZ0x4tXv1Av6CWBWn0IlADc+ZX9pMq7oU0fNQPnBwIZl3rmeLp6SBApbxSQ==}
+    dev: true
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
