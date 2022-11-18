@@ -41,7 +41,7 @@ async function main() {
 
 
 async function mainApi() {
-    const dbStorage = new ApiStorageDriver({apiUrl: "kaibase://localhost:3000?api_key=lol"});
+    const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
     const db = new Kaibase({ storage: dbStorage })
    // const insert = await db.collection('pepe').insert({ name: "xyz"})
    // console.log('insert', insert)

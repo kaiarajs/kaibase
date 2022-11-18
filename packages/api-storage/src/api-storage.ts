@@ -1,5 +1,6 @@
 import { Exist, Sanitize, StorageDriver } from "@kaiarajs/kaibase"
-import fetch from 'node-fetch-commonjs';
+import fetch, { HeadersInit } from 'node-fetch-commonjs';
+import qs from 'querystring';
 
 export class ApiStorageDriver implements StorageDriver {
     public allKeys: string[];
@@ -7,10 +8,17 @@ export class ApiStorageDriver implements StorageDriver {
     public collection: string = 'data';
     public fileExtension: string = 'json';
 
+    private requestOptions: {method: string, headers: HeadersInit, body?: string} = { method: 'POST', headers: { 'Content-Type': 'application/json' } };
+
     constructor(config?: { apiUrl?: string, fileExtension?: string }) {
 
         if (config?.apiUrl) {
-            this.apiUrl = config.apiUrl;
+            const url = config?.apiUrl.split('?')[0]
+            const params = qs.parse(config?.apiUrl.split('?')[1])
+            if(params['api-key']) {
+                this.requestOptions.headers = {...this.requestOptions.headers, 'api-key': params['api-key'] as string}
+            }
+            this.apiUrl = url;
         } else {
             this.apiUrl = `http://localhost:3000`
         }
@@ -18,6 +26,8 @@ export class ApiStorageDriver implements StorageDriver {
         if (config?.fileExtension) {
             this.fileExtension = config.fileExtension;
         }
+
+        
         this.allKeys = [];
 
     }
@@ -62,7 +72,7 @@ export class ApiStorageDriver implements StorageDriver {
     * else reject a new error message.
     */
     public async setItem(key: string, value: any): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key, value }) });
+        const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, {...this.requestOptions, body: JSON.stringify({ key, value })});
         const data: any = await response.json();
         if(response.ok) {
             return data;
