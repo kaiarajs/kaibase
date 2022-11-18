@@ -114,6 +114,11 @@ export interface Range {
  * expect in your plugin. Storage plugins implement a simple key-value store.
  */
  export interface StorageDriver {
+    /**
+     * Set database name
+     * @param key
+     */
+     setDatabase(name: string): void;
      /**
      * Set collection name
      * @param key

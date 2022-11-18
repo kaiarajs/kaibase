@@ -5,31 +5,42 @@ import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
     public allKeys: string[];
-    public databaseName: string;
+    public folderPath: string;
     public collection: string = 'data';
     public fileExtension: string = 'json';
 
-    constructor(config?: { databaseName?: string, fileExtension?: string }) {
+    private databaseName: string = "data"
 
-        if (config?.databaseName) {
-            this.databaseName = config.databaseName;
+    constructor(config?: { folderPath?: string, fileExtension?: string }) {
+
+        if (config?.folderPath) {
+            this.folderPath = config.folderPath;
         } else {
-            this.databaseName = `${process.cwd()}/${this.fileExtension}`
+            this.folderPath = `${process.cwd()}/${this.fileExtension}`
         }
 
         if (config?.fileExtension) {
             this.fileExtension = config.fileExtension;
         }
         this.allKeys = [];
-        const cwd = this.databaseName
+        const cwd = this.folderPath
         if (!fs.existsSync(cwd)) {
             fs.mkdirSync(cwd);
         }
     }
 
+    public setDatabase(name: string) {
+        this.databaseName = name;
+        const cwd = `${this.folderPath}/${this.databaseName}/${this.collection}`
+        if (!fs.existsSync(cwd)) {
+            fs.mkdirSync(cwd);
+        }
+        return this
+    }
+
     public setCollection(collection: string) {
         this.collection = collection;
-        const cwd = `${this.databaseName}/${this.collection}`
+        const cwd = `${this.folderPath}/${this.databaseName}/${this.collection}`
         if (!fs.existsSync(cwd)) {
             fs.mkdirSync(cwd);
         }
@@ -37,7 +48,7 @@ export class DiskStorageDriver implements StorageDriver {
     }
 
     public getCollections(): string[] {
-        return readdirSync(this.databaseName, { withFileTypes: true })
+        return readdirSync(`${this.folderPath}/${this.databaseName}`, { withFileTypes: true })
             .filter(dirent => dirent.isDirectory())
             .map(dirent => dirent.name)
     }
@@ -49,7 +60,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public getItem(key: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             if (!fs.existsSync(cwd)) {
                 reject(`No doc with key: ${key} found in ${cwd}`);
             } else {
@@ -76,7 +87,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public setItem(key: string, value: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             let data;
             try {
                 data = JSON.stringify(value);
@@ -103,7 +114,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public removeItem(key: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             if (!fs.existsSync(`${cwd}/${key}.${this.fileExtension}`)) {
                 //@ts-ignore
 
@@ -137,7 +148,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public storeIndex(key: string, index: string): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `${cwd}/index_${key}.${this.fileExtension}`;
             const pte = fileName;
 
@@ -177,7 +188,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public fetchIndex(key: string): Promise<any[]> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `${cwd}/index_${key}.${this.fileExtension}`;
             let index: any;
             if (!fs.existsSync(fileName)) {
@@ -215,7 +226,7 @@ export class DiskStorageDriver implements StorageDriver {
     }
     public removeIndex(key: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             const fileName = `index_${key}.${this.fileExtension}`;
             if (!fs.existsSync(`${cwd}/${fileName}`)) {
                 resolve(true);
@@ -236,7 +247,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number) => any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             if (!fs.existsSync(cwd)) {
                 reject(`No directory at ${cwd}`);
             } else {
@@ -272,7 +283,7 @@ export class DiskStorageDriver implements StorageDriver {
     public keys(): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             if (this.allKeys.length === 0) {
-                const cwd = `${this.databaseName}/${this.collection}`
+                const cwd = `${this.folderPath}/${this.collection}`
                 //@ts-ignore
                 fs.readdir(cwd, (err: ErrnoException, files) => {
                     if (err) {
@@ -315,7 +326,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public exists(obj: Sanitize, index: any, fieldName: string): Promise<Exist> {
         return new Promise((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             try {
                 if (fs.existsSync(`${cwd}/${obj.value}.${this.fileExtension}`)) {
                     resolve({ key: obj.key, value: obj.value, doesExist: true, index, fieldName });
@@ -337,7 +348,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public collectionSanitize(keys: string[]): Promise<any> {
         return new Promise((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             if (!fs.existsSync(cwd)) {
                 resolve(true);
             } else {
@@ -374,7 +385,7 @@ export class DiskStorageDriver implements StorageDriver {
      */
     public clear(): Promise<any> {
         return new Promise<null>((resolve, reject) => {
-            const cwd = `${this.databaseName}/${this.collection}`
+            const cwd = `${this.folderPath}/${this.collection}`
             if (!fs.existsSync(cwd)) {
                 resolve(null);
             } else {
@@ -409,7 +420,7 @@ export class DiskStorageDriver implements StorageDriver {
     public dump(collections: string[]): Promise<any> {
         return new Promise((resolve, reject) => {
             const collectionPaths: string[] = [];
-            const cwd = `${this.databaseName}`;
+            const cwd = `${this.folderPath}`;
             collections.forEach(element => {
                 collectionPaths.push(`${cwd}/${element}`)
             });
