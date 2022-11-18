@@ -1,5 +1,6 @@
 import { StorageDriver, Sanitize, Exist } from "@kaiarajs/kaibase"
 import fs, { readdirSync } from "fs";
+import tar from 'tar';
 import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
@@ -9,7 +10,7 @@ export class DiskStorageDriver implements StorageDriver {
     public fileExtension: string = 'json';
 
     constructor(config?: { databaseName?: string, fileExtension?: string }) {
-        
+
         if (config?.databaseName) {
             this.databaseName = config.databaseName;
         } else {
@@ -37,8 +38,8 @@ export class DiskStorageDriver implements StorageDriver {
 
     public getCollections(): string[] {
         return readdirSync(this.databaseName, { withFileTypes: true })
-        .filter(dirent => dirent.isDirectory())
-        .map(dirent => dirent.name)
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name)
     }
 
     /**
@@ -158,7 +159,7 @@ export class DiskStorageDriver implements StorageDriver {
                 }
 
             } else {
-                                //@ts-ignore
+                //@ts-ignore
                 fs.writeFile(pte, index, (err: ErrnoException) => {
                     if (err) {
                         reject(err);
@@ -404,4 +405,24 @@ export class DiskStorageDriver implements StorageDriver {
             }
         });
     }
+
+    public dump(collections: string[]): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const collectionPaths: string[] = [];
+            const cwd = `${this.databaseName}`;
+            collections.forEach(element => {
+                collectionPaths.push(`${cwd}/${element}`)
+            });
+            tar.c(
+                {
+                    gzip: true,
+                    file: 'dump.tgz'
+                },
+                collectionPaths
+            )
+            .then((data) => resolve(data))
+            .catch((err) => reject(err))
+        })
+    }
+
 }

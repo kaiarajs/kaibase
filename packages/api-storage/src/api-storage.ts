@@ -31,6 +31,9 @@ export class ApiStorageDriver implements StorageDriver {
         this.allKeys = [];
 
     }
+    dump(collections: string[]): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
 
 
     setCollection(name: string): void {

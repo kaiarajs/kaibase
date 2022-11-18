@@ -2,7 +2,7 @@ import Index from "./indices";
 import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
 import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
 import { AVLNode, SNDBSA } from '@kaiarajs/binary-tree';
-import { ArrObjectsDuplicates, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kaiarajs/kaibase-core";
+import { ArrObjectsDuplicates, CompressObject, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kaiarajs/kaibase-core";
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
@@ -24,6 +24,7 @@ export interface IDatastore {
     getIndices(): Promise<any>;
     getDocs(options: Options, ids: string | string[]): Promise<any[]>;
     search(fieldName: string, value: any): Promise<string[]>;
+    dump(): Promise<any>;
 }
 
 /**
@@ -939,6 +940,15 @@ export class Kaibase implements IDatastore {
         });
     }
 
+    public dump(): Promise<any> {
+        return new Promise<void>((resolve, reject) => {
+            const collections = this.getCollections();
+            this.storage.dump(collections)
+            .then((data) => resolve(data))
+            .catch((err) => reject(err));
+        })
+    }
+
     /**
      * Create Unique ID that contains timestamp
      * @returns {string}
@@ -948,6 +958,3 @@ export class Kaibase implements IDatastore {
     }
 }
 
-function CompressObject(query: any, target: any) {
-    throw new Error("Function not implemented.");
-}

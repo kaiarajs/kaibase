@@ -195,6 +195,11 @@ export interface Range {
      * Clear the entire datastore
      */
     clear(): Promise<null>;
+
+    /**
+     * Clear the entire datastore
+     */
+     dump(collections: string[]): Promise<any>;
 }
 
 /**

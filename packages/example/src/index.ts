@@ -41,11 +41,13 @@ async function main() {
 
 
 async function mainApi() {
-    const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
+   // const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
+   const dbStorage = new DiskStorageDriver();
     const db = new Kaibase({ storage: dbStorage })
    // const insert = await db.collection('pepe').insert({ name: "xyz"})
    // console.log('insert', insert)
-    const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()
+   // const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()
+   const pepe = await db.dump();
     console.log('pepe',pepe)
 }
 
