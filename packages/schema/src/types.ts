@@ -1,5 +1,6 @@
 import { BaseType } from "./types/base-type";
 import { NumberType } from "./types/number";
+import { StringType } from "./types/string";
 
 export type Validator<Type> = (value: Type) => Type;
 
@@ -78,6 +79,8 @@ export type SchemaType<SchemaT extends BaseType<any, any>> = WithDefault<
 export interface Schema {
 
     number(): SchemaType<NumberType>;
+
+    string(): SchemaType<StringType>;
 
     validate(schema: any, value: any):  { [x: string]: unknown; } | null;
 

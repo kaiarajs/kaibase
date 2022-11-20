@@ -17,9 +17,6 @@
     "keywords": [],
     "author": "kaiarajs",
     "license": "MIT",
-    "dependencies": {
-        "node-fetch-commonjs": "^3.2.4"
-    },
     "devDependencies": {
         "@types/node": "^16.14.2",
         "typescript": "4.3.3"

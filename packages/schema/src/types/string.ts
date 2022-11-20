@@ -8,7 +8,7 @@ export interface Template extends MessageTemplate {
 }
 
 
-export class NumberType extends BaseType<string, MessageTemplate> {
+export class StringType extends BaseType<string, MessageTemplate> {
 
     public get messages(): Messages<MessageTemplate> {
         return {
