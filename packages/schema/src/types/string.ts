@@ -2,25 +2,26 @@ import { BaseType } from "./base-type";
 import { Messages, MessageTemplate } from "../types";
 
 export interface Template extends MessageTemplate {
-    number(): string;    
+    string(): string;    
     max(params: { max: number }): string;
     min(params: { min: number }): string;
 }
 
 
-export class NumberType extends BaseType<number, MessageTemplate> {
+export class NumberType extends BaseType<string, MessageTemplate> {
 
     public get messages(): Messages<MessageTemplate> {
         return {
             required: "Expected {{ label }} to have a value",
-            max: "Expected {{ label }} to be less than {{ max }}",
-            number: "Expected {{ label }} to be a valid number"
+            string: "Expected {{ label }} to be a valid string",
+            max: "Expected {{ label }} to contain at most {{ max }} character(s)",
+            min: "Expected {{ label }} to contain at least {{ min }} character(s)",
         };
     }
 
     public max(max: number): this {
         return this.pipe((value) => {
-            if (value <= max) return value;
+            if (value.length <= max) return value;
 
             this.fail(this.render("max", { max }));
         });
@@ -28,15 +29,14 @@ export class NumberType extends BaseType<number, MessageTemplate> {
 
     public min(min: number): this {
         return this.pipe((value) => {
-            if (value >= min) return value;
+            if (value.length >= min) return value;
 
             this.fail(this.render("min", { min }));
         });
     }
+    protected initialValidator(value: unknown): string {
+        if (typeof value === "string") return value;
 
-    protected initialValidator(value: unknown): number {
-        if (typeof value === "number") return value;
-
-        this.fail(this.render("number"));
+        this.fail(this.render("string"));
     }
 }

@@ -9,6 +9,7 @@ export interface MessageTemplate {
     [name: string]: (params: any) => string;
 }
 
+
 export type Value<T> = T extends Record<string, unknown>
   ? { [Key in keyof T]-?: Value<T[Key]> }
   : T extends (infer U)[]
