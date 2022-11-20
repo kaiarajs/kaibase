@@ -6,6 +6,7 @@ export class ApiStorageDriver implements StorageDriver {
     public allKeys: string[];
     public apiUrl: string;
     public collection: string = 'data';
+    public databaseName: string = 'data'
     public fileExtension: string = 'json';
 
     private requestOptions: {method: string, headers: HeadersInit, body?: string} = { method: 'POST', headers: { 'Content-Type': 'application/json' } };
@@ -31,10 +32,12 @@ export class ApiStorageDriver implements StorageDriver {
         this.allKeys = [];
 
     }
+    setDatabase(name: string): void {
+        this.databaseName = name;
+    }
     dump(collections: string[]): Promise<any> {
         throw new Error("Method not implemented.");
     }
-
 
     setCollection(name: string): void {
         this.collection = name;
@@ -75,7 +78,7 @@ export class ApiStorageDriver implements StorageDriver {
     * else reject a new error message.
     */
     public async setItem(key: string, value: any): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/setItem`, {...this.requestOptions, body: JSON.stringify({ key, value })});
+        const response = await fetch(`${this.apiUrl}/${this.databaseName}/${this.collection}/setItem`, {...this.requestOptions, body: JSON.stringify({ key, value })});
         const data: any = await response.json();
         if(response.ok) {
             return data;
@@ -90,7 +93,7 @@ export class ApiStorageDriver implements StorageDriver {
     * else reject a new error message.
     */
     public async getItem(key: string): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/getItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key }) });
+        const response = await fetch(`${this.apiUrl}/${this.databaseName}/${this.collection}/getItem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key }) });
         const data: any = await response.json();
         if(response.ok) {
             return data;
@@ -105,7 +108,7 @@ export class ApiStorageDriver implements StorageDriver {
     * else reject a new error message.
     */
     public async iterate(iteratorCallback: (key: string, value: any, iteratorNumber?: number | undefined) => any): Promise<any> {
-        const response = await fetch(`${this.apiUrl}/${this.collection}/iterate`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+        const response = await fetch(`${this.apiUrl}/${this.databaseName}/${this.collection}/iterate`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
         const data: any = await response.json();
         if (response.ok) {
             return data.forEach(element => {

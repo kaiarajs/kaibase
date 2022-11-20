@@ -11,32 +11,31 @@ const router = new Router();
 app.use(Parser.json())
 
 export function main() {
-    router.post('/:collection/getItem', async (req, res) => {
-        const {collection} = req.params as { collection: string};
+    router.post('/:database/:collection/getItem', async (req, res) => {
+        const {database,collection} = req.params as { database: string ,collection: string};
         const {key} = req.body
-        const insert = await dbStorage.setCollection(collection).getItem(key)
+        const insert = await dbStorage.setDatabase(database).setCollection(collection).getItem(key)
         res.send(insert)
     });
     
-    router.post('/:collection/setItem', async (req, res) => {
-        const {collection} = req.params as { collection: string};
+    router.post('/:database/:collection/setItem', async (req, res) => {
+        const {database,collection} = req.params as { database: string ,collection: string};
         const {key,value} = req.body;
-        const insert = await dbStorage.setCollection(collection).setItem(key,value)
+        const insert = await dbStorage.setDatabase(database).setCollection(collection).setItem(key,value)
         res.send(insert)
     });
     
-    router.post('/:collection/removeItem', async (req, res) => {
-        const {collection} = req.params as { collection: string};
+    router.post('/:database/:collection/removeItem', async (req, res) => {
+        const {database,collection} = req.params as { database: string ,collection: string};
         const body = req.body;
-        const del = await dbStorage.setCollection(collection).removeItem(body)
+        const del = await dbStorage.setDatabase(database).setCollection(collection).removeItem(body)
         res.send(del)
     });
     
-    router.post('/:collection/iterate', async (req, res) => {
-        console.log(req.query);
-        const {collection} = req.params as { collection: string};
+    router.post('/:database/:collection/iterate', async (req, res) => {
+        const {database,collection} = req.params as { database: string ,collection: string};
         let callback: any[] = [];
-        await dbStorage.setCollection(collection).iterate((k,v) => {
+        await dbStorage.setDatabase(database).setCollection(collection).iterate((k,v) => {
             callback.push({k,v})
         })
         res.send(callback)
