@@ -1,4 +1,5 @@
 import { BaseType } from "./types/base-type";
+import { IdType } from "./types/id";
 import { NumberType } from "./types/number";
 import { StringType } from "./types/string";
 
@@ -81,6 +82,9 @@ export interface Schema {
     number(): SchemaType<NumberType>;
 
     string(): SchemaType<StringType>;
+
+    id(): SchemaType<IdType>;
+
 
     validate(schema: any, value: any):  { [x: string]: unknown; } | null;
 

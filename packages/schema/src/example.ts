@@ -4,7 +4,8 @@ import { Schema } from "./schema"
 
 function main() {
     const schema = {
-        age: Schema.number().max(15)
+        age: Schema.number().max(15),
+        user: Schema.id().ref("User")
     }
 
     try {

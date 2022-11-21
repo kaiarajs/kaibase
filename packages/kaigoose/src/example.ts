@@ -11,17 +11,20 @@ async function main() {
     Kaigoose.connect(storage, 'db')
 
     const schema = {
-        age: Schema.number()
+        age: Schema.number(),
+        user: Schema.id().ref("User")
     }
+
+    console.log('sceham', schema)
 
     const UserModel = new Model('User', schema);
 
-
+/*
     const create = await UserModel.create({
         age: 80
     })
    
-    console.log('create', create)
+    console.log('create', create) */
 }
 
 

@@ -1,6 +1,7 @@
 import { UpdateOptions } from "@kaiarajs/kaibase/dist/types";
 import { Schema } from "@kaiarajs/schema";
 import { Kaigoose } from "./kaigoose";
+import { KCursor } from "./kcursor";
 
 
 
@@ -22,18 +23,21 @@ export class Model  {
        return await Kaigoose.kaibase.collection(this.name).insert(value)
     }
 
-    async find(query?: any, sort?: Record<string, unknown>, skip?: number, limit?: number) {
-        return await Kaigoose.kaibase.collection(this.name).find(query).sort(sort).skip(skip || 0).limit(limit || 100).exec();
+    async find(query?: any) {
+        return new KCursor(this.name, query)
     }
 
     async findById(id: string) {
-        return await Kaigoose.kaibase.collection(this.name).find({id}).exec();
+        return await Kaigoose.kaibase.collection(this.name).find({_id: id}).exec();
     }
 
     async deleteById(id: string) {
-        return await Kaigoose.kaibase.collection(this.name).remove({id});
+        return await Kaigoose.kaibase.collection(this.name).remove({_id: id});
     }
 
+    async populate(fieldName: string) {
+        Kaigoose.kaibase.collection(this.name).find()
+    }
 
     async update(query: Record<string, unknown>, updateContent: any, updateOptions?: UpdateOptions) {
         return await Kaigoose.kaibase.collection(this.name).update(query, updateContent, updateOptions)
