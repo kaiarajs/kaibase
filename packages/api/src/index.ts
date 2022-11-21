@@ -9,6 +9,7 @@ const app = new Kainox();
 const router = new Router();
 
 app.use(Parser.json())
+app.use(apiKeyAuth(/^API_KEY_/))
 
 export function main() {
     router.post('/:database/:collection/getItem', async (req, res) => {
