@@ -13,7 +13,9 @@
     "dependencies": {
       "@kaiarajs/kaibase": "workspace:*",
       "@kaiarajs/disk-storage": "workspace:*",
-      "@kaiarajs/api-storage": "workspace:*"
+      "@kaiarajs/api-storage": "workspace:*",
+      "@kaiarajs/kaigoose": "workspace:*",
+      "@kaiarajs/schema": "workspace:*"
     },
     "devDependencies": {
       "@types/node": "^14.11.8",

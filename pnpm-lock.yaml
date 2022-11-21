@@ -107,12 +107,16 @@ importers:
       '@kaiarajs/api-storage': workspace:*
       '@kaiarajs/disk-storage': workspace:*
       '@kaiarajs/kaibase': workspace:*
+      '@kaiarajs/kaigoose': workspace:*
+      '@kaiarajs/schema': workspace:*
       '@types/node': ^14.11.8
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/api-storage': link:../api-storage
       '@kaiarajs/disk-storage': link:../disk-storage
       '@kaiarajs/kaibase': link:../kaibase
+      '@kaiarajs/kaigoose': link:../kaigoose
+      '@kaiarajs/schema': link:../schema
     devDependencies:
       '@types/node': 14.18.33
       typescript: 4.3.3
