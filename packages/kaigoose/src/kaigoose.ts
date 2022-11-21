@@ -19,7 +19,7 @@ class SKaigoose {
 
     connect(storage: StorageDriver, db: string){
         this.kaibase = new Kaibase({storage})
-        this.kaibase.name(db)
+        this.kaibase.db(db)
     }
 }
 

@@ -6,7 +6,7 @@ import { ArrObjectsDuplicates, CompressObject, ExpandObject, FlattenArray, GetDa
 import {Cursor, Options} from "./cursor";
 
 export interface IDatastore {
-    name(name: string): Kaibase,
+    db(name: string): Kaibase,
     collection(name: string): Kaibase;
     getCollections(): string[];
     insert(doc: any): Promise<any>;
@@ -64,7 +64,7 @@ export class Kaibase implements IDatastore {
      * 
      * @param name of the collection
      */
-      name(name: string): Kaibase {
+      db(name: string): Kaibase {
         this.storage.setDatabase(name);
         return this;
     }
