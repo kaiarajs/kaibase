@@ -24,6 +24,7 @@
     "devDependencies": {
         "@kaiarajs/kaibase": "workspace:*",
         "@kaiarajs/schema": "workspace:*",
+        "@kaiarajs/disk-storage": "workspace:*",
         "@types/node": "^16.14.2",
         "typescript": "4.3.3"
     }
