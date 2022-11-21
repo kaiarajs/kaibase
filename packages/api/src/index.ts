@@ -8,10 +8,13 @@ export const dbStorage = new DiskStorageDriver();
 const app = new Kainox();
 const router = new Router();
 
-app.use(Parser.json())
-app.use(apiKeyAuth(/^API_KEY_/))
+export function main(options: {useApikey: boolean}) {
+    app.use(Parser.json())
+    
+    if(options.useApikey) {
+        app.use(apiKeyAuth(/^API_KEY_/))
+    }
 
-export function main() {
     router.post('/:database/:collection/getItem', async (req, res) => {
         const {database,collection} = req.params as { database: string ,collection: string};
         const {key} = req.body
