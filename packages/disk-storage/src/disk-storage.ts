@@ -38,6 +38,12 @@ export class DiskStorageDriver implements StorageDriver {
         return this
     }
 
+    public getDatabases(): string[] {
+        return readdirSync(`${this.folderPath}`, { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name)
+    }
+
     public setCollection(collection: string) {
         this.collection = collection;
         const cwd = `${this.folderPath}/${this.databaseName}/${this.collection}`

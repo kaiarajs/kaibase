@@ -119,6 +119,10 @@ export interface Range {
      * @param key
      */
      setDatabase(name: string): void;
+      /**
+     * Get all databases
+     */
+    getDatabases(): string[];
      /**
      * Set collection name
      * @param key

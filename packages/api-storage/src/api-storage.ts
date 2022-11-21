@@ -32,6 +32,9 @@ export class ApiStorageDriver implements StorageDriver {
         this.allKeys = [];
 
     }
+    getDatabases(): string[] {
+        throw new Error("Method not implemented.");
+    }
     setDatabase(name: string): void {
         this.databaseName = name;
     }

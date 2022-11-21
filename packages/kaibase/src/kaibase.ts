@@ -8,6 +8,7 @@ import {Cursor, Options} from "./cursor";
 export interface IDatastore {
     db(name: string): Kaibase,
     collection(name: string): Kaibase;
+    getDatabases(): string[];
     getCollections(): string[];
     insert(doc: any): Promise<any>;
     find(query: any): Cursor;
@@ -67,6 +68,15 @@ export class Kaibase implements IDatastore {
       db(name: string): Kaibase {
         this.storage.setDatabase(name);
         return this;
+    }
+
+      /**
+     * Get all the databases from storage
+     * 
+     * db.getCollections();
+     */
+       getDatabases(): string[] {
+       return this.storage.getDatabases();
     }
 
     /**
