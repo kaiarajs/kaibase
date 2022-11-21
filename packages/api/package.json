@@ -1,11 +1,17 @@
 {
-    "name": "@kaiarajs/api",
+    "name": "@kaiarajs/kaibase-server",
     "version": "0.0.1",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
+      },
+    "files": [
+        "dist"
+    ],
     "bin": {
-        "kaibase": "dist/cli.js"
+        "kaibase-server": "dist/cli.js"
     },
     "scripts": {
         "build": "tsc",
@@ -16,7 +22,7 @@
     "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-        "@kaiarajs/disk-storage": "0.0.2",
+        "@kaiarajs/disk-storage": "0.0.3",
         "@kaiarajs/http": "^0.0.12",
         "@kaiarajs/kaibase": "^0.0.6",
         "@kaiarajs/kainox": "^0.0.15",

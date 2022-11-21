@@ -15,8 +15,10 @@ RUN pnpm run build
 
 FROM base as release
 
-COPY --from=build /app/dist /app
+COPY --from=build /app/dist /app/dist
+COPY --from=build /app/package.json /app/package.json
+RUN npm install -g pnpm @kaiarajs/kaibase-server
 RUN pnpm i --prod
 
 EXPOSE 3000
-CMD ["kaibase", "start"]
+CMD ["kaibase-server", "start"]
