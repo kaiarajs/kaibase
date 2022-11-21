@@ -35,10 +35,6 @@ export class Model  {
         return await Kaigoose.kaibase.collection(this.name).remove({_id: id});
     }
 
-    async populate(fieldName: string) {
-        Kaigoose.kaibase.collection(this.name).find()
-    }
-
     async update(query: Record<string, unknown>, updateContent: any, updateOptions?: UpdateOptions) {
         return await Kaigoose.kaibase.collection(this.name).update(query, updateContent, updateOptions)
     } 
