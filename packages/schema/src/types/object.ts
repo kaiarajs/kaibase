@@ -1,5 +1,6 @@
 import { BaseType, KeysResult, KeysType } from "./base-type";
 import SchemaError, { ErrorDetails, MessageTemplate, Value } from "../types";
+import { Console } from "console";
 
 export interface Template extends MessageTemplate {
 
@@ -43,7 +44,6 @@ I = Type
           const result = Object.keys(type).reduce<Record<string, unknown>>(
             (prev, key) => {
               let ret = value[key];
-    
               try {
                 ret = type[key].label(key).validate(ret);
               } catch (error) {
@@ -60,7 +60,6 @@ I = Type
           );
     
           if (Object.keys(errors).length > 0) this.fail(errors as ErrorDetails<Type>);
-    
           return result as Type;
         }) as never;
       }

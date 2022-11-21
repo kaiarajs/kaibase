@@ -107,7 +107,6 @@ export abstract class BaseType<Type,Message extends MessageTemplate = MessageTem
     
           return null as Result<Type, Message, this, V>;
         }
-    
         return this._pipeline.reduce(
           (result: Type, validator) => validator.call(this, result),
           value as never,

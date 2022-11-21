@@ -23,8 +23,8 @@ export class Model  {
        return await Kaigoose.kaibase.collection(this.name).insert(value)
     }
 
-    async find(query?: any) {
-        return new KCursor(this.name, query)
+    find(query?: any) {
+        return new KCursor(this.name, this.schema, query)
     }
 
     async findById(id: string) {

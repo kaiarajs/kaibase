@@ -15,16 +15,19 @@ async function main() {
         user: Schema.id().ref("User")
     }
 
-    console.log('sceham', schema)
 
-    const UserModel = new Model('User', schema);
+    const UserModel = new Model('Papa', schema);
+
+    const find = await UserModel.find({}).populate('user').exec();
+    console.log('find', find[0])
 
 /*
     const create = await UserModel.create({
-        age: 80
+        age: 90
     })
    
-    console.log('create', create) */
+    console.log('create', create)
+    */
 }
 
 

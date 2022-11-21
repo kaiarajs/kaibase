@@ -9,6 +9,13 @@ export interface Template extends MessageTemplate {
 
 export class IdType extends BaseType<string, MessageTemplate> {
 
+    public idRef: string;
+
+    constructor() {
+        super()
+    }
+
+
     public get messages(): Messages<MessageTemplate> {
         return {
             required: "Expected {{ label }} to have a value"
@@ -16,9 +23,10 @@ export class IdType extends BaseType<string, MessageTemplate> {
     }
 
     public ref(ref: string): this {
+        this.idRef = ref;
         return this.pipe((value) => {
             if (typeof ref === "string") return value;
-
+            this.idRef = value;
             this.fail(this.render("ref", { ref }));
         });
     }
