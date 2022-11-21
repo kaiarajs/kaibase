@@ -1,6 +1,6 @@
 {
     "name": "@kaiarajs/kaigoose",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
