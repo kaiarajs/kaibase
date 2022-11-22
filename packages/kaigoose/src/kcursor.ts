@@ -69,6 +69,10 @@ export class KCursor implements IKCursor {
     }
 
     public async exec() {
+        if(!Kaigoose.kaibase) {
+            console.log(Kaigoose.kaibase)
+            throw new Error("Kaibase is not connected");
+        }
         const results = await Kaigoose.kaibase.collection(this.collectionName).find(this.query).sort(this.options.sort).skip(this.options.skip || 0).limit(this.options.limit || 10000).exec() as any[]
         for await (const poupu of this.options.populate) {
             for await (const item of results) {

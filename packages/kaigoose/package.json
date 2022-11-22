@@ -1,6 +1,6 @@
 {
     "name": "@kaiarajs/kaigoose",
-    "version": "0.0.3",
+    "version": "0.0.7",
     "description": "Awesome functions",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -18,8 +18,8 @@
     "author": "kaiarajs",
     "license": "MIT",
     "dependencies": {
-        "@kaiarajs/kaibase": "*",
-        "@kaiarajs/schema": "*"
+        "@kaiarajs/kaibase": "^0.0.9",
+        "@kaiarajs/schema": "^0.0.1"
     },
     "devDependencies": {
         "@kaiarajs/kaibase": "workspace:*",

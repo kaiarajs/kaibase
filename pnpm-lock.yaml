@@ -25,9 +25,9 @@ importers:
       http-errors: ^2.0.0
       typescript: 4.3.3
     dependencies:
-      '@kaiarajs/disk-storage': link:../disk-storage
+      '@kaiarajs/disk-storage': 0.0.3_@kaiarajs+kaibase@0.0.6
       '@kaiarajs/http': 0.0.12_@types+node@14.18.33
-      '@kaiarajs/kaibase': link:../kaibase
+      '@kaiarajs/kaibase': 0.0.6
       '@kaiarajs/kainox': 0.0.15_iqwc3dyy5ypibs4v2apgkol5te
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
       commander: 9.4.1
@@ -226,6 +226,22 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: false
 
+  /@kaiarajs/binary-tree/0.0.3:
+    resolution: {integrity: sha512-qnCOhxqZJLRud2MEAvBtGwd2MnUP4TjaHL20w02Dt+aPaSFy45lULqUAHJlMixv1UGocVVzckFDELisDjG6sVg==}
+    dependencies:
+      '@kaiarajs/kaibase-core': 0.0.2
+    dev: false
+
+  /@kaiarajs/disk-storage/0.0.3_@kaiarajs+kaibase@0.0.6:
+    resolution: {integrity: sha512-kiE1OdwqF/Q7ljyggxBbBgv++vD7hp8tcKKOY9s6n1Bv3IgleMXvwqxMsLybi96EPdG0KYtCz97So06Ogxj5bQ==}
+    peerDependencies:
+      '@kaiarajs/kaibase': ^0.0.6
+    dependencies:
+      '@kaiarajs/kaibase': 0.0.6
+      '@types/node': 14.18.33
+      tar: 6.1.12
+    dev: false
+
   /@kaiarajs/fresh/0.0.9:
     resolution: {integrity: sha512-+ogM7CPMy/Ecc70IvT+xwC0pnOw0Y4ASj/feS8Ew10mcdIrNLXn6peLyxSRAdSxzQUnHoxNPpXIeUXoZxXGM1g==}
     engines: {node: '>= 8'}
@@ -261,6 +277,19 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       readable-stream: 4.2.0
+    dev: false
+
+  /@kaiarajs/kaibase-core/0.0.2:
+    resolution: {integrity: sha512-MjURVojmFXWlGosqNZdk/VCCyPfUBnNcPi6I22PRgbX11/SuXM/gFG1CLTmG2723APo57Up41gLkcMYBAKuMLw==}
+    dependencies:
+      '@types/node': 14.18.33
+    dev: false
+
+  /@kaiarajs/kaibase/0.0.6:
+    resolution: {integrity: sha512-wqjHylOVpoCnoJkxM9X0txUnTTDj374G9cU0T8HL7qjjvevaJxA7XopWEvfmtOYDpeOwg2MYoNaRRg06QJNHcQ==}
+    dependencies:
+      '@kaiarajs/binary-tree': 0.0.3
+      '@kaiarajs/kaibase-core': 0.0.2
     dev: false
 
   /@kaiarajs/kainox-tsconfig/0.0.9:
