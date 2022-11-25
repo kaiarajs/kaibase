@@ -1,5 +1,5 @@
 # Stage 1: base
-FROM node:16-alpine as base
+FROM node:19-alpine as base
 
 WORKDIR /app
 # Stage 2
