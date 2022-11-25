@@ -1,4 +1,7 @@
 import { Schema as ISchema } from "./types";
+import { ArrayType } from "./types/array";
+import { BooleanType } from "./types/boolean";
+import DateType from "./types/date";
 import { IdType } from "./types/id";
 import { NumberType } from "./types/number";
 import { ObjectType } from "./types/object";
@@ -13,6 +16,18 @@ export const Schema: ISchema = {
     },
     id() {
         return new IdType();
+    },
+    object() {
+        return new ObjectType();
+    },
+    array() {
+        return new ArrayType();
+    },
+    boolean() {
+        return new BooleanType();
+    },
+    date() {
+        return new DateType();
     },
     validate(schema: any, value: any) {
         return new ObjectType().keys(schema).validate(value)

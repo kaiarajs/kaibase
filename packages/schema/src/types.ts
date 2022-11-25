@@ -1,6 +1,10 @@
+import { ArrayType } from "./types/array";
 import { BaseType } from "./types/base-type";
+import { BooleanType } from "./types/boolean";
+import DateType from "./types/date";
 import { IdType } from "./types/id";
 import { NumberType } from "./types/number";
+import { ObjectType } from "./types/object";
 import { StringType } from "./types/string";
 
 export type Validator<Type> = (value: Type) => Type;
@@ -84,6 +88,14 @@ export interface Schema {
     string(): SchemaType<StringType>;
 
     id(): SchemaType<IdType>;
+
+    object<T extends Record<string, unknown> = Record<string, unknown>>(): SchemaType<ObjectType<T>>;
+
+    array<T = unknown>(): SchemaType<ArrayType<T>>;
+
+    boolean(): SchemaType<BooleanType>;
+
+    date(): SchemaType<DateType>;
 
 
     validate(schema: any, value: any):  { [x: string]: unknown; } | null;
