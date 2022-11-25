@@ -67,8 +67,6 @@ export abstract class BaseType<Type,Message extends MessageTemplate = MessageTem
 
     public isRequired = false;
 
-    public default: any = null;
-
     public get messages(): Messages<Message> {
         return {
             required: "Expected {{ label }} to have a value",
@@ -108,9 +106,6 @@ export abstract class BaseType<Type,Message extends MessageTemplate = MessageTem
           if (this.isRequired) this.fail<string>(this.render("required"));
     
           return null as Result<Type, Message, this, V>;
-        }
-        if(this.default) {
-          value = this.default;
         }
         return this._pipeline.reduce(
           (result: Type, validator) => validator.call(this, result),
