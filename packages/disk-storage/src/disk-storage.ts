@@ -16,7 +16,7 @@ export class DiskStorageDriver implements StorageDriver {
         if (config?.folderPath) {
             this.folderPath = config.folderPath;
         } else {
-            this.folderPath = `${process.cwd()}/${this.fileExtension}`
+            this.folderPath = `${process.cwd()}/Kaibase`
         }
 
         if (config?.fileExtension) {
