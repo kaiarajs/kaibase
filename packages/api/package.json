@@ -23,7 +23,7 @@
     "license": "MIT",
     "dependencies": {
         "@kaiarajs/disk-storage": "0.0.3",
-        "@kaiarajs/http": "^0.0.12",
+        "@kaiarajs/http": "^0.0.13",
         "@kaiarajs/kaibase": "^0.0.6",
         "@kaiarajs/kainox": "^0.0.15",
         "@kaiarajs/router": "^0.0.15",
