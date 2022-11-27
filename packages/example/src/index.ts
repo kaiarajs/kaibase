@@ -41,14 +41,26 @@ async function main() {
 
 
 async function mainApi() {
-   // const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
-   const dbStorage = new DiskStorageDriver();
+    // const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
+    const dbStorage = new DiskStorageDriver();
     const db = new Kaibase({ storage: dbStorage })
-    const insert = await db.db("tesdb").collection('pepe').insert({ name: "xyz"})
+    const insert = await db.db("tesdb").collection('pepe').insert({ name: "xyz", arr: [] })
     console.log('insert', insert)
-   // const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()
-   //const pepe = await db.dump();
-   // console.log('pepe',pepe)
+    const update = await db.db("tesdb").collection('pepe').update({ name: "xyz" }, {
+        "$push": {
+            "arr": "ASAS"
+        }
+    }, { returnUpdatedDocs: true })
+    const update2 = await db.db("tesdb").collection('pepe').update({ name: "xyz" }, {
+        "$push": {
+            "arr": "AaaaaSAS"
+        }
+    }, { returnUpdatedDocs: true })
+    console.log('update2', update2)
+    await db.db("tesdb").collection('pepe').remove({ name: "xyz" })
+    // const pepe = await db.collection('pepe').find({ name: "xyz"}).exec()
+    //const pepe = await db.dump();
+    // console.log('pepe',pepe)
 }
 
 

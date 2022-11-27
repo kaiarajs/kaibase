@@ -32,6 +32,8 @@ const operate = (obj: any, is: any, value: any, type: string): any => {
         switch (type) {
             case "set":
                 return obj[is[0]] = value;
+            case "push":
+                return obj[is[0]].push(value);
             case "mul":
                 return obj[is[0]] = obj[is[0]] * value;
             case "inc":
@@ -70,6 +72,39 @@ export const $set = (obj: any, set: any): Promise<any> => {
         try {
             setKeys.forEach((path: string) => {
                 operate(returnObj, path, set[path], "set");
+            });
+            resolve(returnObj);
+        } catch (e) {
+            return reject(e);
+        }
+    });
+};
+
+
+/**
+ * Push a value
+ *
+ * Example:
+ * ~~~
+ * let obj = {arr: []};
+ * $push(obj, {"arr": "value"})
+ *  .then((res) => console.log(res)) // {arr: ["value"]}
+ *  .catch();
+ * ~~~
+ * @param obj
+ * @param set
+ * @returns {Promise<T>}
+ */
+ export const $push = (obj: any, push: any): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        if (IsEmpty(push)) {
+            return reject(new Error("Empty $push object"));
+        }
+        const returnObj: any = obj;
+        const setKeys: any = Object.keys(push);
+        try {
+            setKeys.forEach((path: string) => {
+                operate(returnObj, path, push[path], "push");
             });
             resolve(returnObj);
         } catch (e) {

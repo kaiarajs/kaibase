@@ -1,9 +1,9 @@
 import Index from "./indices";
 import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
-import { $set, $inc, $mul, $unset, $rename } from "./updateOperators";
+import { $set, $inc, $mul, $unset, $rename, $push } from "./updateOperators";
 import { AVLNode, SNDBSA } from '@kaiarajs/binary-tree';
 import { ArrObjectsDuplicates, CompressObject, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kaiarajs/kaibase-core";
-import {Cursor, Options} from "./cursor";
+import { Cursor, Options } from "./cursor";
 
 export interface IDatastore {
     db(name: string): Kaibase,
@@ -51,32 +51,32 @@ export class Kaibase implements IDatastore {
     /**
      * @param config - config object `{storage: IStorageDriver}`
      */
-    constructor(config: {storage: StorageDriver}) {
+    constructor(config: { storage: StorageDriver }) {
         this.storage = config.storage;
         this.generateId = true;
 
         this.indices = new Map();
     }
 
-     /**
-     * Set the collection name to the storage handler
-     * 
-     * db.name("db");
-     * 
-     * @param name of the collection
-     */
-      db(name: string): Kaibase {
+    /**
+    * Set the collection name to the storage handler
+    * 
+    * db.name("db");
+    * 
+    * @param name of the collection
+    */
+    db(name: string): Kaibase {
         this.storage.setDatabase(name);
         return this;
     }
 
-      /**
-     * Get all the databases from storage
-     * 
-     * db.getCollections();
-     */
-       getDatabases(): string[] {
-       return this.storage.getDatabases();
+    /**
+   * Get all the databases from storage
+   * 
+   * db.getCollections();
+   */
+    getDatabases(): string[] {
+        return this.storage.getDatabases();
     }
 
     /**
@@ -91,11 +91,11 @@ export class Kaibase implements IDatastore {
         return this;
     }
 
-     /**
-     * Get all the collections from storage
-     * 
-     * db.getCollections();
-     */
+    /**
+    * Get all the collections from storage
+    * 
+    * db.getCollections();
+    */
     getCollections(): string[] {
         return this.storage.getCollections();
     }
@@ -219,7 +219,7 @@ export class Kaibase implements IDatastore {
             }
             const promises: Array<Promise<any[]>> = [];
             const indexPromises: Array<Promise<null>> = [];
-            const operators: string[] = ["$set", "$mul", "$inc", "$unset", "$rename"];
+            const operators: string[] = ["$set", "$push", "$mul", "$inc", "$unset", "$rename"];
             const multi: boolean = options.multi || false;
             const upsert: boolean = options.upsert || false;
             const exactObjectFind: boolean = options.exactObjectFind || false;
@@ -341,7 +341,7 @@ export class Kaibase implements IDatastore {
                         // values.push({key: ind.key, value: ind.value});
                         ind.value.forEach((i) => {
                             if (i !== undefined && i !== null && i !== false) {
-                                values.push({key: ind.key, value: i});
+                                values.push({ key: ind.key, value: i });
                             }
                         });
                     });
@@ -373,24 +373,24 @@ export class Kaibase implements IDatastore {
     public storageSan(fieldName: string): Promise<any> {
         return new Promise((resolve, reject) => {
             return this.getIndices()
-            .then((indices) => indices.get(fieldName))
-            .then((INDEX) => {
-                const values: any[] = [];
-                // upgrade here as well
-                INDEX.traverse((ind: AVLNode) => {
-                    values.push(...ind.value.filter((i) => {
-                        if (i !== undefined && i !== null && i !== false) {
-                            return i;
-                        } else return
-                    }));
-                });
-                return values;
-            })
-            .then((values): Promise<any> => {
-                return this.storage.collectionSanitize(values);
-            })
-            .then(resolve)
-            .catch(reject);
+                .then((indices) => indices.get(fieldName))
+                .then((INDEX) => {
+                    const values: any[] = [];
+                    // upgrade here as well
+                    INDEX.traverse((ind: AVLNode) => {
+                        values.push(...ind.value.filter((i) => {
+                            if (i !== undefined && i !== null && i !== false) {
+                                return i;
+                            } else return
+                        }));
+                    });
+                    return values;
+                })
+                .then((values): Promise<any> => {
+                    return this.storage.collectionSanitize(values);
+                })
+                .then(resolve)
+                .catch(reject);
         });
     }
 
@@ -555,10 +555,10 @@ export class Kaibase implements IDatastore {
                 const indices = this.indices.get(key);
                 if (indices !== undefined) {
                     indices.insertMany(key, index)
-                           .then(resolve)
-                           .catch((err) => {
-                                return reject(err);
-                           });
+                        .then(resolve)
+                        .catch((err) => {
+                            return reject(err);
+                        });
                 } else {
                     return reject(new Error("No Index for this key was created on this datastore."));
                 }
@@ -759,14 +759,14 @@ export class Kaibase implements IDatastore {
                     gte = null;
                     ne = null;
                 }
-                const queryArray = [{name: "lt", value: lt},
-                    {name: "lte", value: lte},
-                    {name: "gt", value: gt},
-                    {name: "gte", value: gte},
-                    {name: "ne", value: ne}];
+                const queryArray = [{ name: "lt", value: lt },
+                { name: "lte", value: lte },
+                { name: "gt", value: gt },
+                { name: "gte", value: gte },
+                { name: "ne", value: ne }];
                 queryArray.forEach((q) => {
                     if (q.value !== null) {
-                        queryObj[q.name] = {value: q.value, flag: false};
+                        queryObj[q.name] = { value: q.value, flag: false };
                     }
                 });
                 const allTrue = (obj: any) => {
@@ -824,12 +824,12 @@ export class Kaibase implements IDatastore {
                         }
                     }
                 })
-                .then(() => {
-                    resolve(ids);
-                })
-                .catch((e) => {
-                    reject(e);
-                });
+                    .then(() => {
+                        resolve(ids);
+                    })
+                    .catch((e) => {
+                        reject(e);
+                    });
             } else {
                 // here return keys from storage driver
                 this.storage.keys()
@@ -866,6 +866,16 @@ export class Kaibase implements IDatastore {
                                         // value if the index fieldname =
                                         // the $set obj key.
                                         indexPromises.push(index.updateKey(GetObjValue(doc, field), operation[k][sk]));
+                                    }
+                                });
+                                break;
+                            case "$push":
+                                setKeys.forEach((pk) => { // each $set obj key
+                                    if (field === pk) {
+                                        // update the index value with the new
+                                        // value if the index fieldname =
+                                        // the $push obj key.
+                                        indexPromises.push(index.updateKey(GetObjValue(doc, field), operation[k].push(pk)));
                                     }
                                 });
                                 break;
@@ -914,15 +924,15 @@ export class Kaibase implements IDatastore {
                                         const indexValue = this.indices.get(field);
                                         // delete current index
                                         this.removeIndex(field)
-                                        .then(() => {
-                                            // create new index with old value new name
-                                            if (indexValue) {
-                                                this.indices.set(operation[k][rn], indexValue);
-                                            } else {
-                                                return reject(new Error(`Cannot rename index of ${field} that does not exist`));
-                                            }
-                                        })
-                                        .catch((e) => reject(e));
+                                            .then(() => {
+                                                // create new index with old value new name
+                                                if (indexValue) {
+                                                    this.indices.set(operation[k][rn], indexValue);
+                                                } else {
+                                                    return reject(new Error(`Cannot rename index of ${field} that does not exist`));
+                                                }
+                                            })
+                                            .catch((e) => reject(e));
                                     }
                                 });
                                 break;
@@ -935,6 +945,7 @@ export class Kaibase implements IDatastore {
                 if (operators.indexOf(k) !== -1) {
                     switch (k) {
                         case "$set": promises.push($set(doc, operation[k])); break;
+                        case "$push": promises.push($push(doc, operation[k])); break;
                         case "$mul": promises.push($mul(doc, operation[k])); break;
                         case "$inc": promises.push($inc(doc, operation[k])); break;
                         case "$unset": promises.push($unset(doc, operation[k])); break;
@@ -953,8 +964,8 @@ export class Kaibase implements IDatastore {
     private createIdsArray(ids: string[]): Promise<any[]> {
         return new Promise((resolve, reject) => {
             return Promise.all(ids.map((id) => {
-                    return this.storage.getItem(id);
-                }))
+                return this.storage.getItem(id);
+            }))
                 .then((docs) => {
                     docs = docs.filter((doc) => !IsEmpty(doc));
                     resolve(docs);
@@ -967,8 +978,8 @@ export class Kaibase implements IDatastore {
         return new Promise<void>((resolve, reject) => {
             const collections = this.getCollections();
             this.storage.dump(collections)
-            .then((data) => resolve(data))
-            .catch((err) => reject(err));
+                .then((data) => resolve(data))
+                .catch((err) => reject(err));
         })
     }
 

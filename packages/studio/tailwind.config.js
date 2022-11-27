@@ -1,6 +1,6 @@
-const windmill = require('@kaiarajs/react-ui/config')
+const kaiara = require('@kaiarajs/react-ui/config')
 /** @type {import('tailwindcss').Config} */
-module.exports = windmill({
+module.exports = kaiara({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",

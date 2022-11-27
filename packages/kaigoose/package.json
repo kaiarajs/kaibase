@@ -19,7 +19,7 @@
     "license": "MIT",
     "dependencies": {
         "@kaiarajs/kaibase": "^0.0.9",
-        "@kaiarajs/schema": ">=^0.0.3"
+        "@kaiarajs/schema": "^0.0.3"
     },
     "devDependencies": {
         "@kaiarajs/kaibase": "workspace:*",
