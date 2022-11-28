@@ -1,6 +1,6 @@
 {
   "name": "@kaiarajs/disk-storage",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Awesome functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,11 +18,10 @@
   "author": "kaiarajs",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^14.11.8",
     "tar": "^6.1.12"
   },
   "peerDependencies": {
-    "@kaiarajs/kaibase": "^0.0.6"
+    "@kaiarajs/kaibase": "0.x"
   },
   "devDependencies": {
     "@kaiarajs/kaibase": "workspace:*",
