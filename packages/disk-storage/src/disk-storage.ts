@@ -100,6 +100,9 @@ export class DiskStorageDriver implements StorageDriver {
             } catch (e) {
                 reject(e);
             }
+            if (!fs.existsSync(cwd)) {
+                fs.mkdirSync(cwd);
+            }
             //@ts-ignore
             fs.writeFile(`${cwd}/${key}.${this.fileExtension}`, data, (err: ErrnoException) => {
                 if (err) {
