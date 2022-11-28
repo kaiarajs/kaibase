@@ -1,6 +1,6 @@
 {
   "name": "@kaiarajs/disk-storage",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Awesome functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -25,7 +25,7 @@ export class DiskStorageDriver implements StorageDriver {
         this.allKeys = [];
         const cwd = this.folderPath
         if (!fs.existsSync(cwd)) {
-            fs.mkdirSync(cwd);
+            fs.mkdirSync(cwd, { recursive: true });
         }
     }
 
@@ -33,7 +33,7 @@ export class DiskStorageDriver implements StorageDriver {
         this.databaseName = name;
         const cwd = `${this.folderPath}/${this.databaseName}`
         if (!fs.existsSync(cwd)) {
-            fs.mkdirSync(cwd);
+            fs.mkdirSync(cwd, { recursive: true });
         }
         return this
     }
@@ -48,7 +48,7 @@ export class DiskStorageDriver implements StorageDriver {
         this.collection = collection;
         const cwd = `${this.folderPath}/${this.databaseName}/${this.collection}`
         if (!fs.existsSync(cwd)) {
-            fs.mkdirSync(cwd);
+            fs.mkdirSync(cwd, { recursive: true });
         }
         return this
     }
@@ -101,7 +101,7 @@ export class DiskStorageDriver implements StorageDriver {
                 reject(e);
             }
             if (!fs.existsSync(cwd)) {
-                fs.mkdirSync(cwd);
+                fs.mkdirSync(cwd, { recursive: true });
             }
             //@ts-ignore
             fs.writeFile(`${cwd}/${key}.${this.fileExtension}`, data, (err: ErrnoException) => {
@@ -440,8 +440,8 @@ export class DiskStorageDriver implements StorageDriver {
                 },
                 collectionPaths
             )
-            .then((data) => resolve(data))
-            .catch((err) => reject(err))
+                .then((data) => resolve(data))
+                .catch((err) => reject(err))
         })
     }
 
