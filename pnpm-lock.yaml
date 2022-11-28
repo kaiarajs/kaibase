@@ -137,15 +137,15 @@ importers:
   packages/kaigoose:
     specifiers:
       '@kaiarajs/disk-storage': workspace:*
-      '@kaiarajs/kaibase': ^0.0.9
+      '@kaiarajs/kaibase': workspace:*
       '@kaiarajs/schema': ^0.0.3
       '@types/node': ^16.14.2
       typescript: 4.3.3
     dependencies:
-      '@kaiarajs/kaibase': link:../kaibase
       '@kaiarajs/schema': link:../schema
     devDependencies:
       '@kaiarajs/disk-storage': link:../disk-storage
+      '@kaiarajs/kaibase': link:../kaibase
       '@types/node': 16.18.3
       typescript: 4.3.3
 

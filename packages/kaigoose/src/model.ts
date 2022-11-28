@@ -18,6 +18,11 @@ export class Model  {
         return Schema.validate(this.schema, value);
     }
 
+    setCollectionName(name: string) {
+        this.name = name;
+        return this;
+    }
+
     async create(value: Record<string, unknown>) {
        this.validate(value);
        return await Kaigoose.kaibase.collection(this.name).insert(value)
