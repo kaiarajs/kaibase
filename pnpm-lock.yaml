@@ -9,8 +9,8 @@ importers:
       turbo: latest
     devDependencies:
       eslint-config-custom: link:packages/eslint-config-custom
-      prettier: 2.8.3
-      turbo: 1.7.0
+      prettier: 2.8.4
+      turbo: 1.8.3
 
   packages/api:
     specifiers:
@@ -20,13 +20,13 @@ importers:
       '@kaiarajs/kainox': ^0.0.15
       '@kaiarajs/router': ^0.0.15
       '@types/http-errors': ^2.0.1
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       commander: ^9.4.1
       http-errors: ^2.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/disk-storage': 0.0.3_@kaiarajs+kaibase@0.0.6
-      '@kaiarajs/http': 0.0.12_@types+node@14.18.33
+      '@kaiarajs/http': 0.0.12_@types+node@18.11.9
       '@kaiarajs/kaibase': 0.0.6
       '@kaiarajs/kainox': 0.0.15_iqwc3dyy5ypibs4v2apgkol5te
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
@@ -34,17 +34,17 @@ importers:
       http-errors: 2.0.0
     devDependencies:
       '@types/http-errors': 2.0.1
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/api-storage:
     specifiers:
       '@kaiarajs/kaibase': workspace:*
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       node-fetch-commonjs: ^3.2.4
       typescript: 4.3.3
     dependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       node-fetch-commonjs: 3.2.4
     devDependencies:
       '@kaiarajs/kaibase': link:../kaibase
@@ -53,20 +53,20 @@ importers:
   packages/binary-tree:
     specifiers:
       '@kaiarajs/kaibase-core': ^0.0.2
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/kaibase-core': link:../core
     devDependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/core:
     specifiers:
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     dependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
     devDependencies:
       typescript: 4.3.3
 
@@ -95,7 +95,7 @@ importers:
       eslint: 7.32.0
       eslint-config-next: 13.1.6_3rubbgt5ekhqrcgx4uwls3neim
       eslint-config-prettier: 8.5.0_eslint@7.32.0
-      eslint-config-turbo: 0.0.7_eslint@7.32.0
+      eslint-config-turbo: 0.0.9_eslint@7.32.0
       eslint-plugin-react: 7.31.11_eslint@7.32.0
     devDependencies:
       typescript: 4.8.4
@@ -107,7 +107,7 @@ importers:
       '@kaiarajs/kaibase': workspace:*
       '@kaiarajs/kaigoose': workspace:*
       '@kaiarajs/schema': workspace:*
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/api-storage': link:../api-storage
@@ -116,20 +116,20 @@ importers:
       '@kaiarajs/kaigoose': link:../kaigoose
       '@kaiarajs/schema': link:../schema
     devDependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/kaibase:
     specifiers:
       '@kaiarajs/binary-tree': ^0.0.3
       '@kaiarajs/kaibase-core': ^0.0.2
-      '@types/node': ^14.11.8
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/binary-tree': link:../binary-tree
       '@kaiarajs/kaibase-core': link:../core
     devDependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/kaigoose:
@@ -137,28 +137,28 @@ importers:
       '@kaiarajs/disk-storage': workspace:*
       '@kaiarajs/kaibase': workspace:*
       '@kaiarajs/schema': ^0.0.3
-      '@types/node': ^16.14.2
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     dependencies:
       '@kaiarajs/schema': link:../schema
     devDependencies:
       '@kaiarajs/disk-storage': link:../disk-storage
       '@kaiarajs/kaibase': link:../kaibase
-      '@types/node': 16.18.3
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/schema:
     specifiers:
-      '@types/node': ^16.14.2
+      '@types/node': ^18.0.0
       typescript: 4.3.3
     devDependencies:
-      '@types/node': 16.18.3
+      '@types/node': 18.11.9
       typescript: 4.3.3
 
   packages/studio:
     specifiers:
       '@kaiarajs/react-ui': ^0.0.7
-      '@types/node': 18.11.9
+      '@types/node': 18.14.2
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
       autoprefixer: ^10.4.13
@@ -172,7 +172,7 @@ importers:
       typescript: 4.9.3
     dependencies:
       '@kaiarajs/react-ui': 0.0.7_bvai3i5a2wg6lfiumjdxdzymmm
-      '@types/node': 18.11.9
+      '@types/node': 18.14.2
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
       eslint: 8.28.0
@@ -329,14 +329,14 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
-  /@kaiarajs/http/0.0.12_@types+node@14.18.33:
+  /@kaiarajs/http/0.0.12_@types+node@18.11.9:
     resolution: {integrity: sha512-4HA2WkfM0+lBCDHwTMgkubesesLXF5XDXsFiRIwdBiBdAeamq3PqkNvXciyTYHf2T5Gv4exSiXrWrR9L1KsjdQ==}
     peerDependencies:
       '@types/node': '>=16'
     dependencies:
       '@kaiarajs/fresh': 0.0.9
       '@kaiarajs/kainox-tsconfig': 0.0.9
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       content-disposition: 0.5.4
       content-type: 1.0.4
       cookie: 0.5.0
@@ -386,7 +386,7 @@ packages:
       '@kaiarajs/http': ^0.0.11
       '@kaiarajs/router': ^0.0.14
     dependencies:
-      '@kaiarajs/http': 0.0.12_@types+node@14.18.33
+      '@kaiarajs/http': 0.0.12_@types+node@18.11.9
       '@kaiarajs/inject': 0.0.9
       '@kaiarajs/router': 0.0.15_@kaiarajs+http@0.0.12
       body-parser: 1.20.1
@@ -428,7 +428,7 @@ packages:
     peerDependencies:
       '@kaiarajs/http': ^0.0.11
     dependencies:
-      '@kaiarajs/http': 0.0.12_@types+node@14.18.33
+      '@kaiarajs/http': 0.0.12_@types+node@18.11.9
       escape-html: 1.0.3
       fast-json-stringify: 2.7.13
     dev: false
@@ -626,13 +626,13 @@ packages:
 
   /@types/node/14.18.33:
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
-
-  /@types/node/16.18.3:
-    resolution: {integrity: sha512-jh6m0QUhIRcZpNv7Z/rpN+ZWXOicUUQbSoWks7Htkbb9IjFQj4kzcX/xFCkjstCj5flMsN8FiSvt+q+Tcs4Llg==}
-    dev: true
+    dev: false
 
   /@types/node/18.11.9:
     resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
+
+  /@types/node/18.14.2:
+    resolution: {integrity: sha512-1uEQxww3DaghA0RxqHx0O0ppVlo43pJhepY51OxuQIKHpjbnYLA7vcdwioNPzIqmC2u3I/dmylcqjlh0e7AyUA==}
     dev: false
 
   /@types/prop-types/15.7.5:
@@ -669,7 +669,7 @@ packages:
   /@types/tar/6.1.3:
     resolution: {integrity: sha512-YzDOr5kdAeqS8dcO6NTTHTMJ44MUCBDoLEIyPtwEn7PssKqUYL49R1iCVJPeiPzPlKi6DbH33eZkpeJ27e4vHg==}
     dependencies:
-      '@types/node': 14.18.33
+      '@types/node': 18.11.9
       minipass: 3.3.5
     dev: true
 
@@ -1455,13 +1455,13 @@ packages:
       eslint: 7.32.0
     dev: false
 
-  /eslint-config-turbo/0.0.7_eslint@7.32.0:
-    resolution: {integrity: sha512-WbrGlyfs94rOXrhombi1wjIAYGdV2iosgJRndOZtmDQeq5GLTzYmBUCJQZWtLBEBUPCj96RxZ2OL7Cn+xv/Azg==}
+  /eslint-config-turbo/0.0.9_eslint@7.32.0:
+    resolution: {integrity: sha512-j1cTdx3tRmKo0csyfQKhpuT8dynK9oddbK5nmrShoMpXI2qMbxHLYH7MWAid4FmJN8rYympy3VKw5U63Yazycg==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
       eslint: 7.32.0
-      eslint-plugin-turbo: 0.0.7_eslint@7.32.0
+      eslint-plugin-turbo: 0.0.9_eslint@7.32.0
     dev: false
 
   /eslint-import-resolver-node/0.3.6:
@@ -1745,8 +1745,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: false
 
-  /eslint-plugin-turbo/0.0.7_eslint@7.32.0:
-    resolution: {integrity: sha512-iajOH8eD4jha3duztGVBD1BEmvNrQBaA/y3HFHf91vMDRYRwH7BpHSDFtxydDpk5ghlhRxG299SFxz7D6z4MBQ==}
+  /eslint-plugin-turbo/0.0.9_eslint@7.32.0:
+    resolution: {integrity: sha512-fEsuSnYU3GLtT+s66mUuzDL1LaSieIx5uk3tPO0ToGv7hI2XzOfP24aPkQItTBGl7kq2JaVkRzPwcnfz8hkp0w==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
@@ -2960,8 +2960,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: false
 
-  /prettier/2.8.3:
-    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
+  /prettier/2.8.4:
+    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -3579,65 +3579,65 @@ packages:
       typescript: 4.9.3
     dev: false
 
-  /turbo-darwin-64/1.7.0:
-    resolution: {integrity: sha512-hSGAueSf5Ko8J67mpqjpt9FsP6ePn1nMcl7IVPoJq5dHsgX3anCP/BPlexJ502bNK+87DDyhQhJ/LPSJXKrSYQ==}
+  /turbo-darwin-64/1.8.3:
+    resolution: {integrity: sha512-bLM084Wr17VAAY/EvCWj7+OwYHvI9s/NdsvlqGp8iT5HEYVimcornCHespgJS/yvZDfC+mX9EQkn3V2JmYgGGw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.7.0:
-    resolution: {integrity: sha512-BLLOW5W6VZxk5+0ZOj5AO1qjM0P5isIgjbEuyAl8lHZ4s9antUbY4CtFrspT32XxPTYoDl4UjviPMcSsbcl3WQ==}
+  /turbo-darwin-arm64/1.8.3:
+    resolution: {integrity: sha512-4oZjXtzakopMK110kue3z/hqu3WLv+eDLZOX1NGdo49gqca9BeD8GbH+sXpAp6tqyeuzpss+PIliVYuyt7LgbA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.7.0:
-    resolution: {integrity: sha512-aw2qxmfZa+kT87SB3GNUoFimqEPzTlzlRqhPgHuAAT6Uf0JHnmebPt4K+ZPtDNl5yfVmtB05bhHPqw+5QV97Yg==}
+  /turbo-linux-64/1.8.3:
+    resolution: {integrity: sha512-uvX2VKotf5PU14FCxJA5iHItPQno2JWzerMd+g3/h/Asay6dvxvtVjc39MQeGT0H5njSvzVKFkT+3/5q8lgOEg==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.7.0:
-    resolution: {integrity: sha512-AJEx2jX+zO5fQtJpO3r6uhTabj4oSA5ZhB7zTs/rwu/XqoydsvStA4X8NDW4poTbOjF7DcSHizqwi04tSMzpJw==}
+  /turbo-linux-arm64/1.8.3:
+    resolution: {integrity: sha512-E1p+oH3XKMaPS4rqWhYsL4j2Pzc0d/9P5KU7Kn1kqVLo2T3iRA7n2KVULEieUNE0nTH+aIJPXYXOpqCI5wFJaA==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.7.0:
-    resolution: {integrity: sha512-ewj7PPv2uxqv0r31hgnBa3E5qwUu7eyVRP5M1gB/TJXfSHduU79gbxpKCyxIZv2fL/N2/3U7EPOQPSZxBAoljA==}
+  /turbo-windows-64/1.8.3:
+    resolution: {integrity: sha512-cnzAytHtoLXd0J7aNzRpZFpL/GTjcBmkvAPlbOdf/Pl1iwS4qzGrudZQ+OM1lmLgLIfBPIavsGHBknTwTNib4A==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.7.0:
-    resolution: {integrity: sha512-LzjOUzveWkvTD0jP8DBMYiAnYemmydsvqxdSmsUapHHJkl6wKZIOQNSO7pxsy+9XM/1/+0f9Y9F9ZNl5lePTEA==}
+  /turbo-windows-arm64/1.8.3:
+    resolution: {integrity: sha512-ulIiItNm2w/zYJdD5/oAzjzNns1IjbpweRzpsE8tLXaWwo6+fnXXkyloUug0IUhcd2k6fJXfoiDZfygqpOVuXg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.7.0:
-    resolution: {integrity: sha512-cwympNwQNnQZ/TffBd8yT0i0O10Cf/hlxccCYgUcwhcGEb9rDjE5thDbHoHw1hlJQUF/5ua7ERJe7Zr0lNE/ww==}
+  /turbo/1.8.3:
+    resolution: {integrity: sha512-zGrkU1EuNFmkq6iky6LcMqD4h0OLE8XysVFxQWRIZbcTNnf0XAycbsbeEyiJpiWeqb7qtg2bVuY9EYcNoNhVuQ==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.7.0
-      turbo-darwin-arm64: 1.7.0
-      turbo-linux-64: 1.7.0
-      turbo-linux-arm64: 1.7.0
-      turbo-windows-64: 1.7.0
-      turbo-windows-arm64: 1.7.0
+      turbo-darwin-64: 1.8.3
+      turbo-darwin-arm64: 1.8.3
+      turbo-linux-64: 1.8.3
+      turbo-linux-arm64: 1.8.3
+      turbo-windows-64: 1.8.3
+      turbo-windows-arm64: 1.8.3
     dev: true
 
   /type-check/0.4.0:
