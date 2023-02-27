@@ -2,8 +2,8 @@
     "name": "@kaiarajs/api-storage",
     "version": "0.0.2",
     "description": "Awesome functions",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "src/index.ts",
+    "types": "src/index.ts",
     "files": [
         "dist"
     ],
@@ -22,10 +22,9 @@
         "node-fetch-commonjs": "^3.2.4"
     },
     "peerDependencies": {
-        "@kaiarajs/kaibase": "^0.0.5"
+        "@kaiarajs/kaibase": "workspace:../kaibase"
     },
     "devDependencies": {
-        "@kaiarajs/kaibase": "workspace:*",
         "typescript": "4.3.3"
     }
 }

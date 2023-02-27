@@ -1,9 +1,9 @@
 {
   "name": "@kaiarajs/disk-storage",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Awesome functions",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"T.B.D.\""
@@ -11,21 +11,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [],
   "author": "kaiarajs",
   "license": "MIT",
-  "dependencies": {
-    "tar": "^6.1.12"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "@kaiarajs/kaibase": "0.x"
+    "@kaiarajs/kaibase": "workspace:../kaibase"
   },
   "devDependencies": {
-    "@kaiarajs/kaibase": "workspace:*",
-    "@types/tar": "^6.1.3",
     "typescript": "4.3.3"
   }
 }

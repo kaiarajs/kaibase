@@ -1,4 +1,4 @@
-import { UpdateOptions } from "@kaiarajs/kaibase/dist/types";
+import { UpdateOptions } from "@kaiarajs/kaibase/src/types";
 import { Schema } from "@kaiarajs/schema";
 import { Kaigoose } from "./kaigoose";
 import { KCursor } from "./kcursor";

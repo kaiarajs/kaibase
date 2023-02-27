@@ -1,6 +1,6 @@
 import { StorageDriver, Sanitize, Exist } from "@kaiarajs/kaibase"
 import fs, { readdirSync } from "fs";
-import tar from 'tar';
+//import tar from 'tar';
 import ErrnoException = NodeJS.ErrnoException;
 
 export class DiskStorageDriver implements StorageDriver {
@@ -433,7 +433,7 @@ export class DiskStorageDriver implements StorageDriver {
             collections.forEach(element => {
                 collectionPaths.push(`${cwd}/${element}`)
             });
-            tar.c(
+/*       NOT WORK BUN      tar.c(
                 {
                     gzip: true,
                     file: 'dump.tgz'
@@ -441,7 +441,7 @@ export class DiskStorageDriver implements StorageDriver {
                 collectionPaths
             )
                 .then((data) => resolve(data))
-                .catch((err) => reject(err))
+                .catch((err) => reject(err)) */
         })
     }
 

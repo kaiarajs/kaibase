@@ -1,8 +1,8 @@
 import { Kaibase } from "@kaiarajs/kaibase";
 import { DiskStorageDriver } from '@kaiarajs/disk-storage'
-import { ApiStorageDriver } from '@kaiarajs/api-storage'
+//import { ApiStorageDriver } from '@kaiarajs/api-storage'
 
-async function main() {
+/*  async function main() {
     try {
 
         const dbStorage = new DiskStorageDriver();
@@ -20,7 +20,7 @@ async function main() {
         console.log('indices', indices)
 
 
-        for (let index = 1; index < 10; index++) {
+        for (let index = 1; index < 10000; index++) {
             await db.collection('pepe').insert({ name: "xyz", age: String(index) })
             console.log(index);
         }
@@ -37,8 +37,8 @@ async function main() {
         console.log(error)
     }
 
-}
-
+} 
+ */
 
 async function mainApi() {
     // const dbStorage = new ApiStorageDriver({apiUrl: "http://localhost:3000?api-key=lol"});
