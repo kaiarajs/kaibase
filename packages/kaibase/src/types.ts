@@ -237,5 +237,5 @@ export interface Exist {
  */
 export interface Doc {
     _id: string;
-    [key: string]: number;
+    [key: string]: unknown;
 }
