@@ -20,7 +20,7 @@ async function main() {
         console.log('indices', indices)
 
 
-        for (let index = 1; index < 10; index++) {
+        for (let index = 1; index < 10000; index++) {
             await db.collection('pepe').insert({ name: "xyz", age: String(index) })
             console.log(index);
         }
@@ -64,4 +64,4 @@ async function mainApi() {
 }
 
 
-mainApi()
+main()

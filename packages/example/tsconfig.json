@@ -6,6 +6,7 @@
         "es6",
         "es2019"
       ],
+      "rootDir": "src",
       "target": "es5",
       "outDir": "./dist",
       "esModuleInterop": true,
