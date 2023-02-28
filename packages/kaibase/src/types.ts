@@ -216,17 +216,26 @@ export interface Range {
  * search term
  */
 export interface Sanitize {
-    key: any; // -> search term
-    value: any; // actual key
+    key: string; // -> search term
+    value: unknown; // actual key
 }
 
 /**
  * Return object interface for the exists method of the storage driver.
  */
 export interface Exist {
-    key: any;
+    key: ASNDBS | string;
     value: string;
     doesExist: boolean;
-    index: any;
+    index: unknown;
     fieldName: string;
+}
+
+
+/**
+ * General document interface
+ */
+export interface Doc {
+    _id: string;
+    [key: string]: number;
 }

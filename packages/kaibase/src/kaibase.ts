@@ -1,5 +1,5 @@
 import Index from "./indices";
-import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize } from "./types";
+import { IndexOptions, StorageDriver, Range, UpdateOptions, Sanitize, Doc } from "./types";
 import { $set, $inc, $mul, $unset, $rename, $push } from "./updateOperators";
 import { AVLNode, SNDBSA } from '@kaiarajs/binary-tree';
 import { ArrObjectsDuplicates, CompressObject, ExpandObject, FlattenArray, GetDate, GetObjValue, GetUUID, IsEmpty, SaveArrayDups } from "@kaiarajs/kaibase-core";
@@ -10,23 +10,23 @@ export interface IDatastore {
     collection(name: string): Kaibase;
     getDatabases(): string[];
     getCollections(): string[];
-    insert(doc: any): Promise<any>;
-    find(query: any): Cursor;
-    count(query: any): Cursor;
-    update(query: any, operation: any, options: UpdateOptions): Promise<any>;
-    remove(query: any): Promise<number>;
+    insert(doc: Doc): Promise<void>;
+    find(query: Options): Cursor;
+    count(query: Options): Cursor;
+    update(query: Options, operation: any, options: UpdateOptions): Promise<any>;
+    remove(query: Options): Promise<number>;
     ensureIndex(options: IndexOptions): Promise<null>;
     san(fieldName: string, index: Index): Promise<any>;
     sanitize(): Promise<any>;
     storageSan(fieldName: string): Promise<any>;
-    storageSanitize(): any;
+    storageSanitize(): void;
     removeIndex(fieldName: string): Promise<null>;
     saveIndex(fieldName: string): Promise<null>;
     insertIndex(key: string, index: any[]): Promise<null>;
     getIndices(): Promise<any>;
     getDocs(options: Options, ids: string | string[]): Promise<any[]>;
     search(fieldName: string, value: any): Promise<string[]>;
-    dump(): Promise<any>;
+    dump(): Promise<void>;
 }
 
 /**
@@ -171,7 +171,7 @@ export class Kaibase implements IDatastore {
      * @param query
      * @returns {Cursor}
      */
-    public find(query: any = {}): Cursor {
+    public find(query: Options = {}): Cursor {
         return new Cursor(this, query);
     }
 
@@ -179,7 +179,7 @@ export class Kaibase implements IDatastore {
      * Count documents
      * @param query
      */
-    public count(query: any = {}): Cursor {
+    public count(query: Options = {}): Cursor {
         return new Cursor(this, query, true);
     }
 
@@ -394,7 +394,7 @@ export class Kaibase implements IDatastore {
         });
     }
 
-    public storageSanitize(): any {
+    public storageSanitize(): Promise<any> {
         return new Promise((resolve, reject) => {
             if (this.indices.size !== 0) {
                 const fieldNames: Array<Promise<null>> = [];
@@ -436,13 +436,13 @@ export class Kaibase implements IDatastore {
      * @param query
      * @returns {Promise<number>}
      */
-    public remove(query: any = {}): Promise<number> {
+    public remove(query: Options = {}): Promise<number> {
         return new Promise((resolve, reject) => {
             const uniqueIds: string[] = [];
             this.find(query)
                 .exec()
                 //@ts-ignore
-                .then((docs: any[]): Promise<any[][]> | any[] => {
+                .then((docs: Doc[]): Promise<any[][]> | any[] => {
                     // Array of promises for index remove
                     if (this.indices.size !== 0) {
                         return Promise.all(docs.map((document) => {
@@ -454,11 +454,11 @@ export class Kaibase implements IDatastore {
                         return docs;
                     }
                 })
-                .then((docs: any[]) => {
+                .then((docs: Doc[]) => {
                     docs = FlattenArray(docs);
                     return ArrObjectsDuplicates(docs, "_id");
                 })
-                .then((docs: any[]) => {
+                .then((docs: Doc[]) => {
                     docs.forEach((document) => {
                         if (uniqueIds.indexOf(document._id) === -1) {
                             uniqueIds.push(document._id);
@@ -472,7 +472,7 @@ export class Kaibase implements IDatastore {
                         }
                     }));
                 })
-                .then((): any => {
+                .then(() => {
                     resolve(uniqueIds.length);
                 })
                 .catch(reject);
@@ -524,10 +524,10 @@ export class Kaibase implements IDatastore {
      * Save the index currently in memory to the persisted version if need be
      * through the storage driver.
      * @param fieldName
-     * @returns {Promise<any>}
+     * @returns {Promise<null>}
      */
     public saveIndex(fieldName: string): Promise<null> {
-        return new Promise<any>((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             const index = this.indices.get(fieldName);
             if (index) {
                 index.toJSON()
@@ -584,7 +584,7 @@ export class Kaibase implements IDatastore {
      * @returns {Promise<any>}
      */
     public getIndices(): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             if (this.indices) {
                 resolve(this.indices);
             } else {
@@ -601,7 +601,7 @@ export class Kaibase implements IDatastore {
      * @returns {Promise<any>}
      */
     public getDocs(options: Options, ids: string | string[]): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let idsArr: string[] = (typeof ids === "string") ? [ids] : ids;
             if (options.skip && options.limit) {
                 idsArr = idsArr.splice(options.skip, options.limit);
@@ -624,7 +624,7 @@ export class Kaibase implements IDatastore {
      * @param value - string,number,date,null - or [{ field: value }, { field: value }]
      * @returns {Promise<T>}
      */
-    public search(fieldName?: string, value?: any): Promise<any> {
+    public search(fieldName?: string, value?: unknown): Promise<any> {
         return new Promise((resolve, reject) => {
             if (fieldName === "$or" && value instanceof Array) {
                 const promises: Array<Promise<any>> = [];
@@ -974,7 +974,7 @@ export class Kaibase implements IDatastore {
         });
     }
 
-    public dump(): Promise<any> {
+    public dump(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             const collections = this.getCollections();
             this.storage.dump(collections)

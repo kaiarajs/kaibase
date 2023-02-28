@@ -41,7 +41,7 @@ export class Cursor implements ICursor {
      * @param query - query for search
      * @param count - is this a count operation? Default: false
      */
-    constructor(datastore: Kaibase, query: any = {}, count?: boolean) {
+    constructor(datastore: Kaibase, query: Options = {}, count?: boolean) {
         this.datastore = datastore;
         this.query = query;
         this.count = count || false;
