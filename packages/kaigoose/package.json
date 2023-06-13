@@ -27,7 +27,7 @@
         "@kaiarajs/kaibase": "workspace:*",
         "@kaiarajs/schema": "workspace:*",
         "@kaiarajs/disk-storage": "workspace:*",
-        "@types/node": "^16.14.2",
+        "@types/node": "^18.0.0",
         "typescript": "4.9.5"
     }
 }
