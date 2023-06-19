@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 importers:
@@ -30,8 +30,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6
       '@kaiarajs/kainox':
-        specifier: ^0.0.15
-        version: 0.0.15(@kaiarajs/http@0.0.12)(@kaiarajs/router@0.0.15)
+        specifier: ^0.0.18
+        version: 0.0.18
       '@kaiarajs/router':
         specifier: ^0.0.15
         version: 0.0.15(@kaiarajs/http@0.0.12)
@@ -295,6 +295,10 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
+  /@fastify/deepmerge@1.3.0:
+    resolution: {integrity: sha512-J8TOSBq3SoZbDhM9+R/u77hP93gz/rajSA+K2kGyijPpORPWUXHUpTaleoj+92As0S9uPRP7Oi8IqMf0u+ro6A==}
+    dev: false
+
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
     engines: {node: '>=10.10.0'}
@@ -361,8 +365,51 @@ packages:
       - supports-color
     dev: false
 
-  /@kaiarajs/inject@0.0.9:
-    resolution: {integrity: sha512-yqzBlKCieiUh/q/l0ZutdWjXI4BQjdD4izn07vDHxN0kwe2uAWogZIY4RYpDhiA7zSBQzMOntezaT4RREOsx3w==}
+  /@kaiarajs/http@0.0.13:
+    resolution: {integrity: sha512-4wmwuAHUD/lADAzQFdGaEZ+WcMXZZ8ja2UgkSnWgEGUhJ/8Id22LlktZyeDmPoTdoOHfkQhfGXaLM77MNaiGMg==}
+    dependencies:
+      '@kaiarajs/fresh': 0.0.9
+      '@kaiarajs/kainox-tsconfig': 0.0.9
+      content-disposition: 0.5.4
+      content-type: 1.0.4
+      cookie: 0.5.0
+      cookie-signature: 1.2.0
+      escape-html: 1.0.3
+      etag: 1.8.1
+      mime-types: 2.1.35
+      negotiator: 0.6.3
+      on-finished: 2.4.1
+      proxy-addr: 2.0.7
+      qs: 6.11.0
+      send: 0.18.0
+      type-is: 1.6.18
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@kaiarajs/http@0.0.14:
+    resolution: {integrity: sha512-5P/P39upJm32XVUybZUOAjv3MyiFJTe+Bt356bCGUKmzixKFJ/uSbY0auHObsdYQ3QVM6FGTgCTJRXU5oJpLwA==}
+    dependencies:
+      '@kaiarajs/kainox-tsconfig': 0.0.9
+      content-disposition: 0.5.4
+      content-type: 1.0.4
+      cookie: 0.5.0
+      cookie-signature: 1.2.0
+      escape-html: 1.0.3
+      etag: 1.8.1
+      mime-types: 2.1.35
+      negotiator: 0.6.3
+      on-finished: 2.4.1
+      proxy-addr: 2.0.7
+      qs: 6.11.0
+      send: 0.18.0
+      type-is: 1.6.18
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@kaiarajs/inject@0.0.10:
+    resolution: {integrity: sha512-kkOGQbYosgSkIqtdz6ooE+gN9qcJ0Z7HQPPnmP7na5lhcdlH5i4OyXrhvn8EeSh8ZJrPmZADVs3g2viBW/KaIA==}
     engines: {node: '>=14'}
     dependencies:
       readable-stream: 4.2.0
@@ -385,22 +432,19 @@ packages:
     resolution: {integrity: sha512-1YRkLhYzlRx4OkHmb+2bEXooJ5dXmeYBOtp6o0prmYY149SgmuSl0CIbKv+nzifSqoqtMfHNnOfjvtPvEWiq3Q==}
     dev: false
 
-  /@kaiarajs/kainox@0.0.15(@kaiarajs/http@0.0.12)(@kaiarajs/router@0.0.15):
-    resolution: {integrity: sha512-lP1nn0HJMtbernIev64NZ+8dIKELKGfGpC9ZNk63lVyK8jBdhFZJ5JiG0i7VnCJDNsTyn09OW+0CDNH/agVjfA==}
+  /@kaiarajs/kainox@0.0.18:
+    resolution: {integrity: sha512-67gVWbXnY77kC0IB3ydyhXjC7+N7kOX7+iv7FD0I0mYouyEuz7PdOc5hi2h40IOMPw6JH1sNxA4E6yY4D80/QQ==}
     engines: {node: '>= 16'}
     requiresBuild: true
-    peerDependencies:
-      '@kaiarajs/http': ^0.0.11
-      '@kaiarajs/router': ^0.0.14
     dependencies:
-      '@kaiarajs/http': 0.0.12(@types/node@18.16.18)
-      '@kaiarajs/inject': 0.0.9
-      '@kaiarajs/router': 0.0.15(@kaiarajs/http@0.0.12)
+      '@kaiarajs/http': 0.0.14
+      '@kaiarajs/inject': 0.0.10
+      '@kaiarajs/router': 0.0.18
       body-parser: 1.20.1
       dotenv: 16.0.3
       escape-html: 1.0.3
       etag: 1.8.1
-      fast-json-stringify: 1.21.0
+      fast-json-stringify: 5.7.0
       proxy-addr: 2.0.7
       qs: 6.11.0
       safe-regex: 2.1.1
@@ -433,6 +477,17 @@ packages:
       '@kaiarajs/http': 0.0.12(@types/node@18.16.18)
       escape-html: 1.0.3
       fast-json-stringify: 2.7.13
+    dev: false
+
+  /@kaiarajs/router@0.0.18:
+    resolution: {integrity: sha512-VtAyasQBeH6tQRlbiJT0FX2E1wDO1rQEMDtu9s19KbVDjRqKrq0P93fLzMJeLd3a7Ef1+a+4X6CLQ+fymKdxLA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@kaiarajs/http': 0.0.13
+      escape-html: 1.0.3
+      fast-json-stringify: 5.7.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@next/env@13.4.6:
@@ -759,12 +814,30 @@ packages:
     hasBin: true
     dev: false
 
+  /ajv-formats@2.1.1:
+    resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependenciesMeta:
+      ajv:
+        optional: true
+    dependencies:
+      ajv: 8.12.0
+    dev: false
+
   /ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
     dependencies:
       fast-deep-equal: 3.1.3
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
+      uri-js: 4.4.1
+    dev: false
+
+  /ajv@8.12.0:
+    resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
       uri-js: 4.4.1
     dev: false
 
@@ -1621,14 +1694,6 @@ packages:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
     dev: false
 
-  /fast-json-stringify@1.21.0:
-    resolution: {integrity: sha512-xY6gyjmHN3AK1Y15BCbMpeO9+dea5ePVsp3BouHCdukcx0hOHbXwFhRodhcI0NpZIgDChSeAKkHW9YjKvhwKBA==}
-    dependencies:
-      ajv: 6.12.6
-      deepmerge: 4.2.2
-      string-similarity: 4.0.4
-    dev: false
-
   /fast-json-stringify@2.7.13:
     resolution: {integrity: sha512-ar+hQ4+OIurUGjSJD1anvYSDcUflywhKjfxnsW4TBTD7+u0tJufv6DKRWoQk3vI6YBOWMoz0TQtfbe7dxbQmvA==}
     engines: {node: '>= 10.0.0'}
@@ -1639,8 +1704,23 @@ packages:
       string-similarity: 4.0.4
     dev: false
 
+  /fast-json-stringify@5.7.0:
+    resolution: {integrity: sha512-sBVPTgnAZseLu1Qgj6lUbQ0HfjFhZWXAmpZ5AaSGkyLh5gAXBga/uPJjQPHpDFjC9adWIpdOcCLSDTgrZ7snoQ==}
+    dependencies:
+      '@fastify/deepmerge': 1.3.0
+      ajv: 8.12.0
+      ajv-formats: 2.1.1
+      fast-deep-equal: 3.1.3
+      fast-uri: 2.2.0
+      rfdc: 1.3.0
+    dev: false
+
   /fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
+    dev: false
+
+  /fast-uri@2.2.0:
+    resolution: {integrity: sha512-cIusKBIt/R/oI6z/1nyfe2FvGKVTohVRfvkOhvx0nCEW+xf5NoCXjAHcWp93uOUBchzYcsvPlrapAdX1uW+YGg==}
     dev: false
 
   /fastq@1.13.0:
@@ -2079,6 +2159,10 @@ packages:
 
   /json-schema-traverse@0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
+    dev: false
+
+  /json-schema-traverse@1.0.0:
+    resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
     dev: false
 
   /json-stable-stringify-without-jsonify@1.0.1:
@@ -2670,6 +2754,11 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.1.4
       functions-have-names: 1.2.3
+    dev: false
+
+  /require-from-string@2.0.2:
+    resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /resolve-from@4.0.0:
