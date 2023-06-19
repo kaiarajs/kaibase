@@ -1,4 +1,4 @@
-import { Schema } from "../../schema/src/schema"
+/* import { Schema } from "../../schema/src/schema"
 
 
 
@@ -30,4 +30,4 @@ function main() {
 }
 
 
-main()
+main() */

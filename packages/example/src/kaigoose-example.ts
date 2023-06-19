@@ -1,4 +1,4 @@
-import { Schema } from "@kaiarajs/schema";
+/* import { Schema } from "@kaiarajs/schema";
 import { Kaigoose } from "../../kaigoose/src/kaigoose";
 import { Model } from "../../kaigoose/src/model";
 import { DiskStorageDriver } from '@kaiarajs/disk-storage'
@@ -27,8 +27,7 @@ async function main() {
     })
    
     console.log('create', create)
-    */
 }
 
 
-main()
+main() */
