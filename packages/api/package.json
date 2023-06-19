@@ -27,7 +27,7 @@
         "@kaiarajs/kaibase": "^0.0.6",
         "@kaiarajs/kainox": "^0.0.15",
         "@kaiarajs/router": "^0.0.15",
-        "commander": "^9.4.1",
+        "commander": "^11.0.0",
         "http-errors": "^2.0.0"
     },
     "devDependencies": {
