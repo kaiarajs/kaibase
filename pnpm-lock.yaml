@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 importers:
@@ -24,17 +24,17 @@ importers:
         specifier: 0.0.3
         version: 0.0.3(@kaiarajs/kaibase@0.0.6)
       '@kaiarajs/http':
-        specifier: ^0.0.12
-        version: 0.0.12(@types/node@18.16.18)
+        specifier: ^0.0.14
+        version: 0.0.14
       '@kaiarajs/kaibase':
         specifier: ^0.0.6
         version: 0.0.6
       '@kaiarajs/kainox':
         specifier: ^0.0.15
-        version: 0.0.15(@kaiarajs/http@0.0.12)(@kaiarajs/router@0.0.15)
+        version: 0.0.15(@kaiarajs/http@0.0.14)(@kaiarajs/router@0.0.15)
       '@kaiarajs/router':
         specifier: ^0.0.15
-        version: 0.0.15(@kaiarajs/http@0.0.12)
+        version: 0.0.15(@kaiarajs/http@0.0.14)
       commander:
         specifier: ^9.4.1
         version: 9.4.1
@@ -331,19 +331,10 @@ packages:
       tar: 6.1.12
     dev: false
 
-  /@kaiarajs/fresh@0.0.9:
-    resolution: {integrity: sha512-+ogM7CPMy/Ecc70IvT+xwC0pnOw0Y4ASj/feS8Ew10mcdIrNLXn6peLyxSRAdSxzQUnHoxNPpXIeUXoZxXGM1g==}
-    engines: {node: '>= 8'}
-    dev: false
-
-  /@kaiarajs/http@0.0.12(@types/node@18.16.18):
-    resolution: {integrity: sha512-4HA2WkfM0+lBCDHwTMgkubesesLXF5XDXsFiRIwdBiBdAeamq3PqkNvXciyTYHf2T5Gv4exSiXrWrR9L1KsjdQ==}
-    peerDependencies:
-      '@types/node': '>=16'
+  /@kaiarajs/http@0.0.14:
+    resolution: {integrity: sha512-5P/P39upJm32XVUybZUOAjv3MyiFJTe+Bt356bCGUKmzixKFJ/uSbY0auHObsdYQ3QVM6FGTgCTJRXU5oJpLwA==}
     dependencies:
-      '@kaiarajs/fresh': 0.0.9
       '@kaiarajs/kainox-tsconfig': 0.0.9
-      '@types/node': 18.16.18
       content-disposition: 0.5.4
       content-type: 1.0.4
       cookie: 0.5.0
@@ -385,7 +376,7 @@ packages:
     resolution: {integrity: sha512-1YRkLhYzlRx4OkHmb+2bEXooJ5dXmeYBOtp6o0prmYY149SgmuSl0CIbKv+nzifSqoqtMfHNnOfjvtPvEWiq3Q==}
     dev: false
 
-  /@kaiarajs/kainox@0.0.15(@kaiarajs/http@0.0.12)(@kaiarajs/router@0.0.15):
+  /@kaiarajs/kainox@0.0.15(@kaiarajs/http@0.0.14)(@kaiarajs/router@0.0.15):
     resolution: {integrity: sha512-lP1nn0HJMtbernIev64NZ+8dIKELKGfGpC9ZNk63lVyK8jBdhFZJ5JiG0i7VnCJDNsTyn09OW+0CDNH/agVjfA==}
     engines: {node: '>= 16'}
     requiresBuild: true
@@ -393,9 +384,9 @@ packages:
       '@kaiarajs/http': ^0.0.11
       '@kaiarajs/router': ^0.0.14
     dependencies:
-      '@kaiarajs/http': 0.0.12(@types/node@18.16.18)
+      '@kaiarajs/http': 0.0.14
       '@kaiarajs/inject': 0.0.9
-      '@kaiarajs/router': 0.0.15(@kaiarajs/http@0.0.12)
+      '@kaiarajs/router': 0.0.15(@kaiarajs/http@0.0.14)
       body-parser: 1.20.1
       dotenv: 16.0.3
       escape-html: 1.0.3
@@ -424,13 +415,13 @@ packages:
       - tailwindcss
     dev: false
 
-  /@kaiarajs/router@0.0.15(@kaiarajs/http@0.0.12):
+  /@kaiarajs/router@0.0.15(@kaiarajs/http@0.0.14):
     resolution: {integrity: sha512-ZmgAmbzH9xCfa+oyXM0aBSm1kmTc9GEw6WIkivZU2qyniYoB8UsFXOuupuXg+ht7vVnNfsZYlpdRam4KRw3XMA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@kaiarajs/http': ^0.0.11
     dependencies:
-      '@kaiarajs/http': 0.0.12(@types/node@18.16.18)
+      '@kaiarajs/http': 0.0.14
       escape-html: 1.0.3
       fast-json-stringify: 2.7.13
     dev: false
