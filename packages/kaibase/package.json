@@ -25,6 +25,6 @@
         "@types/node": "^18.0.0",
         "@kaiarajs/binary-tree": "workspace:*",
         "@kaiarajs/kaibase-core": "workspace:*",
-        "typescript": "4.9.5"
+        "typescript": "5.3.3"
     }
 }
