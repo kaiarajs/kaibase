@@ -11,8 +11,8 @@
   "dependencies": {
     "@kaiarajs/react-ui": "^0.0.11",
     "@types/node": "18.16.18",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
+    "@types/react": "18.2.52",
+    "@types/react-dom": "18.2.18",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "next": "13.4.6",
