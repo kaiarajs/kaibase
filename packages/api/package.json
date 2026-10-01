@@ -25,7 +25,7 @@
         "@kaiarajs/disk-storage": "0.0.3",
         "@kaiarajs/http": "^0.0.12",
         "@kaiarajs/kaibase": "^0.0.6",
-        "@kaiarajs/kainox": "^0.0.15",
+        "@kaiarajs/kainox": "^0.0.18",
         "@kaiarajs/router": "^0.0.15",
         "commander": "^9.4.1",
         "http-errors": "^2.0.0"
