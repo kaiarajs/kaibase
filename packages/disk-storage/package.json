@@ -18,7 +18,7 @@
   "author": "kaiarajs",
   "license": "MIT",
   "dependencies": {
-    "tar": "^6.1.12"
+    "tar": "^7.0.0"
   },
   "peerDependencies": {
     "@kaiarajs/kaibase": "0.x"
